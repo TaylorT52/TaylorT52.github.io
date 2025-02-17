@@ -79,16 +79,16 @@ body {
   .projects .card {
     aspect-ratio: 1 / 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  
-  .card {
-    border: none;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-    background: #fff;
+
+  .projects .card-body img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    margin-top: 0.5rem;
   }
   .card:hover {
     transform: translateY(-5px);

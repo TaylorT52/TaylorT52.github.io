@@ -17,6 +17,12 @@ body {
     top: 0;
     z-index: 1000;
   }
+
+  header .logo img {
+    width: 100px;
+    height: auto;
+  }
+  
   header .container {
     display: flex;
     justify-content: space-between;

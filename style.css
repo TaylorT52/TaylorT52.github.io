@@ -48,12 +48,12 @@ body {
     margin-top: 20px; /* Reduced spacing from header */
   }
   
-  /* Hero Section (if used on other pages) */
+  /* Hero Section */
   .hero {
     background: #f8f9fa;
     color: #333;
     padding: 3rem 1.5rem;
-    text-align: left;
+    text-align: left; /* change to center if you prefer */
   }
   .hero h1 {
     font-size: 2.5rem;
@@ -72,7 +72,6 @@ body {
   #about {
     background: #333;
     color: #f8f9fa;
-    padding: 3rem 0;
   }
   #about p {
     font-size: 1.1rem;

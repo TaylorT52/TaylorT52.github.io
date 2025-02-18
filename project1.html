@@ -14,10 +14,10 @@
 <body>
   <!-- Header / Navigation -->
   <header>
-    <div class="container">
-    <a href="index.html" class="logo">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo">
         <img src="imgs/pilogo.png" alt="Taylor Tam Logo" />
-    </a>
+      </a>
       <nav>
         <a href="index.html#about">About</a>
         <a href="index.html#projects">Projects</a>
@@ -26,15 +26,38 @@
     </div>
   </header>
   
-  <!-- Project Content -->
-  <main class="container" style="margin-top: 100px;">
+  <!-- Main Project Content -->
+  <main class="container project-content">
     <h1>Automated Liver Tissue Analysis Pipeline</h1>
     <p>
-      Created a computer vision-AI pipeline to automate liver tissue analysis and quantify steatosis in donor liver images, reducing latency by 100x.
-      The pipeline consists of Python-based image preprocessing, a CVAI model, GPU-accelerated processing on a Jetson board scaled with Google Cloud Functions,
-      and is integrated with an iOS application (currently under legal review for distribution).
+      This project presents an innovative computer vision and AI pipeline that automates the analysis of liver tissue images to quantify steatosis levels in donor livers—reducing analysis latency by over 100× compared to traditional methods.
     </p>
-    <!-- You can add more details, images, code snippets, or links here -->
+    
+    <h2>Overview</h2>
+    <p>
+      Our pipeline uses Python-based image preprocessing and a custom computer vision model to segment liver tissue and accurately quantify the degree of steatosis. The system leverages GPU-accelerated processing on an Nvidia Jetson board and is integrated with an iOS application (currently under legal review for distribution), allowing for near real-time analysis during donor liver evaluation.
+    </p>
+    
+    <h2>Clinical Background</h2>
+    <p>
+      Recent research, as detailed in a study published in <em>Frontiers in Transplantation</em> 
+      (<a href="https://www.frontiersin.org/journals/transplantation/articles/10.3389/frtra.2023.1206085/full" target="_blank" rel="noopener noreferrer">full article</a>), has shown that advanced machine perfusion techniques, combined with targeted therapies, can ameliorate steatosis and improve hepatocyte viability in donor livers. These findings highlight the importance of rapid and accurate steatosis quantification to enhance donor liver selection and ultimately improve transplantation outcomes.
+    </p>
+    
+    <h2>Key Features and Innovations</h2>
+    <ul>
+      <li><strong>Real-Time Analysis:</strong> Process high-resolution images of liver tissue rapidly to deliver quantitative steatosis metrics in near real-time.</li>
+      <li><strong>Advanced Image Processing:</strong> Utilizes robust Python libraries for preprocessing, enhancing image quality before AI analysis.</li>
+      <li><strong>Custom AI Model:</strong> A deep learning model designed for liver tissue segmentation and steatosis quantification, validated with clinical datasets.</li>
+      <li><strong>GPU Acceleration:</strong> Powered by an Nvidia Jetson board, ensuring efficient processing of large image datasets.</li>
+      <li><strong>Clinical Integration:</strong> The pipeline is integrated with an iOS application, offering a mobile interface for clinicians to access analysis results during donor liver evaluation.</li>
+    </ul>
+    
+    <h2>Impact and Future Directions</h2>
+    <p>
+      By automating the liver tissue analysis process, this pipeline has the potential to drastically reduce the time and labor associated with donor liver evaluation. Future enhancements will focus on improving model accuracy, expanding diagnostic capabilities, and integrating additional clinical parameters to further support decision-making in liver transplantation.
+    </p>
+    
     <p>
       <a href="index.html#projects" class="btn btn-primary">Back to Projects</a>
     </p>

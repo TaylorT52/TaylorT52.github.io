@@ -15,9 +15,9 @@
   <!-- Header / Navigation -->
   <header>
     <div class="container">
-        <a href="index.html" class="logo">
-            <img src="imgs/pilogo.png" alt="Taylor Tam Logo" />
-        </a>
+      <a href="index.html" class="logo">
+        <img src="imgs/pilogo.png" alt="Taylor Tam Logo" />
+      </a>
       <nav>
         <a href="index.html#about">About</a>
         <a href="index.html#projects">Projects</a>
@@ -26,6 +26,9 @@
     </div>
   </header>
 
+  <!-- Spacer between header and main content -->
+  <div style="height: 50px;"></div>
+  
   <!-- Main Project Content -->
   <main class="container" style="margin-top: 100px;">
     <h1>Medical Device Localization in Chest X-Rays</h1>
@@ -35,7 +38,7 @@
     
     <h2>Project Overview</h2>
     <p>
-      The objective of this project was to enhance the detection and localization of medical devices within chest x-rays. This is crucial for clinical diagnostics and effective patient care. By leveraging advanced machine learning techniques, the system not only classifies but also pinpoints the exact location of devices, streamlining the review process for radiologists.
+      The objective of this project was to enhance the detection and localization of medical devices within chest x-rays—a critical task for clinical diagnostics and effective patient care. By leveraging advanced machine learning techniques, the system not only classifies but also pinpoints the exact location of devices, streamlining the radiologist’s workflow.
     </p>
     
     <h2>Key Features</h2>
@@ -48,7 +51,16 @@
     
     <h2>Technical Details</h2>
     <p>
-      The pipeline starts with a Multi-Label Classifier that pre-screens the x-ray images to identify potential areas of interest. Following this, the YOLOv5 model is employed to accurately localize and draw bounding boxes around the detected devices. This dual-model approach ensures that the system can handle the variability in chest x-ray images while maintaining a high level of precision and reliability.
+      The pipeline starts with a Multi-Label Classifier that pre-screens x-ray images to identify potential regions of interest. A YOLOv5 model is then employed to accurately localize and draw bounding boxes around detected devices. This dual-model approach ensures robustness and high precision, even in the presence of imaging variability.
+    </p>
+    
+    <h2>Internship Insights: Radiology and ResNets</h2>
+    <p>
+      During my summer internship with AIMI at Stanford, I gained valuable insights into the application of deep convolutional neural networks—specifically ResNets—in radiological image analysis. By fine-tuning a ResNet model for chest x-ray analysis, our team was able to further improve detection accuracy and better understand the nuances of clinical imaging. This experience validated the potential of integrating state-of-the-art deep learning techniques into medical imaging workflows and reinforced the importance of adaptive models for handling diverse datasets.
+    </p>
+    <p>
+      You can read more about these insights on 
+      <a href="https://medium.com/@stanfordaimi/radiology-and-resnets-our-summer-internship-experience-with-aimi-abda196494d7" target="_blank" rel="noopener noreferrer">this Medium article</a>.
     </p>
     
     <p>

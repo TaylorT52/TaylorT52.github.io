@@ -482,6 +482,10 @@ h2::after {
   }
   .projects .card-body {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .projects .card-body img {

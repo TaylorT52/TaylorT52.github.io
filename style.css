@@ -514,16 +514,27 @@ h2::after {
 }
 
 .badge {
-    font-size: 0.75rem;
-    padding: 0.35em 0.65em;
+    font-size: 0.8rem;
     font-weight: 500;
-    margin-left: 0.5rem;
-    border-radius: 12px;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--primary);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    transition: all 0.2s ease;
+    margin: 0.25rem;
+}
+
+.badge:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-1px);
 }
 
 .badge.bg-primary {
-    background: var(--primary-light) !important;
-    color: var(--primary-dark);
+    background-color: rgba(37, 99, 235, 0.1) !important;
+    color: var(--primary);
+    border: 1px solid rgba(37, 99, 235, 0.2);
 }
 
 .projects .card-link {

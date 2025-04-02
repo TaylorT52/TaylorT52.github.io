@@ -1,102 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Conversational Forms with AI</title>
-  <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-    crossorigin="anonymous"
-  />
-  <!-- Google Font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-    crossorigin="anonymous"
-  />
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-  <!-- External CSS -->
-  <link rel="stylesheet" href="../style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Conversational Forms with AI</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"
+        crossorigin="anonymous" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../style.css" />
 </head>
+
 <body>
-  <!-- Hero Section -->
-  <section class="hero project-hero">
-    <div class="container">
-      <div class="d-flex align-items-center mb-4">
-        <a href="../index.html#projects" class="back-link">
-          <i class="fas fa-arrow-left me-2"></i>Back to Projects
-        </a>
-      </div>
-      <h1>Conversational Forms with AI</h1>
-      <div class="project-tags">
-        <span class="badge bg-primary">JS Widgets</span>
-        <span class="badge bg-primary">AI Agents</span>
-        <span class="badge bg-primary">Discord Integrations</span>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Main Project Content -->
-  <main class="container project-content">
-    <div class="project-overview">
-      <img src="../imgs/survey_automation.png" alt="Autonomous Robot Navigation" class="project-image mb-4" />
-      <p class="lead">
-        A lightweight JS widget that transforms static forms into dynamic, AI-driven conversations—handled entirely through a Discord bot powered by Mistral. Designed for smoother user onboarding, surveys, and interactive workflows.
-      </p>
-    </div>
-    
-    <h2>Project Overview</h2>
-    <p>
-      Ever had to help a family through frustrating form validation? We developed a tool that turns any standard survey into a conversation with an AI agent, who helps guide a user through validation and standardizes user input. Can integrate into any website through a dev portal that generates an embeddable JS widget.
-    </p>
-    
-    <h2>Key Features</h2>
-    <ul>
-      <li><strong>AI Agent: </strong>Developed an AI Agent via discord using Mistral API. Through Mistral, every survey question is turned into a conversational, natural language question. If there is input error, a user is gently guided through fixing their response to fit the desired input.</li>
-      <li><strong>Developer Portal: </strong>Any developer can create a list of questions in natural language, or within a structured format. This generates a JS widget on the developer portal, which can be pasted into any website source code and transform a webform into an interactive conversation with our Discord agent.</li>
-      <li><strong>JS Widget: </strong>The pasted JS widget prompts a user to input their discord id. From their, a DM is sent to the user with the survey questions. A developer simply needs to set up a webhook to get json responses, already in the format necessary.</li>
-    </ul>
-    
-    <h2>Technical Details</h2>
-    <p>
-      Details here
-    </p>
-    
-    <div class="project-navigation mt-5">
-      <a href="../index.html#projects" class="btn btn-outline-primary">
-        <i class="fas fa-arrow-left me-2"></i>Back to Projects
-      </a>
-    </div>
-  </main>
-  
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-buttons mb-4">
-          <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github me-2"></i>GitHub
-          </a>
-          <a href="https://linkedin.com/in/taylor-tam" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-linkedin me-2"></i>LinkedIn
-          </a>
+    <!-- Hero Section -->
+    <section class="hero project-hero">
+        <div class="container">
+            <div class="d-flex align-items-center mb-4">
+                <a href="../index.html#projects" class="back-link">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Projects
+                </a>
+            </div>
+            <h1>Conversational Forms with AI</h1>
+            <div class="project-tags">
+                <span class="badge bg-primary">JS Widgets</span>
+                <span class="badge bg-primary">AI Agents</span>
+                <span class="badge bg-primary">Discord Integrations</span>
+            </div>
         </div>
-        <p class="copyright mb-0">&copy; 2025 Taylor Tam <span class="bullet">•</span> Built with <i class="fas fa-heart text-danger mx-1"></i></p>
-      </div>
-    </div>
-  </footer>
-  
-  <!-- Bootstrap JS Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </section>
+
+    <!-- Main Project Content -->
+    <main class="container project-content">
+        <div class="project-overview">
+            <img src="../imgs/survey_automation.png" alt="Autonomous Robot Navigation" class="project-image mb-4" />
+            <p class="lead">
+                A lightweight JS widget that transforms static forms into dynamic, AI-driven conversations—handled
+                entirely through a Discord bot powered by Mistral. Designed for smoother user onboarding, surveys, and
+                interactive workflows.
+            </p>
+        </div>
+
+        <h2>Project Overview</h2>
+        <p>
+            Ever had to help a family through frustrating form validation? We developed a tool that turns any standard
+            survey into a conversation with an AI agent, who helps guide a user through validation and standardizes user
+            input. Can integrate into any website through a dev portal that generates an embeddable JS widget.
+        </p>
+
+        <h2>Key Features</h2>
+        <ul>
+            <li><strong>AI Agent: </strong>Developed an AI Agent via discord using Mistral API. Through Mistral, every
+                survey question is turned into a conversational, natural language question. If there is input error, a
+                user is gently guided through fixing their response to fit the desired input.</li>
+            <li><strong>Developer Portal: </strong>Any developer can create a list of questions in natural language, or
+                within a structured format. This generates a JS widget on the developer portal, which can be pasted into
+                any website source code and transform a webform into an interactive conversation with our Discord agent.
+            </li>
+            <li><strong>JS Widget: </strong>The pasted JS widget prompts a user to input their discord id. From their, a
+                DM is sent to the user with the survey questions. A developer simply needs to set up a webhook to get
+                json responses, already in the format necessary.</li>
+        </ul>
+
+        <h2>Technical Details</h2>
+        <p>
+            The system consists of three major components: a JavaScript widget generator, an AI-powered Discord bot, and
+            a webhook-based response collector.
+        </p>
+
+        <h3>1. JS Widget Generator</h3>
+        <p>
+            Developers define survey questions through a simple web interface—either in natural language or in a structured format.
+            These inputs are used to generate a JS widget that can be pasted into any website source code.
+        </p>
+        <p>
+            When embedded on a developer's site, the widget prompts users to enter their Discord username. Upon
+            submission, a backend call is made to our API to initialize the Discord conversation.
+        </p>
+        <img src="../imgs/discord_widget.png" alt="JS Widget generation and embed flow" class="project-image my-4" />
+
+        <h3>2. AI Discord Agent</h3>
+        <p>
+            Built using Discord.js and integrated with Mistral API, the AI agent converts each form question into a
+            conversational prompt. It interprets free-text user responses, validates against expected formats, and
+            provides real-time correction when necessary.
+        </p>
+        <p>
+            The bot maintains context across a conversation and provides a smooth, human-like experience using prompt
+            engineering and function-calling for structured data extraction.
+        </p>
+        <img src="../imgs/discord_conversation.png" alt="Mistral-powered Discord AI agent interface"
+            class="project-image my-4" />
+
+        <h3>3. Response Delivery via Webhooks</h3>
+        <p>
+            Once a user completes the conversation, the structured results are posted as JSON to a developer-defined
+            webhook. Each response payload includes metadata like the user's Discord ID, timestamp, and the validated
+            answers.
+        </p>
+        <p>
+            This makes it simple for devs to plug the results into any database, spreadsheet, or automation pipeline.
+        </p>
+        <h3>Technologies Used</h3>
+        <ul>
+            <li><strong>Discord.js</strong> – Handles bot interactions and messaging flows.</li>
+            <li><strong>Mistral API</strong> – Used for conversational prompt generation and data validation.</li>
+            <li><strong>Node.js / Express</strong> – Backend services for webhook handling and widget generation.</li>
+            <li><strong>Vanilla JS</strong> – For embedding widgets without dependencies or heavy SDKs.</li>
+        </ul>
+
+
+        <div class="project-navigation mt-5">
+            <a href="../index.html#projects" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Projects
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-buttons mb-4">
+                    <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fab fa-github me-2"></i>GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/taylor-tam" class="btn btn-outline-light" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fab fa-linkedin me-2"></i>LinkedIn
+                    </a>
+                </div>
+                <p class="copyright mb-0">&copy; 2025 Taylor Tam <span class="bullet">•</span> Built with <i
+                        class="fas fa-heart text-danger mx-1"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

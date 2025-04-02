@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>High-Altitude Environmental Monitoring - Taylor Tam</title>
+  <title>{{TITLE}} - Taylor Tam</title>
   <!-- Bootstrap CSS -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -33,16 +33,13 @@
   <section class="hero project-hero">
     <div class="container">
       <div class="d-flex align-items-center mb-4">
-        <a href="../index.html#projects" class="back-link">
+        <a href="../index.html" class="back-link">
           <i class="fas fa-arrow-left me-2"></i>Back to Projects
         </a>
       </div>
-      <h1>High-Altitude Environmental Monitoring System</h1>
+      <h1>{{TITLE}}</h1>
       <div class="project-tags">
-        <span class="badge bg-primary">Arduino</span>
-        <span class="badge bg-primary">IoT</span>
-        <span class="badge bg-primary">Environmental</span>
-        <span class="badge bg-primary">Python</span>
+        {{TAGS}}
       </div>
     </div>
   </section>
@@ -50,29 +47,13 @@
   <!-- Main Project Content -->
   <main class="container project-content">
     <div class="project-overview">
-      <img src="../imgs/arduino.jpeg" alt="High-Altitude Environmental Monitoring System" class="project-image mb-4" />
+      <img src="../imgs/{{IMAGE}}" alt="{{TITLE}}" class="project-image mb-4" />
       <p class="lead">
-        Developed an Arduino-based high-altitude environmental monitoring system that collects, processes, and analyzes atmospheric data at altitudes up to 100k ft. This system monitors key parameters including GPS location, pressure, temperature, humidity, and CO₂ levels to provide comprehensive environmental insights.
+        {{DESCRIPTION}}
       </p>
     </div>
     
-    <h2>Project Overview</h2>
-    <p>
-      The goal of this project was to design a robust dual-board Arduino setup capable of operating at extreme altitudes. The system captures real-time atmospheric data and integrates a pressure-based cutdown mechanism to safely terminate the flight, ensuring both data integrity and hardware safety during high-altitude missions.
-    </p>
-    
-    <h2>Key Features</h2>
-    <ul>
-      <li><strong>Redundant Architecture:</strong> Dual-board Arduino setup ensures system reliability at extreme altitudes.</li>
-      <li><strong>Comprehensive Monitoring:</strong> Real-time tracking of GPS, pressure, temperature, humidity, and CO₂ levels.</li>
-      <li><strong>Safety Mechanisms:</strong> Automated pressure-based cutdown system for controlled flight termination.</li>
-      <li><strong>Advanced Data Processing:</strong> Rolling-window pressure averaging and Python-based analysis tools.</li>
-    </ul>
-    
-    <h2>Technical Details</h2>
-    <p>
-      The system employs two Arduino boards to ensure redundancy and reliability during high-altitude operations. Sensors continuously capture environmental data which is processed on board using custom algorithms. A pressure-based cutdown mechanism is triggered under predetermined conditions to initiate a safe descent, protecting the payload and ensuring data preservation. Once recovered, the logged data is analyzed using Python to extract meaningful insights regarding atmospheric conditions.
-    </p>
+    {{CONTENT}}
     
     <div class="project-navigation mt-5">
       <a href="../index.html#projects" class="btn btn-outline-primary">

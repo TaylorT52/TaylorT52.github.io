@@ -5,37 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TreeHacks 2025: Custom-Fitted Insole iOS App - Taylor Tam</title>
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
   <!-- External CSS -->
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <!-- Header / Navigation -->
-  <header>
-    <div class="container d-flex align-items-center justify-content-between">
-      <a href="../index.html" class="logo">
-        <img src="../imgs/pilogo.png" alt="Taylor Tam Logo" />
-      </a>
-      <nav>
-        <a href="../index.html#about">About</a>
-        <a href="../index.html#projects">Projects</a>
-        <a href="../index.html#contact">Contact</a>
-      </nav>
+  <!-- Hero Section -->
+  <section class="hero project-hero">
+    <div class="container">
+      <div class="d-flex align-items-center mb-4">
+        <a href="../index.html#projects" class="back-link">
+          <i class="fas fa-arrow-left me-2"></i>Back to Projects
+        </a>
+      </div>
+      <h1>TreeHacks 2025: Custom-Fitted Insole iOS App</h1>
+      <div class="project-tags">
+        <span class="badge bg-primary">iOS</span>
+        <span class="badge bg-primary">LiDAR</span>
+        <span class="badge bg-primary">3D Printing</span>
+        <span class="badge bg-primary">Healthcare</span>
+      </div>
     </div>
-  </header>
-  
-  <!-- Spacer between header and main content -->
-  <div style="height: 50px;"></div>
+  </section>
   
   <!-- Main Project Content -->
-  <main class="container">
-    <br>
-    <h1>TreeHacks 2025: Custom-Fitted Insole iOS App</h1>
-    <p>
-      Developed an innovative iOS app that leverages LiDAR to scan a user's feet and generate a custom-fitted, 3D-printable insole in just 2 minutes. Using an iPhone and a $50 3D printer, this solution provides an affordable and rapid way to produce personalized shoe insoles.
-    </p>
+  <main class="container project-content">
+    <div class="project-overview">
+      <img src="../imgs/solemate.png" alt="Custom-Fitted Insole iOS App" class="project-image mb-4" />
+      <p class="lead">
+        Developed an innovative iOS app that leverages LiDAR to scan a user's feet and generate a custom-fitted, 3D-printable insole in just 2 minutes. Using an iPhone and a $50 3D printer, this solution provides an affordable and rapid way to produce personalized shoe insoles.
+      </p>
+    </div>
     
     <h2>Project Overview</h2>
     <p>
@@ -44,10 +63,10 @@
     
     <h2>Key Features</h2>
     <ul>
-      <li>Utilizes LiDAR for precise foot scanning</li>
-      <li>Generates custom 3D-printable insole designs</li>
-      <li>Rapid turnaround – insoles ready in 2 minutes</li>
-      <li>Cost-effective: Designed to work with a $50 3D printer</li>
+      <li><strong>LiDAR Integration:</strong> Utilizes iPhone's LiDAR sensor for precise and detailed foot scanning.</li>
+      <li><strong>3D Model Generation:</strong> Advanced algorithms convert scan data into printable insole designs.</li>
+      <li><strong>Rapid Processing:</strong> Complete workflow from scan to model in just 2 minutes.</li>
+      <li><strong>Cost-Effective Solution:</strong> Compatible with affordable 3D printers, making custom insoles accessible.</li>
     </ul>
     
     <h2>Learn More</h2>
@@ -56,15 +75,27 @@
       <a href="https://devpost.com/software/solemate-9jmhuf?ref_content=user-portfolio&ref_feature=in_progress" target="_blank" rel="noopener noreferrer">Devpost</a>.
     </p>
     
-    <p>
-      <a href="../index.html#projects" class="btn btn-primary">Back to Projects</a>
-    </p>
+    <div class="project-navigation mt-5">
+      <a href="../index.html#projects" class="btn btn-outline-primary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Projects
+      </a>
+    </div>
   </main>
   
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p class="mb-0">&copy; 2025 Taylor Tam</p>
+      <div class="footer-content">
+        <div class="footer-buttons mb-4">
+          <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github me-2"></i>GitHub
+          </a>
+          <a href="https://linkedin.com/in/taylor-tam" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin me-2"></i>LinkedIn
+          </a>
+        </div>
+        <p class="copyright mb-0">&copy; 2025 Taylor Tam <span class="bullet">•</span> Built with <i class="fas fa-heart text-danger mx-1"></i></p>
+      </div>
     </div>
   </footer>
   

@@ -5,65 +5,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Autonomous Robot Navigation Localization - Taylor Tam</title>
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
   <!-- External CSS -->
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <!-- Header / Navigation -->
-  <header>
-    <div class="container d-flex align-items-center justify-content-between">
-      <a href="../index.html" class="logo">
-        <img src="../imgs/pilogo.png" alt="Taylor Tam Logo" />
-      </a>
-      <nav>
-        <a href="../index.html#about">About</a>
-        <a href="../index.html#projects">Projects</a>
-        <a href="../index.html#contact">Contact</a>
-      </nav>
+  <!-- Hero Section -->
+  <section class="hero project-hero">
+    <div class="container">
+      <div class="d-flex align-items-center mb-4">
+        <a href="../index.html#projects" class="back-link">
+          <i class="fas fa-arrow-left me-2"></i>Back to Projects
+        </a>
+      </div>
+      <h1>Autonomous Robot Navigation Localization</h1>
+      <div class="project-tags">
+        <span class="badge bg-primary">Computer Vision</span>
+        <span class="badge bg-primary">Robotics</span>
+        <span class="badge bg-primary">Python</span>
+        <span class="badge bg-primary">OpenCV</span>
+      </div>
     </div>
-  </header>
-  
-  <!-- Spacer between header and main content -->
-  <div style="height: 50px;"></div>
+  </section>
   
   <!-- Main Project Content -->
-  <main class="container">
-    <br>
-    <h1>Autonomous Robot Navigation Localization</h1>
-    <p>
-      Developed a custom localization program for autonomous robot navigation by integrating a computer vision pipeline with custom blob detection, angle correction, and color detection. In this project, I served as the lead software engineer and collaborated with a multidisciplinary team of electrical and mechanical engineers.
-    </p>
+  <main class="container project-content">
+    <div class="project-overview">
+      <img src="../imgs/robot.jpeg" alt="Autonomous Robot Navigation" class="project-image mb-4" />
+      <p class="lead">
+        Developed a custom localization program for autonomous robot navigation by integrating a computer vision pipeline with custom blob detection, angle correction, and color detection. In this project, I served as the lead software engineer and collaborated with a multidisciplinary team of electrical and mechanical engineers.
+      </p>
+    </div>
     
     <h2>Project Overview</h2>
     <p>
-      The goal of this project was to create a robust and efficient localization system that enables autonomous robots to navigate accurately in complex environments. By leveraging computer vision techniques, the system processes live video feeds to detect, track, and correct the robot’s trajectory in real time.
+      The goal of this project was to create a robust and efficient localization system that enables autonomous robots to navigate accurately in complex environments. By leveraging computer vision techniques, the system processes live video feeds to detect, track, and correct the robot's trajectory in real time.
     </p>
     
     <h2>Key Features</h2>
     <ul>
-      <li>Custom computer vision pipeline for robust localization</li>
-      <li>Blob detection for precise object and feature identification</li>
-      <li>Angle correction and color detection to enhance positional accuracy</li>
-      <li>Cross-disciplinary collaboration with electrical and mechanical engineers</li>
+      <li><strong>Advanced Vision Pipeline:</strong> Custom computer vision system for robust real-time localization.</li>
+      <li><strong>Precise Detection:</strong> Sophisticated blob detection algorithms for accurate object and feature identification.</li>
+      <li><strong>Intelligent Correction:</strong> Real-time angle correction and color detection for enhanced positional accuracy.</li>
+      <li><strong>Collaborative Development:</strong> Led software development in a cross-disciplinary team environment.</li>
     </ul>
     
     <h2>Technical Details</h2>
     <p>
-      The system employs a computer vision pipeline designed to process video input and identify relevant features using custom blob detection algorithms. Angle correction algorithms adjust the robot’s orientation, while color detection helps in distinguishing landmarks for accurate localization. This integrated approach enables real-time navigation and improved autonomous decision-making in challenging environments.
+      The system employs a computer vision pipeline designed to process video input and identify relevant features using custom blob detection algorithms. Angle correction algorithms adjust the robot's orientation, while color detection helps in distinguishing landmarks for accurate localization. This integrated approach enables real-time navigation and improved autonomous decision-making in challenging environments.
     </p>
     
-    <p>
-      <a href="../index.html#projects" class="btn btn-primary">Back to Projects</a>
-    </p>
+    <div class="project-navigation mt-5">
+      <a href="../index.html#projects" class="btn btn-outline-primary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Projects
+      </a>
+    </div>
   </main>
   
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p class="mb-0">&copy; 2025 Taylor Tam</p>
+      <div class="footer-content">
+        <div class="footer-buttons mb-4">
+          <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github me-2"></i>GitHub
+          </a>
+          <a href="https://linkedin.com/in/taylor-tam" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin me-2"></i>LinkedIn
+          </a>
+        </div>
+        <p class="copyright mb-0">&copy; 2025 Taylor Tam <span class="bullet">•</span> Built with <i class="fas fa-heart text-danger mx-1"></i></p>
+      </div>
     </div>
   </footer>
   

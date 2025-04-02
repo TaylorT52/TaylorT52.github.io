@@ -168,7 +168,7 @@ header nav a:hover::after {
     font-size: 1.75rem !important;
     font-weight: 600;
     color: var(--text);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     position: relative;
     letter-spacing: 0.01em;
 }
@@ -190,7 +190,8 @@ header nav a:hover::after {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    justify-content: center;
 }
 
 .project-tags .badge {
@@ -218,8 +219,8 @@ header nav a:hover::after {
 
 .project-content h2 {
     font-size: 1.5rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
     color: var(--text);
 }
 

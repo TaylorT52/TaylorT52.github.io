@@ -26,6 +26,10 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.3;
 }
 
+h1 {
+    font-size: 2rem;
+}
+
 a {
     color: var(--primary);
     text-decoration: none;
@@ -161,7 +165,7 @@ header nav a:hover::after {
 }
 
 .project-hero h1 {
-    font-size: 1.1rem;
+    font-size: 2rem !important;
     font-weight: 600;
     color: var(--text);
     margin-bottom: 0.75rem;

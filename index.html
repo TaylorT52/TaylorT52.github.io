@@ -37,6 +37,7 @@
   <nav class="main-nav">
     <div class="container">
       <div class="nav-content">
+        <a href="#research" class="nav-link">Research</a>
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
@@ -46,16 +47,33 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
-      <h1>Taylor Tam</h1>
-      <p class="subtitle">full-stack developer • AI researcher • student @ stanford</p>
-      <div class="hero-content">
-        <p class="hero-description">
-          Hi! I'm Taylor, a Computer Science student at Stanford University passionate about leveraging technology to solve complex problems in healthcare and human-computer interaction. My research focuses on applying artificial intelligence and computer vision to medical applications.
-        </p>
-        <div class="hero-links">
-          <a href="mailto:taylor52@stanford.edu" class="hero-link">[email protected]</a>
-          <a href="https://github.com/TaylorT52" class="hero-link" target="_blank" rel="noopener noreferrer">github</a>
-          <a href="https://www.linkedin.com/in/taylortam52/" class="hero-link" target="_blank" rel="noopener noreferrer">linkedin</a>
+      <div class="hero-wrapper">
+        <div class="hero-text">
+          <h1>Taylor Tam</h1>
+          <p class="subtitle">full-stack developer • AI researcher • student @ stanford</p>
+          <div class="hero-content">
+            <p class="hero-description">
+              Hi! I'm Taylor, a Computer Science student at Stanford University passionate about leveraging technology to solve complex problems in healthcare and human-computer interaction. My research focuses on applying artificial intelligence and computer vision to medical applications.
+            </p>
+            <div class="hero-positions">
+              <div class="position-item">
+                <span class="position-label">PREV:</span>
+                <span class="position-text">@ aida</span>
+              </div>
+              <div class="position-item">
+                <span class="position-label">NOW:</span>
+                <span class="position-text">@ stanford's melcher lab, incoming at apple</span>
+              </div>
+            </div>
+            <div class="hero-links">
+              <a href="mailto:taylor52@stanford.edu" class="hero-link">[email protected]</a>
+              <a href="https://github.com/TaylorT52" class="hero-link" target="_blank" rel="noopener noreferrer">github</a>
+              <a href="https://www.linkedin.com/in/taylortam52/" class="hero-link" target="_blank" rel="noopener noreferrer">linkedin</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="./profile.png" alt="Taylor Tam" class="profile-photo" />
         </div>
       </div>
     </div>
@@ -106,104 +124,59 @@
   <section id="projects" class="projects">
     <div class="container">
       <h2>Projects</h2>
-      <div class="research-grid">
+      <div class="projects-mosaic">
          <!-- Project 0 -->
-         <a href="projpages/project8.html" class="card-link text-decoration-none">
-          <div class="card h-100">
-            <div class="card-body d-flex flex-column justify-content-between">
-              <div>
-                <img src="./imgs/survey_automation.png" alt="Geometric light sculpture resembling a 3D dodecahedron at Burning Man 2024" class="img-fluid mb-3" />
-                <h5 class="card-title">Conversational Forms with AI</h5>
-                <p class="card-text">
-                  A lightweight JS widget that transforms static forms into dynamic, AI-driven conversations—handled entirely through a Discord bot powered by Mistral.
-                </p>
-              </div>
-              <div class="text-end mt-3">
-                <span class="badge bg-primary">JavaScript Widget</span>
-                <span class="badge bg-primary">AI Agent</span>
-                <span class="badge bg-primary">Discord Integration</span>
-              </div>
-            </div>
+         <a href="projpages/project8.html" class="project-card">
+          <div class="project-year">2025</div>
+          <img src="./imgs/survey_automation.png" alt="Conversational Forms with AI" />
+          <div class="project-info">
+            <h3 class="project-title">Conversational Forms with AI</h3>
+            <p class="project-desc">A lightweight JS widget that transforms static forms into dynamic, AI-driven conversations.</p>
           </div>
         </a>
         <!-- Project 1 -->
-        <a href="projpages/project2.html" class="card-link">
-          <div class="card">
-            <div class="card-body">
-              <div>
-                <img src="./imgs/unfoldinghumanity.jpeg" alt="3D Dodecahedron for Burning Man 2024" />
-                <h5 class="card-title">3D Dodecahedron for Burning Man 2024</h5>
-                <p class="card-text">Interactive art installation featuring a large-scale geometric structure with LED animations.</p>
-              </div>
-              <div class="text-end">
-                <span class="badge bg-primary">3D Design</span>
-                <span class="badge bg-primary">Interactive Art</span>
-              </div>
-            </div>
+        <a href="projpages/project2.html" class="project-card">
+          <div class="project-year">2024</div>
+          <img src="./imgs/unfoldinghumanity.jpeg" alt="3D Dodecahedron for Burning Man 2024" />
+          <div class="project-info">
+            <h3 class="project-title">3D Dodecahedron for Burning Man 2024</h3>
+            <p class="project-desc">Interactive art installation featuring a large-scale geometric structure with LED animations.</p>
           </div>
         </a>
         <!-- Project 2 -->
-        <a href="projpages/project3.html" class="card-link">
-          <div class="card">
-            <div class="card-body">
-              <div>
-                <img src="./imgs/solemate.png" alt="TreeHacks 2025: Custom-Fitted Insole iOS App" />
-                <h5 class="card-title">Custom-Fitted Insole iOS App</h5>
-                <p class="card-text">Mobile app using AR and ML to scan feet and generate custom-fitted orthopedic insoles.</p>
-              </div>
-              <div class="text-end">
-                <span class="badge bg-primary">iOS</span>
-                <span class="badge bg-primary">AR/ML</span>
-              </div>
-            </div>
+        <a href="projpages/project3.html" class="project-card">
+          <div class="project-year">2025</div>
+          <img src="./imgs/solemate.png" alt="Custom-Fitted Insole iOS App" />
+          <div class="project-info">
+            <h3 class="project-title">Custom-Fitted Insole iOS App</h3>
+            <p class="project-desc">Mobile app using AR and ML to scan feet and generate custom-fitted orthopedic insoles.</p>
           </div>
         </a>
         <!-- Project 3 -->
-        <a href="projpages/project4.html" class="card-link">
-          <div class="card">
-            <div class="card-body">
-              <div>
-                <img src="./imgs/mariokart.png" alt="Gesture-Controlled Mario Kart" />
-                <h5 class="card-title">Gesture-Controlled Mario Kart</h5>
-                <p class="card-text">Custom controller using computer vision to detect hand gestures for playing Mario Kart and simulating Nintendo Switch controller's bluetooth protocol.</p>
-              </div>
-              <div class="text-end">
-                <span class="badge bg-primary">Computer Vision</span>
-                <span class="badge bg-primary">Gaming</span>
-              </div>
-            </div>
+        <a href="projpages/project4.html" class="project-card">
+          <div class="project-year">2024</div>
+          <img src="./imgs/mariokart.png" alt="Gesture-Controlled Mario Kart" />
+          <div class="project-info">
+            <h3 class="project-title">Gesture-Controlled Mario Kart</h3>
+            <p class="project-desc">Custom controller using computer vision to detect hand gestures for playing Mario Kart.</p>
           </div>
         </a>
         <!-- Project 4 -->
-        <a href="projpages/project6.html" class="card-link">
-          <div class="card">
-            <div class="card-body">
-              <div>
-                <img src="./imgs/weatherballoon.jpeg" alt="High-Altitude Environmental Monitoring" />
-                <h5 class="card-title">High-Altitude Environmental Monitoring</h5>
-                <p class="card-text">Weather balloon system for collecting atmospheric data and environmental measurements.</p>
-              </div>
-              <div class="text-end">
-                <span class="badge bg-primary">IoT</span>
-                <span class="badge bg-primary">Environmental</span>
-              </div>
-            </div>
+        <a href="projpages/project6.html" class="project-card">
+          <div class="project-year">2023</div>
+          <img src="./imgs/weatherballoon.jpeg" alt="High-Altitude Environmental Monitoring" />
+          <div class="project-info">
+            <h3 class="project-title">High-Altitude Environmental Monitoring</h3>
+            <p class="project-desc">Weather balloon system for collecting atmospheric data and environmental measurements.</p>
           </div>
         </a>
         <!-- Project 5 -->
-        <a href="projpages/project7.html" class="card-link">
-          <div class="card">
-            <div class="card-body">
-              <div>
-                <img src="./imgs/robotics.png" alt="Autonomous Robot Navigation" />
-                <h5 class="card-title">Autonomous Robot Navigation</h5>
-                <p class="card-text">Implementation of SLAM algorithms for autonomous robot navigation and mapping.</p>
-              </div>
-              <div class="text-end">
-                <span class="badge bg-primary">Robotics</span>
-                <span class="badge bg-primary">SLAM</span>
-              </div>
-            </div>
+        <a href="projpages/project7.html" class="project-card">
+          <div class="project-year">2023</div>
+          <img src="./imgs/robotics.png" alt="Autonomous Robot Navigation" />
+          <div class="project-info">
+            <h3 class="project-title">Autonomous Robot Navigation</h3>
+            <p class="project-desc">Implementation of SLAM algorithms for autonomous robot navigation and mapping.</p>
           </div>
         </a>
       </div>

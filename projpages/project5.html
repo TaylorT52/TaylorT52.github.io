@@ -52,31 +52,31 @@
     <div class="project-overview">
       <img src="../imgs/aimi.png" alt="Medical Device Localization" class="project-image mb-4" />
       <p class="lead">
-        Developed a machine learning pipeline to localize medical devices in chest x-rays with 97% accuracy across diverse test sets. This project combines a Multi-Label Classifier with a YOLOv5 model to detect and generate bounding boxes around medical devices, ensuring robust performance in varied clinical imaging scenarios.
+        Built a two-stage chest x-ray pipeline: a multi-label classifier for device presence and a YOLOv5 detector for localization, reaching ~97% detection accuracy across heterogeneous validation sets.
       </p>
     </div>
     
     <h2>Project Overview</h2>
     <p>
-      The objective of this project was to enhance the detection and localization of medical devices within chest x-rays—a critical task for clinical diagnostics and effective patient care. By leveraging advanced machine learning techniques, the system not only classifies but also pinpoints the exact location of devices, streamlining the radiologist's workflow.
+      The system preprocesses radiographs, predicts likely device classes, and then performs class-conditional bounding-box inference. Separating classification from localization reduced false positives and improved reliability under varied acquisition conditions.
     </p>
     
     <h2>Key Features</h2>
     <ul>
-      <li><strong>High Accuracy:</strong> Achieved 97% detection accuracy across multiple diverse datasets.</li>
-      <li><strong>Dual-Model Architecture:</strong> Innovative combination of Multi-Label Classifier and YOLOv5 for precise localization.</li>
-      <li><strong>Advanced Visualization:</strong> Automated generation of bounding boxes around detected medical devices.</li>
-      <li><strong>Robust Performance:</strong> Adaptable system that maintains accuracy across various imaging conditions.</li>
+      <li><strong>Dual-Model Design:</strong> Multi-label screening stage + YOLOv5 localization stage.</li>
+      <li><strong>Detection Quality:</strong> ~97% accuracy on diverse chest x-ray validation cohorts.</li>
+      <li><strong>Structured Outputs:</strong> Per-class confidence scores and pixel-space bounding boxes.</li>
+      <li><strong>Clinical Robustness:</strong> Stable performance across different image quality and device configurations.</li>
     </ul>
     
     <h2>Technical Details</h2>
     <p>
-      The pipeline starts with a Multi-Label Classifier that pre-screens x-ray images to identify potential regions of interest. A YOLOv5 model is then employed to accurately localize and draw bounding boxes around detected devices. This dual-model approach ensures robustness and high precision, even in the presence of imaging variability.
+      Training and evaluation were implemented in Python with dataset augmentation and threshold tuning to balance precision/recall. At inference time, the classifier gates candidate classes and the detector returns localized boxes, enabling downstream QA and faster radiology review workflows.
     </p>
     
     <h2>Internship Insights: Radiology and ResNets</h2>
     <p>
-      During my summer internship with AIMI at Stanford, I gained valuable insights into the application of deep convolutional neural networks—specifically ResNets—in radiological image analysis. By fine-tuning a ResNet model for chest x-ray analysis, our team was able to further improve detection accuracy and better understand the nuances of clinical imaging. This experience validated the potential of integrating state-of-the-art deep learning techniques into medical imaging workflows and reinforced the importance of adaptive models for handling diverse datasets.
+      During my Stanford AIMI internship, I also fine-tuned ResNet baselines for chest x-ray tasks to benchmark calibration and failure modes. Those experiments informed preprocessing and error-analysis choices for this localization pipeline.
     </p>
     <p>
       You can read more about these insights on 

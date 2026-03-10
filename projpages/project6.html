@@ -52,26 +52,26 @@
     <div class="project-overview">
       <img src="../imgs/weatherballoon.jpeg" alt="High-Altitude Environmental Monitoring System" class="project-image mb-4" />
       <p class="lead">
-        Developed an Arduino-based high-altitude environmental monitoring system that collects, processes, and analyzes atmospheric data at altitudes up to 100k ft. This system monitors key parameters including GPS location, pressure, temperature, humidity, and CO₂ levels to provide comprehensive environmental insights.
+        Developed a dual-controller high-altitude telemetry stack that logs GPS, pressure, temperature, humidity, and CO2 up to ~100k ft, with automated pressure-triggered cutdown for flight safety.
       </p>
     </div>
     
     <h2>Project Overview</h2>
     <p>
-      The goal of this project was to design a robust dual-board Arduino setup capable of operating at extreme altitudes. The system captures real-time atmospheric data and integrates a pressure-based cutdown mechanism to safely terminate the flight, ensuring both data integrity and hardware safety during high-altitude missions.
+      Two Arduino boards run redundant sensing and control loops for resilience in low-temperature, low-pressure conditions. Telemetry is sampled and timestamped in real time, while cutdown logic monitors rolling pressure trends and threshold conditions to trigger controlled descent.
     </p>
     
     <h2>Key Features</h2>
     <ul>
-      <li><strong>Redundant Architecture:</strong> Dual-board Arduino setup ensures system reliability at extreme altitudes.</li>
-      <li><strong>Comprehensive Monitoring:</strong> Real-time tracking of GPS, pressure, temperature, humidity, and CO₂ levels.</li>
-      <li><strong>Safety Mechanisms:</strong> Automated pressure-based cutdown system for controlled flight termination.</li>
-      <li><strong>Advanced Data Processing:</strong> Rolling-window pressure averaging and Python-based analysis tools.</li>
+      <li><strong>Redundant Flight Electronics:</strong> Dual-board architecture for fault tolerance during ascent.</li>
+      <li><strong>Multi-Sensor Telemetry:</strong> Continuous GPS + atmospheric sensing with synchronized logs.</li>
+      <li><strong>Safety Automation:</strong> Pressure-based cutdown relay with rolling-window decision logic.</li>
+      <li><strong>Post-Flight Analytics:</strong> Python tooling for trajectory reconstruction and atmospheric profiling.</li>
     </ul>
     
     <h2>Technical Details</h2>
     <p>
-      The system employs two Arduino boards to ensure redundancy and reliability during high-altitude operations. Sensors continuously capture environmental data which is processed on board using custom algorithms. A pressure-based cutdown mechanism is triggered under predetermined conditions to initiate a safe descent, protecting the payload and ensuring data preservation. Once recovered, the logged data is analyzed using Python to extract meaningful insights regarding atmospheric conditions.
+      Firmware emphasizes deterministic sampling, sensor health checks, and fail-safe state transitions before actuator fire. After payload recovery, analysis scripts align time series data, derive altitude from pressure curves, and produce mission diagnostics for subsequent hardware iterations.
     </p>
     
     <div class="project-navigation mt-5">

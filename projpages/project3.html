@@ -52,21 +52,21 @@
     <div class="project-overview">
       <img src="../imgs/solemate.png" alt="Custom-Fitted Insole iOS App" class="project-image mb-4" />
       <p class="lead">
-        Developed an innovative iOS app that leverages LiDAR to scan a user's feet and generate a custom-fitted, 3D-printable insole in just 2 minutes. Using an iPhone and a $50 3D printer, this solution provides an affordable and rapid way to produce personalized shoe insoles.
+        SoleMate is an iOS pipeline that captures foot geometry with ARKit LiDAR, reconstructs a dense mesh with Open3D (alpha-shape + smoothing), and exports print-ready insole models (OBJ/STL) in about 2 minutes.
       </p>
     </div>
     
     <h2>Project Overview</h2>
     <p>
-      This project was created for TreeHacks 2025 to tackle the challenge of obtaining well-fitting, custom insoles quickly and inexpensively. By capturing detailed foot measurements using LiDAR technology, the app processes the data to produce a 3D model of an insole that can be directly 3D printed.
+      Built at TreeHacks 2025, the system converts iPhone depth and point-cloud data into custom orthotic geometry. The processing stack uses Open3D for denoising/meshing, Trimesh for surface inversion and insole shaping, and OpenCV distance-transform refinement for contour fit before final export.
     </p>
     
     <h2>Key Features</h2>
     <ul>
-      <li><strong>LiDAR Integration:</strong> Utilizes iPhone's LiDAR sensor for precise and detailed foot scanning.</li>
-      <li><strong>3D Model Generation:</strong> Advanced algorithms convert scan data into printable insole designs.</li>
-      <li><strong>Rapid Processing:</strong> Complete workflow from scan to model in just 2 minutes.</li>
-      <li><strong>Cost-Effective Solution:</strong> Compatible with affordable 3D printers, making custom insoles accessible.</li>
+      <li><strong>ARKit LiDAR Capture:</strong> Uses iPhone LiDAR to acquire high-resolution foot surface data.</li>
+      <li><strong>Mesh Reconstruction:</strong> Generates printable geometry with Open3D alpha-shape meshing and smoothing.</li>
+      <li><strong>Insole Synthesis:</strong> Applies Trimesh-based inversion/shaping and OpenCV contour refinement.</li>
+      <li><strong>Print Pipeline:</strong> Produces OBJ/STL files compatible with low-cost FDM printers in about 2 minutes.</li>
     </ul>
     
     <h2>Learn More</h2>

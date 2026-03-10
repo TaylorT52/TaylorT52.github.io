@@ -52,26 +52,27 @@
     <div class="project-overview">
       <img src="../imgs/mariokart.png" alt="Gesture-Controlled Nintendo Switch" class="project-image mb-4" />
       <p class="lead">
-        In this project, I hacked the Nintendo Switch to enable gesture-controlled gameplay using computer vision techniques. By leveraging YOLO for custom gesture recognition and running the solution on an Nvidia Jetson Orin, I emulated the Nintendo Switch Bluetooth protocol to spoof controllers, allowing for an innovative and interactive gaming experience.
+        Built a real-time gesture-to-controller stack for Nintendo Switch: YOLOv8 hand detection, MediaPipe keypoint tracking, ORB/BF gesture matching, and Bluetooth HID emulation on Jetson Orin.
       </p>
     </div>
     
     <h2>Project Overview</h2>
     <p>
-      The goal of this project was to develop a novel, vision-based control interface for the Nintendo Switch. Through the use of advanced computer vision algorithms, the system interprets hand and body gestures in real-time, translating them into gameplay commands. This approach opens up new possibilities for accessible and immersive game interaction.
+      The pipeline ingests webcam frames, detects hands with a custom-trained YOLOv8 model (EgoHands), extracts 21 hand landmarks with MediaPipe, then classifies gesture commands using ORB feature matching with brute-force cross-checking against reference templates.
     </p>
     
     <h2>Key Features</h2>
     <ul>
-      <li><strong>Advanced Gesture Recognition:</strong> Custom-trained YOLO model for accurate and responsive gesture detection.</li>
-      <li><strong>Real-time Processing:</strong> Optimized computer vision pipeline running on Nvidia Jetson Orin for minimal latency.</li>
-      <li><strong>Bluetooth Protocol Emulation:</strong> Custom implementation to spoof Nintendo Switch controllers.</li>
-      <li><strong>Accessible Gaming:</strong> Motion-based control system that enhances gaming immersion.</li>
+      <li><strong>Detection + Tracking:</strong> YOLOv8 hand detection followed by MediaPipe landmark extraction per frame.</li>
+      <li><strong>Gesture Classification:</strong> ORB + brute-force matcher with thresholded feature matches (>= 110) for command mapping.</li>
+      <li><strong>Controller Emulation:</strong> nxbt-based Bluetooth HID spoofing to present as a Switch Pro Controller/JoyCon device.</li>
+      <li><strong>Edge Deployment:</strong> End-to-end inference and command relay on NVIDIA Jetson Orin (Ubuntu 22.04).</li>
+      <li><strong>Measured Performance:</strong> 30 fps runtime with 165 ms average gesture-to-action latency.</li>
     </ul>
     
     <h2>Technical Details</h2>
     <p>
-      The core of the project is built around a custom computer vision pipeline that detects specific gestures and interprets them as game inputs. This data is processed in real-time using an Nvidia Jetson Orin, ensuring low latency. The system then emulates the Nintendo Switch's Bluetooth protocol, effectively acting as a virtual controller. The result is an engaging gameplay experience that bypasses traditional input methods.
+      Six Mario Kart controls were mapped to reference gestures and serialized to HID inputs after classification. The model stack was optimized for real-time gameplay, with YOLO handling robust hand localization, MediaPipe providing rotation-stable keypoints, and ORB matching adding lightweight geometric verification before transmission to the Switch.
     </p>
     
     <div class="project-navigation mt-5">

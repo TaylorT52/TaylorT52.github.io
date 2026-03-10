@@ -52,34 +52,29 @@
     <div class="project-overview">
       <img src="../imgs/livers.png" alt="Automated Liver Tissue Analysis" class="project-image mb-4" />
       <p class="lead">
-        This project presents an innovative computer vision and AI pipeline that automates the analysis of liver tissue images to quantify steatosis levels in donor livers—reducing analysis latency by over 100× compared to traditional methods.
+        A point-of-care CV pipeline for donor-liver steatosis quantification: microscope capture on Jetson Nano, tiled U-Net segmentation, and on-device percent-steatosis scoring with strong cloud-level agreement (r = 0.9399).
       </p>
     </div>
 
     <h2>Overview</h2>
     <p>
-      Our pipeline uses Python-based image preprocessing and a custom computer vision model to segment liver tissue and accurately quantify the degree of steatosis. The system leverages GPU-accelerated processing on an Nvidia Jetson board and is integrated with an iOS application (currently under legal review for distribution), allowing for near real-time analysis during donor liver evaluation.
+      The system runs on Ubuntu/Jetson Nano using Python, TensorFlow, OpenCV, and Argus API for camera ingestion. It captures biopsy images at 1080 x 720, applies quality/background filtering, tiles frames into 256 x 256 patches, performs U-Net inference, and aggregates per-pixel fat masks into a final steatosis percentage.
     </p>
     
-    <h2>Clinical Background</h2>
+    <h2>Validation (Frontiers 2023)</h2>
     <p>
-      Recent research, as detailed in a study published in <em>Frontiers in Transplantation</em> 
-      (<a href="https://www.frontiersin.org/journals/transplantation/articles/10.3389/frtra.2023.1206085/full" target="_blank" rel="noopener noreferrer">full article</a>), has shown that advanced machine perfusion techniques, combined with targeted therapies, can ameliorate steatosis and improve hepatocyte viability in donor livers. These findings highlight the importance of rapid and accurate steatosis quantification to enhance donor liver selection and ultimately improve transplantation outcomes.
+      In the <em>Frontiers in Transplantation</em> brief report 
+      (<a href="https://www.frontiersin.org/journals/transplantation/articles/10.3389/frtra.2023.1206085/full#B11" target="_blank" rel="noopener noreferrer">full article</a>), device-based scores on 33 donor-liver biopsy slides showed strong correlation with prior cloud analysis (r = 0.9399), demonstrating that near-real-time steatosis assessment can be performed offline at the donor site.
     </p>
     
     <h2>Key Features and Innovations</h2>
     <ul>
-      <li><strong>Real-Time Analysis:</strong> Process high-resolution images of liver tissue rapidly to deliver quantitative steatosis metrics in near real-time.</li>
-      <li><strong>Advanced Image Processing:</strong> Utilizes robust Python libraries for preprocessing, enhancing image quality before AI analysis.</li>
-      <li><strong>Custom AI Model:</strong> A deep learning model designed for liver tissue segmentation and steatosis quantification, validated with clinical datasets.</li>
-      <li><strong>GPU Acceleration:</strong> Powered by an Nvidia Jetson board, ensuring efficient processing of large image datasets.</li>
-      <li><strong>Clinical Integration:</strong> The pipeline is integrated with an iOS application, offering a mobile interface for clinicians to access analysis results during donor liver evaluation.</li>
+      <li><strong>Edge Hardware:</strong> Jetson Nano GPU + 12.3 MP IMX477 microscope camera in a portable 3D-printed form factor.</li>
+      <li><strong>Segmentation Pipeline:</strong> Compressed U-Net inference on 256 x 256 tiles with per-pixel fat-vacuole masking.</li>
+      <li><strong>Quantification Logic:</strong> Automated artifact/background filtering and averaged steatosis scoring across sampled fields.</li>
+      <li><strong>Deployment Model:</strong> Offline on-device inference for low-connectivity settings, with optional cloud upload for downstream analysis.</li>
+      <li><strong>Empirical Validation:</strong> Device and cloud outputs were strongly correlated on 33 slides (r = 0.9399).</li>
     </ul>
-    
-    <h2>Impact and Future Directions</h2>
-    <p>
-      By automating the liver tissue analysis process, this pipeline has the potential to drastically reduce the time and labor associated with donor liver evaluation. Future enhancements will focus on improving model accuracy, expanding diagnostic capabilities, and integrating additional clinical parameters to further support decision-making in liver transplantation.
-    </p>
     
     <div class="project-navigation mt-5">
       <a href="../index.html#research" class="btn btn-outline-primary">

@@ -52,21 +52,21 @@
     <div class="project-overview">
       <img src="../imgs/unfoldinghumanity.jpeg" alt="3D Dodecahedron for Burning Man 2024" class="project-image mb-4" />
       <p class="lead">
-        Engineered a 3D dodecahedron structure for Burning Man 2024 featuring exterior LED animations controlled by an Arduino Teensy. The project integrates custom LED animation simulation software with Blender 3D and a low-code video projection algorithm to create a seamless, dynamic visual experience.
+        Designed and built a large-scale dodecahedron installation with Teensy-driven addressable LEDs, using a geometry-aware pipeline (Blender modeling, simulation tooling, and projection mapping) for synchronized real-time visuals.
       </p>
     </div>
 
     <h2>Project Overview</h2>
     <p>
-      This project involved designing and constructing a large-scale 3D dodecahedron that serves as an interactive art installation at Burning Man 2024. The structure's exterior is adorned with LED animations, which are choreographed and controlled in real time using an Arduino Teensy.
+      The build combined mechanical fabrication with a software toolchain that maps animation content onto 12 pentagonal faces. Geometry from Blender was converted into LED index maps and streamed as timed frame buffers to an Arduino Teensy for live playback and parameter tuning on site.
     </p>
     
     <h2>Key Features</h2>
     <ul>
-      <li><strong>Custom LED Animation Software:</strong> Developed simulation software for rapid prototyping and real-time adjustments of LED patterns.</li>
-      <li><strong>3D Modeling Integration:</strong> Utilized Blender 3D for precise structure modeling and LED projection mapping.</li>
-      <li><strong>Efficient Workflow:</strong> Implemented a low-code video projection algorithm for streamlined animation development.</li>
-      <li><strong>Real-time Control:</strong> Arduino Teensy-based system for responsive LED control and pattern management.</li>
+      <li><strong>Simulation-First Workflow:</strong> Custom tooling for rapid animation prototyping before hardware deployment.</li>
+      <li><strong>Geometry-Aware Mapping:</strong> Blender-derived facet coordinates converted to deterministic LED addressing.</li>
+      <li><strong>Controller Runtime:</strong> Teensy firmware streams time-based patterns for low-latency visual updates.</li>
+      <li><strong>Projection Alignment:</strong> Low-code projection pipeline keeps rendered content synchronized with physical faces.</li>
     </ul>
     
     <h2>Watch the Project in Action</h2>
@@ -76,10 +76,7 @@
     
     <h2>Technical Details</h2>
     <p>
-      The LED animations were developed using custom simulation software that allowed for rapid prototyping and real-time adjustments. Blender 3D was employed to design the structure and ensure that the LED projections align perfectly with the facets of the dodecahedron. The low-code video projection algorithm simplifies the animation workflow, while the Arduino Teensy provides robust, real-time control of the LEDs.
-    </p>
-    <p>
-      This innovative pipeline has streamlined the design process and pushed the boundaries of interactive installations, making it a standout project in my portfolio.
+      Each facet was modeled as an independent logical panel, then compiled into contiguous pixel buffers with timing metadata for playback. This split made it easy to iterate on effects in software while preserving deterministic output behavior on embedded hardware during installation runs.
     </p>
     
     <div class="project-navigation mt-5">

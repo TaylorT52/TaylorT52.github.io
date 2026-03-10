@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hybrid Solar + Battery EV (2023) - Taylor Tam</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style.css?v=20260310" />
+</head>
+<body class="minimal-project">
+  <!-- Hero Section -->
+  <section class="hero project-hero">
+    <div class="container">
+      <div class="d-flex align-items-center mb-4">
+        <a href="../index.html#all-projects" class="back-link">
+          <i class="fas fa-arrow-left me-2"></i>Back to Projects
+        </a>
+      </div>
+      <h1>Hybrid Solar + Battery EV (2023)</h1>
+      <div class="project-tags">
+        <span class="badge bg-primary">Embedded Systems</span>
+        <span class="badge bg-primary">Energy Systems</span>
+        <span class="badge bg-primary">Electronics</span>
+        <span class="badge bg-primary">Hardware</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Project Content -->
+  <main class="container project-content">
+    <div class="project-overview">
+      <img src="../imgs/solarcar.png" alt="Hybrid solar and battery electric vehicle prototype" class="project-image mb-4" />
+      <p class="lead">
+        Built a 2023 electric vehicle prototype that runs on solar when light is available and falls back to onboard battery power when light drops.
+      </p>
+    </div>
+
+    <h2>Project Overview</h2>
+    <p>
+      This 2023 project explored how a vehicle can dynamically use two energy sources to maximize runtime and efficiency.
+      When sunlight was sufficient, solar panels generated power that could either support vehicle systems directly or recharge the battery pack.
+      When solar input dropped (cloud cover, low light, or night), the system automatically transitioned to battery power.
+    </p>
+
+    <h2>Power Switching Approach</h2>
+    <p>
+      I did not build full solar telemetry tracking for this version. Instead, I used a phototransistor-based trigger circuit to detect light level and switch between solar-assisted operation and battery power.
+      The goal was a reliable automatic handoff so the vehicle could keep operating without manual source toggling.
+      Even with this simple approach, the hybrid setup improved practical runtime and reduced dependency on charging.
+    </p>
+
+    <h2>What I Learned</h2>
+    <p>
+      This is one of my older projects from 2023, but it was where I learned a lot of hardware fundamentals that I still use now.
+      I spent significant time understanding how motors work with copper coil windings, how back-EMF changes behavior at speed, and how capacitor sizing/placement stabilizes voltage during startup and transient load spikes.
+      Debugging those interactions taught me practical circuit tuning and power-system thinking.
+    </p>
+
+    <img src="../imgs/motors.png" alt="Motor assembly and copper coil exploration" class="project-image project-image-compact my-4" />
+    <img src="../imgs/capacitors.png" alt="Capacitor experiments and circuit tuning" class="project-image project-image-compact my-4" />
+
+    <h2>Why It Still Matters</h2>
+    <p>
+      Even though this build predates my newer AI/software work, it gave me the systems mindset I now apply to end-to-end engineering projects.
+      It made me much more comfortable connecting software decisions with physical hardware behavior.
+    </p>
+
+    <div class="project-navigation mt-5">
+      <a href="../index.html#all-projects" class="btn btn-outline-primary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Projects
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-buttons mb-4">
+          <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github me-2"></i>GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/taylortam52/" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin me-2"></i>LinkedIn
+          </a>
+        </div>
+        <p class="copyright mb-0">&copy; 2026 Taylor Tam <span class="bullet">•</span> Built with <i class="fas fa-heart text-danger mx-1"></i></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

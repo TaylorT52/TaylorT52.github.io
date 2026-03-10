@@ -1103,6 +1103,17 @@ footer {
 .minimal-project .project-image {
     border: 1px solid var(--project-line);
     border-radius: 0;
+    width: min(100%, 780px);
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+}
+
+.minimal-project .project-image-compact {
+    max-height: 460px;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.55);
 }
 
 .minimal-project .project-content .lead {

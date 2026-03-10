@@ -3,21 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Taylor Tam | Software Developer & Researcher</title>
-  <!-- Bootstrap CSS -->
+  <title>Taylor Tam | Portfolio</title>
+  <meta name="description" content="Taylor Tam is a Stanford Computer Science student building software projects in AI, healthcare, robotics, and full-stack development." />
+  <meta name="keywords" content="Taylor Tam, portfolio, Stanford, AI, software engineering, robotics" />
+  <meta name="author" content="Taylor Tam" />
+
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
     crossorigin="anonymous"
   />
-  <!-- Google Font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-    crossorigin="anonymous"
-  />
-  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -25,185 +21,193 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
-  <!-- External CSS -->
   <link rel="stylesheet" href="./style.css" />
-  <!-- Meta tags for SEO -->
-  <meta name="description" content="Taylor Tam - Software Developer and Stanford Student specializing in AI, robotics, and healthcare technology.">
-  <meta name="keywords" content="Taylor Tam, Software Developer, Stanford, AI Research, Healthcare Technology, Robotics">
-  <meta name="author" content="Taylor Tam">
 </head>
-<body>
-  <!-- Navigation -->
+<body id="top" class="minimal-home">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
   <nav class="main-nav">
-    <div class="container">
-      <div class="nav-content">
-        <a href="#research" class="nav-link">Research</a>
-        <a href="#projects" class="nav-link">Projects</a>
+    <div class="container nav-content">
+      <a class="brand" href="#top" aria-label="Go to top">
+        <span class="brand-mark">TT</span>
+        <span class="brand-text">Taylor Tam</span>
+      </a>
+      <div class="nav-links">
+        <a href="#selected-projects" class="nav-link">Projects</a>
+        <a href="#research-list" class="nav-link">Research</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
+  <main id="main-content" class="home-main">
     <div class="container">
-      <div class="hero-wrapper">
-        <div class="hero-text">
-          <h1>Taylor Tam</h1>
-          <p class="subtitle">full-stack developer • AI researcher • student @ stanford</p>
-          <div class="hero-content">
-            <p class="hero-description">
-              Hi! I'm Taylor, a Computer Science student at Stanford University passionate about leveraging technology to solve complex problems in healthcare and human-computer interaction. My research focuses on applying artificial intelligence and computer vision to medical applications.
-            </p>
-            <div class="hero-positions">
-              <div class="position-item">
-                <span class="position-label">PREV:</span>
-                <span class="position-text">@ aida</span>
-              </div>
-              <div class="position-item">
-                <span class="position-label">NOW:</span>
-                <span class="position-text">@ stanford's melcher lab, incoming at apple</span>
-              </div>
-            </div>
-            <div class="hero-links">
-              <a href="mailto:taylor52@stanford.edu" class="hero-link">[email protected]</a>
-              <a href="https://github.com/TaylorT52" class="hero-link" target="_blank" rel="noopener noreferrer">github</a>
-              <a href="https://www.linkedin.com/in/taylortam52/" class="hero-link" target="_blank" rel="noopener noreferrer">linkedin</a>
-            </div>
-          </div>
-        </div>
-        <div class="hero-image">
-          <img src="./profile.png" alt="Taylor Tam" class="profile-photo" />
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Research Section -->
-  <section id="research" class="projects">
-    <div class="container">
-      <h2>Research</h2>
-      <div class="research-grid">
-        <!-- Research Project 1 -->
-        <a href="projpages/project1.html" class="card-link">
-          <div class="card">
-            <div class="card-body">
-              <div>
-                <img src="./imgs/livers.png" alt="Automated Liver Tissue Analysis" />
-                <h5 class="card-title">Automated Liver Tissue Analysis w/ CVAI</h5>
-                <p class="card-text">Developing computer vision algorithms for automated analysis of liver tissue samples, enhancing diagnostic accuracy and efficiency.</p>
-              </div>
-              <div class="text-end">
-                <span class="badge bg-primary">Computer Vision</span>
-                <span class="badge bg-primary">Medical AI</span>
-              </div>
-            </div>
-          </div>
-        </a>
-        <!-- Research Project 2 -->
-        <a href="projpages/project5.html" class="card-link">
-          <div class="card">
-            <div class="card-body">
-              <div>
-                <img src="./imgs/aimi.png" alt="Medical Device Localization in X-Rays" />
-                <h5 class="card-title">Medical Device Localization in Chest X-Rays</h5>
-                <p class="card-text">Implementing deep learning models to automatically detect and localize medical devices in chest X-ray images.</p>
-              </div>
-              <div class="text-end">
-                <span class="badge bg-primary">Deep Learning</span>
-                <span class="badge bg-primary">Healthcare</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
+      <section class="home-grid">
+      <article class="home-column intro-column">
+        <h1>Hi, I'm Taylor.</h1>
+        <p class="intro-copy">
+          Stanford CS student trying to build thoughtful software and useful tools for healthcare, AI, and human-computer interaction.
+        </p>
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects">
-    <div class="container">
-      <h2>Projects</h2>
-      <div class="projects-mosaic">
-         <!-- Project 0 -->
-         <a href="projpages/project8.html" class="project-card">
-          <div class="project-year">2025</div>
-          <img src="./imgs/survey_automation.png" alt="Conversational Forms with AI" />
-          <div class="project-info">
-            <h3 class="project-title">Conversational Forms with AI</h3>
-            <p class="project-desc">A lightweight JS widget that transforms static forms into dynamic, AI-driven conversations.</p>
-          </div>
-        </a>
-        <!-- Project 1 -->
-        <a href="projpages/project2.html" class="project-card">
-          <div class="project-year">2024</div>
-          <img src="./imgs/unfoldinghumanity.jpeg" alt="3D Dodecahedron for Burning Man 2024" />
-          <div class="project-info">
-            <h3 class="project-title">3D Dodecahedron for Burning Man 2024</h3>
-            <p class="project-desc">Interactive art installation featuring a large-scale geometric structure with LED animations.</p>
-          </div>
-        </a>
-        <!-- Project 2 -->
-        <a href="projpages/project3.html" class="project-card">
-          <div class="project-year">2025</div>
-          <img src="./imgs/solemate.png" alt="Custom-Fitted Insole iOS App" />
-          <div class="project-info">
-            <h3 class="project-title">Custom-Fitted Insole iOS App</h3>
-            <p class="project-desc">Mobile app using AR and ML to scan feet and generate custom-fitted orthopedic insoles.</p>
-          </div>
-        </a>
-        <!-- Project 3 -->
-        <a href="projpages/project4.html" class="project-card">
-          <div class="project-year">2024</div>
-          <img src="./imgs/mariokart.png" alt="Gesture-Controlled Mario Kart" />
-          <div class="project-info">
-            <h3 class="project-title">Gesture-Controlled Mario Kart</h3>
-            <p class="project-desc">Custom controller using computer vision to detect hand gestures for playing Mario Kart.</p>
-          </div>
-        </a>
-        <!-- Project 4 -->
-        <a href="projpages/project6.html" class="project-card">
-          <div class="project-year">2023</div>
-          <img src="./imgs/weatherballoon.jpeg" alt="High-Altitude Environmental Monitoring" />
-          <div class="project-info">
-            <h3 class="project-title">High-Altitude Environmental Monitoring</h3>
-            <p class="project-desc">Weather balloon system for collecting atmospheric data and environmental measurements.</p>
-          </div>
-        </a>
-        <!-- Project 5 -->
-        <a href="projpages/project7.html" class="project-card">
-          <div class="project-year">2023</div>
-          <img src="./imgs/robotics.png" alt="Autonomous Robot Navigation" />
-          <div class="project-info">
-            <h3 class="project-title">Autonomous Robot Navigation</h3>
-            <p class="project-desc">Implementation of SLAM algorithms for autonomous robot navigation and mapping.</p>
-          </div>
-        </a>
-      </div>
+        <a href="mailto:taylor52@stanford.edu" class="inline-link">taylor52@stanford.edu -></a>
+
+        <img src="./profile.png" alt="Taylor Tam" class="intro-photo" />
+
+        <div class="contact-stack">
+          <a href="https://github.com/TaylorT52" target="_blank" rel="noopener noreferrer" class="inline-link">github.com/TaylorT52 -></a>
+          <a href="https://www.linkedin.com/in/taylortam52/" target="_blank" rel="noopener noreferrer" class="inline-link">linkedin.com/in/taylortam52 -></a>
+        </div>
+      </article>
+
+      <section class="home-column" id="selected-projects">
+        <h2>Selected Projects:</h2>
+        <ol class="note-list">
+          <li>
+            <span class="item-index">01</span>
+            <div>
+              <a href="projpages/project2.html" class="inline-link">3D Dodecahedron for Burning Man 2024 -></a>
+              <p>Large-scale installation with real-time LED animation simulation and projection mapping.</p>
+            </div>
+          </li>
+          <li>
+            <span class="item-index">02</span>
+            <div>
+              <a href="projpages/project3.html" class="inline-link">Custom-Fitted Insole iOS App -></a>
+              <p>TreeHacks build using LiDAR foot scans to generate 3D-printable insoles in minutes.</p>
+            </div>
+          </li>
+          <li>
+            <span class="item-index">03</span>
+            <div>
+              <a href="projpages/project4.html" class="inline-link">Gesture-Controlled Nintendo Switch -></a>
+              <p>Used YOLO + Jetson to run gesture recognition and emulate Bluetooth controller input.</p>
+            </div>
+          </li>
+          <li>
+            <span class="item-index">04</span>
+            <div>
+              <a href="#all-projects" class="inline-link">View full portfolio -></a>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="home-column">
+        <h2>Currently:</h2>
+        <ol class="note-list">
+          <li>
+            <span class="item-index">01</span>
+            <div>
+              <p>Researching medical computer vision at Stanford's Melcher Lab.</p>
+            </div>
+          </li>
+          <li>
+            <span class="item-index">02</span>
+            <div>
+              <p>Incoming Software Engineering Intern at Apple.</p>
+            </div>
+          </li>
+          <li>
+            <span class="item-index">03</span>
+            <div>
+              <p>Based in Stanford / Bay Area.</p>
+            </div>
+          </li>
+          <li>
+            <span class="item-index">04</span>
+            <div>
+              <p>Recently ran Napa Half. <a href="https://www.strava.com/activities/17567565412" target="_blank" rel="noopener noreferrer" class="inline-link">Strava -></a></p>
+            </div>
+          </li>
+          <li>
+            <span class="item-index">05</span>
+            <div>
+              <p>Upcoming SF Marathon.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="home-column" id="contact">
+        <h2>Past Experience:</h2>
+        <ol class="note-list">
+          <li>
+            <span class="item-index">01</span>
+            <div>
+              <p><strong>Aida (SWE Intern, 2025):</strong> Built Python/SQL/GCP backend services for CRM automation and production workflows.</p>
+            </div>
+          </li>
+          <li>
+            <span class="item-index">02</span>
+            <div>
+              <p><strong>Stanford AIMI (Software Intern, 2022-2023):</strong> Trained a ResNet-50 chest X-ray device detection pipeline to 97% accuracy.</p>
+            </div>
+          </li>
+          <li>
+            <span class="item-index">03</span>
+            <div>
+              <p><strong>Melcher Lab, Stanford (Software Engineer, 2020-2025):</strong> Co-developed a Jetson + iOS + GCP liver analysis system with 100x lower latency.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+      </section>
+
+      <section class="compact-lists" id="research-list">
+        <div class="list-block">
+          <h2>Research</h2>
+          <ul class="simple-links">
+            <li>
+              <a href="projpages/project1.html" class="inline-link">Automated Liver Tissue Analysis Pipeline -></a>
+              <span>Computer Vision, Medical AI, Python</span>
+            </li>
+            <li>
+              <a href="projpages/project5.html" class="inline-link">Medical Device Localization in Chest X-Rays -></a>
+              <span>Machine Learning, YOLOv5, Healthcare</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="list-block" id="all-projects">
+          <h2>All Projects</h2>
+          <ul class="simple-links">
+            <li>
+              <a href="projpages/project8.html" class="inline-link">Conversational Forms with AI -></a>
+              <span>JavaScript widget, AI agent flow, Discord integration</span>
+            </li>
+            <li>
+              <a href="projpages/project2.html" class="inline-link">3D Dodecahedron for Burning Man 2024 -></a>
+              <span>3D Design, Interactive Art, Arduino</span>
+            </li>
+            <li>
+              <a href="projpages/project3.html" class="inline-link">Custom-Fitted Insole iOS App -></a>
+              <span>Swift, LiDAR, ARKit, 3D modeling</span>
+            </li>
+            <li>
+              <a href="projpages/project4.html" class="inline-link">Gesture-Controlled Nintendo Switch -></a>
+              <span>YOLO, OpenCV, Bluetooth HID emulation</span>
+            </li>
+            <li>
+              <a href="projpages/project6.html" class="inline-link">High-Altitude Environmental Monitoring -></a>
+              <span>Arduino, IoT, Environmental sensing</span>
+            </li>
+            <li>
+              <a href="projpages/project7.html" class="inline-link">Autonomous Robot Navigation Localization -></a>
+              <span>Robotics, OpenCV, Real-time localization</span>
+            </li>
+          </ul>
+        </div>
+      </section>
     </div>
-  </section>
-  
-  <!-- Contact Section -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <h2>Contact</h2>
-      <p>I'm always interested in discussing new opportunities.</p>
-      <div class="contact-links">
-        <a href="mailto:taylor52@stanford.edu" class="contact-link">[email protected]</a>
-        <a href="https://github.com/TaylorT52" class="contact-link" target="_blank" rel="noopener noreferrer">github</a>
-        <a href="https://www.linkedin.com/in/taylortam52/" class="contact-link" target="_blank" rel="noopener noreferrer">linkedin</a>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Footer -->
+  </main>
+
   <footer>
-    <div class="container">
-      <p class="copyright">&copy; 2025 Taylor Tam</p>
+    <div class="container footer-shell">
+      <p class="copyright">&copy; 2026 Taylor Tam</p>
+      <p class="footer-note">Minimal portfolio site, hand-coded.</p>
     </div>
   </footer>
-  
-  <!-- Bootstrap JS Bundle with Popper -->
+
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
   ></script>

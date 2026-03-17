@@ -1121,6 +1121,12 @@ footer {
     flex-wrap: wrap;
 }
 
+.minimal-home .project-type-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
 .minimal-home .project-type {
     color: var(--home-muted);
     font-size: 0.72rem;

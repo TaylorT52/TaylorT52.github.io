@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#f3f4f2"/>
+  <text
+    x="32"
+    y="45"
+    fill="#3c5f7f"
+    font-family="IBM Plex Mono, monospace"
+    font-size="40"
+    font-weight="600"
+    text-anchor="middle"
+  >&#960;</text>
+</svg>

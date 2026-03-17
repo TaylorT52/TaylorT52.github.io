@@ -97,7 +97,8 @@ a {
     align-items: center;
     justify-content: center;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 0.82rem;
+    font-size: 0.98rem;
+    font-weight: 600;
     color: var(--ink-soft);
 }
 
@@ -808,7 +809,8 @@ footer {
     border: none;
     border-radius: 0;
     padding: 0;
-    font-size: 0.84rem;
+    font-size: 1rem;
+    line-height: 1;
     color: var(--home-muted);
 }
 

@@ -44,7 +44,9 @@
     <div class="container">
       <section class="home-grid">
       <article class="home-column intro-column">
-        <h1>Hi, I'm Taylor.</h1>
+        <h1 class="intro-title" data-typing-text="Hi, I'm Taylor." aria-label="Hi, I'm Taylor.">
+          <span class="typing-text" aria-hidden="true">Hi, I'm Taylor.</span><span class="typing-caret" aria-hidden="true"></span>
+        </h1>
         <p class="intro-copy">
           Stanford EE + CS student | Incoming @ Apple
         </p>
@@ -516,6 +518,42 @@
 
       updateArchive("all");
       syncTabToHash();
+    })();
+
+    (() => {
+      const title = document.querySelector("[data-typing-text]");
+      const textNode = title?.querySelector(".typing-text");
+      const caretNode = title?.querySelector(".typing-caret");
+
+      if (!title || !textNode || !caretNode) {
+        return;
+      }
+
+      const fullText = title.dataset.typingText || textNode.textContent || "";
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        textNode.textContent = fullText;
+        caretNode.classList.add("is-done");
+        return;
+      }
+
+      textNode.textContent = "";
+
+      let index = 0;
+
+      const typeNext = () => {
+        index += 1;
+        textNode.textContent = fullText.slice(0, index);
+
+        if (index < fullText.length) {
+          window.setTimeout(typeNext, 85);
+          return;
+        }
+
+        caretNode.classList.add("is-done");
+      };
+
+      window.setTimeout(typeNext, 250);
     })();
   </script>
 </body>

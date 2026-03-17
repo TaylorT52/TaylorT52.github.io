@@ -745,6 +745,23 @@ footer {
     html {
         scroll-behavior: auto;
     }
+
+    .minimal-home .typing-caret {
+        animation: none;
+        opacity: 0;
+    }
+}
+
+@keyframes home-caret-blink {
+    0%,
+    45% {
+        opacity: 1;
+    }
+
+    46%,
+    100% {
+        opacity: 0;
+    }
 }
 
 /* Minimal Home Layout */
@@ -845,12 +862,37 @@ footer {
     grid-column: 3 / 4;
 }
 
-.minimal-home .intro-column h1 {
+.minimal-home .intro-column h1,
+.minimal-home .intro-title {
     color: var(--home-accent);
     font-size: clamp(1.7rem, 2.7vw, 2.5rem);
     line-height: 1.15;
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
+}
+
+.minimal-home .intro-title {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 0.08em;
+    min-height: 1.2em;
+}
+
+.minimal-home .typing-text {
+    display: inline-block;
+}
+
+.minimal-home .typing-caret {
+    width: 0.08em;
+    height: 0.95em;
+    background: currentColor;
+    transform: translateY(-0.03em);
+    animation: home-caret-blink 0.9s steps(1) infinite;
+}
+
+.minimal-home .typing-caret.is-done {
+    animation: none;
+    opacity: 0;
 }
 
 .minimal-home .intro-copy {

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FPGA Polyphonic Music Synthesizer - Taylor Tam</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style.css?v=20260316" />
+</head>
+<body class="minimal-project">
+  <section class="hero project-hero">
+    <div class="container">
+      <div class="d-flex align-items-center mb-4">
+        <a href="../index.html#all-projects" class="back-link">
+          <i class="fas fa-arrow-left me-2"></i>Back to Projects
+        </a>
+      </div>
+      <h1>FPGA Polyphonic Music Synthesizer</h1>
+      <div class="project-tags">
+        <span class="badge bg-primary">Verilog</span>
+        <span class="badge bg-primary">FPGA</span>
+        <span class="badge bg-primary">Digital Design</span>
+        <span class="badge bg-primary">Audio DSP</span>
+        <span class="badge bg-primary">VGA</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="container project-content">
+    <div class="project-overview">
+      <img src="../imgs/ee108-synth.png" alt="Report overview for an FPGA polyphonic music synthesizer project" class="project-image mb-4" />
+      <p class="lead">
+        Built for Stanford EE108, this Verilog music player reads songs from ROM and synthesizes polyphonic audio with weighted harmonics, ADSR dynamics, echo, stereo panning, and a past/present/future note display.
+      </p>
+    </div>
+
+    <section class="project-snapshot">
+      <h2>At a Glance</h2>
+      <dl class="snapshot-grid">
+        <div class="snapshot-item">
+          <dt>Course</dt>
+          <dd>Stanford EE108 final project</dd>
+        </div>
+        <div class="snapshot-item">
+          <dt>Team</dt>
+          <dd>Taylor Tam, Benji Warburton, Danica Sun</dd>
+        </div>
+        <div class="snapshot-item">
+          <dt>Core Features</dt>
+          <dd>3-voice chords, harmonics, ADSR, echo, stereo, note display</dd>
+        </div>
+        <div class="snapshot-item">
+          <dt>Tools</dt>
+          <dd>Verilog, Vivado, FPGA audio pipeline, VGA display logic</dd>
+        </div>
+      </dl>
+      <div class="project-link-row">
+        <a href="../papers/ee108-final-report.pdf" target="_blank" rel="noopener noreferrer" class="project-link-btn">Final report</a>
+        <a href="../papers/ee108-planning.pdf" target="_blank" rel="noopener noreferrer" class="project-link-btn">Planning doc</a>
+        <a href="../papers/ee108-waveforms.pdf" target="_blank" rel="noopener noreferrer" class="project-link-btn">Waveform verification</a>
+      </div>
+    </section>
+
+    <h2>System Overview</h2>
+    <p>
+      The design is organized around a ROM-driven playback path. An MCU-side controller selects a song, <code>song_reader</code> steps through note data in <code>song_rom</code>, and the audio pipeline synthesizes each note before passing the result to the codec. In parallel, a VGA display path renders the recent notes, active notes, and upcoming notes so the interface mirrors the playback state.
+    </p>
+
+    <h2>Audio Pipeline</h2>
+    <ul>
+      <li><strong>Polyphonic chords:</strong> Three synchronized note-generation paths feed a <code>multi_voice_player</code> mixer so the system can play full chords instead of single-note melodies.</li>
+      <li><strong>Weighted harmonics:</strong> Fundamental, second, and third harmonic sine waves are mixed with different weights to shape timbre while avoiding overflow on lower notes.</li>
+      <li><strong>ADSR dynamics:</strong> The amplitude envelope advances on valid sample ticks rather than every system-clock edge, which keeps note articulation aligned with the audio stream.</li>
+      <li><strong>Echo:</strong> A circular delay buffer reads an older sample, attenuates it, and mixes it back with the dry signal for a delayed repeat.</li>
+      <li><strong>Stereo spread:</strong> The root stays centered while the third and fifth are panned left and right to widen the chord without losing the melody.</li>
+    </ul>
+
+    <img src="../imgs/ee108-waveforms.png" alt="Waveform verification results for the FPGA music synthesizer modules" class="project-image project-image-compact my-4" />
+
+    <h2>Verification</h2>
+    <p>
+      The testbench suite covered chord generation, harmonics, dynamics, echo, note display, and stereo effects. The submitted waveforms verify behaviors like third-voice suppression on very low notes, harmonic-region switching, sample-tick-driven envelope updates, signed echo saturation, and distinct left/right stereo outputs.
+    </p>
+
+    <h2>Timing and Design Tradeoffs</h2>
+    <p>
+      According to the final report, the 100 MHz logic, 25 MHz display, and 48 MHz codec domains each met intra-domain timing. Remaining violations were isolated to unsynchronized 100 MHz to 25 MHz crossings, which made clock-domain behavior the main systems risk rather than any single synthesis block. The project also forced careful overflow handling in the chord mixer and echo stage so parallel features did not degrade audio quality.
+    </p>
+
+    <h2>Why This Project Matters</h2>
+    <p>
+      This was a good end-to-end digital systems project: ROM control, signal synthesis, display logic, verification, and timing all had to work together. The most useful takeaway was learning to treat synchronization, sample timing, and interface consistency as part of the product itself, not as cleanup after the main functionality works.
+    </p>
+
+    <div class="project-navigation mt-5">
+      <a href="../index.html#all-projects" class="btn btn-outline-primary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Projects
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-buttons mb-4">
+          <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github me-2"></i>GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/taylortam52/" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin me-2"></i>LinkedIn
+          </a>
+        </div>
+        <p class="copyright mb-0">&copy; 2026 Taylor Tam <span class="bullet">•</span> Built with <i class="fas fa-heart text-danger mx-1"></i></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

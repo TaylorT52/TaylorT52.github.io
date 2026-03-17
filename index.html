@@ -21,7 +21,7 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
-  <link rel="stylesheet" href="./style.css?v=20260310" />
+  <link rel="stylesheet" href="./style.css?v=20260316c" />
 </head>
 <body id="top" class="minimal-home">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -204,61 +204,197 @@
       </section>
       </section>
 
-      <section class="compact-lists" id="research-list">
-        <div class="list-block">
-          <h2>Research</h2>
-          <ul class="simple-links">
-            <li>
-              <a href="projpages/project1.html" class="inline-link">Automated Liver Tissue Analysis Pipeline -></a>
-              <span>Python, U-Net, TensorFlow, OpenCV, Jetson Nano</span>
-            </li>
-            <li>
-              <a href="projpages/project5.html" class="inline-link">Medical Device Localization in Chest X-Rays -></a>
-              <span>PyTorch, Multi-label classifier, YOLOv5, Clinical CV</span>
-            </li>
-            <li>
-              <a href="papers/cs229-flow-sumo-platoons.pdf" target="_blank" rel="noopener noreferrer" class="inline-link">CTDE vs. Independent PPO: Benchmarking Multi-Agent Coordination in Flow-SUMO Vehicle Platoons (PDF) -></a>
-              <span>Stanford CS229, Multi-agent RL, autonomous vehicles, Flow, SUMO</span>
-            </li>
-            <li>
-              <a href="papers/cs231n-rust-apple-silicon.pdf" target="_blank" rel="noopener noreferrer" class="inline-link">Fail Fast, Run Faster: Shape Safe Deep Learning in Rust on Apple Silicon (PDF) -></a>
-              <span>Stanford CS231n, Rust, Apple Silicon, const generics, Metal</span>
-            </li>
-          </ul>
-        </div>
+      <section class="work-browser" id="research-list" data-work-browser>
+        <span id="all-projects" class="work-anchor" aria-hidden="true"></span>
+        <div class="work-browser-shell">
+          <div class="work-tabs" role="tablist" aria-label="Browse research and projects">
+            <button
+              type="button"
+              class="work-tab is-active"
+              id="work-tab-research"
+              role="tab"
+              aria-controls="work-panel-research"
+              aria-selected="true"
+              data-tab="research"
+            >
+              Research
+            </button>
+            <button
+              type="button"
+              class="work-tab"
+              id="work-tab-projects"
+              role="tab"
+              aria-controls="work-panel-projects"
+              aria-selected="false"
+              data-tab="projects"
+            >
+              Projects
+            </button>
+          </div>
 
-        <div class="list-block" id="all-projects">
-          <h2>All Projects</h2>
-          <ul class="simple-links">
-            <li>
-              <a href="projpages/project8.html" class="inline-link">Conversational Forms with AI -></a>
-              <span>Vanilla JS widget, Discord.js, Mistral API, Webhooks</span>
-            </li>
-            <li>
-              <a href="projpages/project2.html" class="inline-link">3D Dodecahedron for Burning Man 2024 -></a>
-              <span>Blender mapping, Teensy firmware, LED simulation, Projection</span>
-            </li>
-            <li>
-              <a href="projpages/project3.html" class="inline-link">Custom-Fitted Insole iOS App -></a>
-              <span>Swift, ARKit LiDAR, Open3D, Trimesh, OpenCV</span>
-            </li>
-            <li>
-              <a href="projpages/project4.html" class="inline-link">Gesture-Controlled Nintendo Switch -></a>
-              <span>YOLOv8, MediaPipe, OpenCV ORB, Jetson Orin, nxbt HID</span>
-            </li>
-            <li>
-              <a href="projpages/project6.html" class="inline-link">High-Altitude Environmental Monitoring -></a>
-              <span>Dual Arduino, Sensor telemetry, Cutdown control, Python analysis</span>
-            </li>
-            <li>
-              <a href="projpages/project7.html" class="inline-link">Autonomous Robot Navigation Localization -></a>
-              <span>OpenCV, Blob tracking, Pose correction, Closed-loop control</span>
-            </li>
-            <li>
-              <a href="projpages/project9.html" class="inline-link">Hybrid Solar + Battery EV (2023) -></a>
-              <span>Dual-source power switching, Motor transients, Capacitor tuning</span>
-            </li>
-          </ul>
+          <section
+            class="work-panel is-active"
+            id="work-panel-research"
+            role="tabpanel"
+            aria-labelledby="work-tab-research"
+            data-tab-panel="research"
+          >
+            <div class="work-panel-head">
+              <div>
+                <h2>Research</h2>
+                <p class="list-intro">Papers, clinical computer vision, and course research projects.</p>
+              </div>
+              <p class="panel-count">4 items</p>
+            </div>
+            <div class="work-card-grid">
+              <article class="work-card">
+                <a href="projpages/project1.html" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">Clinical CV</span>
+                  </div>
+                  <h3 class="work-card-title">Automated Liver Tissue Analysis Pipeline -></h3>
+                  <p class="work-card-summary">Edge-deployed liver biopsy analysis with tiled U-Net segmentation and on-device steatosis scoring.</p>
+                  <span class="project-tech">Python, U-Net, TensorFlow, OpenCV, Jetson Nano</span>
+                </a>
+              </article>
+              <article class="work-card">
+                <a href="projpages/project5.html" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">Medical AI</span>
+                  </div>
+                  <h3 class="work-card-title">Medical Device Localization in Chest X-Rays -></h3>
+                  <p class="work-card-summary">Trained device detection and localization models for radiology workflows using chest X-ray data.</p>
+                  <span class="project-tech">PyTorch, Multi-label classifier, YOLOv5, Clinical CV</span>
+                </a>
+              </article>
+              <article class="work-card">
+                <a href="papers/cs229-flow-sumo-platoons.pdf" target="_blank" rel="noopener noreferrer" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">RL Research</span>
+                  </div>
+                  <h3 class="work-card-title">CTDE vs. Independent PPO: Benchmarking Multi-Agent Coordination in Flow-SUMO Vehicle Platoons (PDF) -></h3>
+                  <p class="work-card-summary">Benchmarked centralized training against independent PPO for coordinated autonomous vehicle platoons.</p>
+                  <span class="project-tech">Stanford CS229, Multi-agent RL, autonomous vehicles, Flow, SUMO</span>
+                </a>
+              </article>
+              <article class="work-card">
+                <a href="papers/cs231n-rust-apple-silicon.pdf" target="_blank" rel="noopener noreferrer" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">Systems</span>
+                  </div>
+                  <h3 class="work-card-title">Fail Fast, Run Faster: Shape Safe Deep Learning in Rust on Apple Silicon (PDF) -></h3>
+                  <p class="work-card-summary">Built a shape-safe Rust deep learning stack with compile-time tensor guarantees and Apple Silicon acceleration.</p>
+                  <span class="project-tech">Stanford CS231n, Rust, Apple Silicon, const generics, Metal</span>
+                </a>
+              </article>
+            </div>
+          </section>
+
+          <section
+            class="work-panel"
+            id="work-panel-projects"
+            role="tabpanel"
+            aria-labelledby="work-tab-projects"
+            data-tab-panel="projects"
+            hidden
+          >
+            <div class="work-panel-head">
+              <div>
+                <h2>Project Archive</h2>
+                <p class="list-intro">Apps, robotics, hardware, and course builds beyond the featured work.</p>
+              </div>
+              <p class="archive-count" aria-live="polite">8 projects</p>
+            </div>
+            <div class="project-filter-bar" role="toolbar" aria-label="Project filters">
+              <button type="button" class="project-filter is-active" data-filter="all" aria-pressed="true">All</button>
+              <button type="button" class="project-filter" data-filter="software" aria-pressed="false">Software</button>
+              <button type="button" class="project-filter" data-filter="hardware" aria-pressed="false">Hardware</button>
+              <button type="button" class="project-filter" data-filter="vision" aria-pressed="false">Vision</button>
+              <button type="button" class="project-filter" data-filter="robotics" aria-pressed="false">Robotics</button>
+            </div>
+            <div class="work-card-grid" data-project-archive>
+              <article class="work-card project-card" data-groups="hardware">
+                <a href="projpages/project10.html" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">Digital Design</span>
+                  </div>
+                  <h3 class="work-card-title">FPGA Polyphonic Music Synthesizer -></h3>
+                  <p class="work-card-summary">EE108 final project with chord synthesis, ADSR, echo, stereo panning, and VGA note display.</p>
+                  <span class="project-tech">Verilog, FPGA, Audio DSP, Vivado, ROM sequencing, VGA</span>
+                </a>
+              </article>
+              <article class="work-card project-card" data-groups="software">
+                <a href="projpages/project8.html" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">Full-Stack</span>
+                  </div>
+                  <h3 class="work-card-title">Conversational Forms with AI -></h3>
+                  <p class="work-card-summary">Converted static intake into a conversational widget with Discord handoff and AI follow-up.</p>
+                  <span class="project-tech">Vanilla JS widget, Discord.js, Mistral API, Webhooks</span>
+                </a>
+              </article>
+              <article class="work-card project-card" data-groups="hardware">
+                <a href="projpages/project2.html" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">Installation</span>
+                  </div>
+                  <h3 class="work-card-title">3D Dodecahedron for Burning Man 2024 -></h3>
+                  <p class="work-card-summary">Large-format lighting and projection structure with mapped geometry and LED routing.</p>
+                  <span class="project-tech">Blender mapping, Teensy firmware, LED simulation, Projection</span>
+                </a>
+              </article>
+              <article class="work-card project-card" data-groups="software vision">
+                <a href="projpages/project3.html" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">iOS + 3D</span>
+                  </div>
+                  <h3 class="work-card-title">Custom-Fitted Insole iOS App -></h3>
+                  <p class="work-card-summary">Used iPhone LiDAR and 3D reconstruction to generate custom-fit insole geometry from scans.</p>
+                  <span class="project-tech">Swift, ARKit LiDAR, Open3D, Trimesh, OpenCV</span>
+                </a>
+              </article>
+              <article class="work-card project-card" data-groups="software vision robotics">
+                <a href="projpages/project4.html" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">Computer Vision</span>
+                  </div>
+                  <h3 class="work-card-title">Gesture-Controlled Nintendo Switch -></h3>
+                  <p class="work-card-summary">Mapped hand gestures to Nintendo Switch controls with low-latency tracking on Jetson.</p>
+                  <span class="project-tech">YOLOv8, MediaPipe, OpenCV ORB, Jetson Orin, nxbt HID</span>
+                </a>
+              </article>
+              <article class="work-card project-card" data-groups="hardware">
+                <a href="projpages/project6.html" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">Embedded</span>
+                  </div>
+                  <h3 class="work-card-title">High-Altitude Environmental Monitoring -></h3>
+                  <p class="work-card-summary">High-altitude payload for telemetry, sensor logging, and cutdown control during balloon flight.</p>
+                  <span class="project-tech">Dual Arduino, Sensor telemetry, Cutdown control, Python analysis</span>
+                </a>
+              </article>
+              <article class="work-card project-card" data-groups="robotics vision software">
+                <a href="projpages/project7.html" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">Robotics</span>
+                  </div>
+                  <h3 class="work-card-title">Autonomous Robot Navigation Localization -></h3>
+                  <p class="work-card-summary">Vision-based pose estimation and heading correction for closed-loop autonomous navigation.</p>
+                  <span class="project-tech">OpenCV, Blob tracking, Pose correction, Closed-loop control</span>
+                </a>
+              </article>
+              <article class="work-card project-card" data-groups="hardware">
+                <a href="projpages/project9.html" class="work-card-link">
+                  <div class="project-link-top">
+                    <span class="project-type">Hardware</span>
+                  </div>
+                  <h3 class="work-card-title">Hybrid Solar + Battery EV (2023) -></h3>
+                  <p class="work-card-summary">Prototype for automatic solar-to-battery switching and stable dual-source power delivery.</p>
+                  <span class="project-tech">Dual-source power switching, Motor transients, Capacitor tuning</span>
+                </a>
+              </article>
+            </div>
+          </section>
         </div>
       </section>
     </div>
@@ -273,5 +409,95 @@
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
   ></script>
+  <script>
+    (() => {
+      const browser = document.querySelector("[data-work-browser]");
+      const archive = document.querySelector("[data-project-archive]");
+      const filters = Array.from(document.querySelectorAll(".project-filter"));
+      const countEl = document.querySelector(".archive-count");
+      const tabs = Array.from(document.querySelectorAll(".work-tab"));
+      const panels = Array.from(document.querySelectorAll("[data-tab-panel]"));
+
+      if (!browser || !archive || !filters.length || !countEl || !tabs.length || !panels.length) {
+        return;
+      }
+
+      const items = Array.from(archive.querySelectorAll(".project-card"));
+
+      const updateArchive = (filter) => {
+        let visibleCount = 0;
+
+        items.forEach((item) => {
+          const groups = (item.dataset.groups || "").split(/\s+/).filter(Boolean);
+          const matches = filter === "all" || groups.includes(filter);
+          item.hidden = !matches;
+
+          if (matches) {
+            visibleCount += 1;
+          }
+        });
+
+        countEl.textContent = `${visibleCount} project${visibleCount === 1 ? "" : "s"}`;
+      };
+
+      const activateTab = (name, updateHash = false) => {
+        tabs.forEach((tab) => {
+          const active = tab.dataset.tab === name;
+          tab.classList.toggle("is-active", active);
+          tab.setAttribute("aria-selected", String(active));
+        });
+
+        panels.forEach((panel) => {
+          const active = panel.dataset.tabPanel === name;
+          panel.classList.toggle("is-active", active);
+          panel.hidden = !active;
+        });
+
+        if (updateHash && window.history && typeof window.history.replaceState === "function") {
+          const hash = name === "projects" ? "#all-projects" : "#research-list";
+          window.history.replaceState(null, "", hash);
+        }
+      };
+
+      filters.forEach((button) => {
+        button.addEventListener("click", () => {
+          filters.forEach((candidate) => {
+            const active = candidate === button;
+            candidate.classList.toggle("is-active", active);
+            candidate.setAttribute("aria-pressed", String(active));
+          });
+
+          updateArchive(button.dataset.filter || "all");
+        });
+      });
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+          activateTab(tab.dataset.tab || "research", true);
+        });
+
+        tab.addEventListener("keydown", (event) => {
+          if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
+            return;
+          }
+
+          event.preventDefault();
+          const direction = event.key === "ArrowRight" ? 1 : -1;
+          const nextIndex = (index + direction + tabs.length) % tabs.length;
+          tabs[nextIndex].focus();
+          activateTab(tabs[nextIndex].dataset.tab || "research", true);
+        });
+      });
+
+      const syncTabToHash = () => {
+        activateTab(window.location.hash === "#all-projects" ? "projects" : "research");
+      };
+
+      window.addEventListener("hashchange", syncTabToHash);
+
+      updateArchive("all");
+      syncTabToHash();
+    })();
+  </script>
 </body>
 </html>

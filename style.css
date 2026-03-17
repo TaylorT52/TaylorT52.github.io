@@ -972,36 +972,196 @@ footer {
     gap: 0.55rem;
 }
 
-.minimal-home .compact-lists {
+.minimal-home .work-browser {
     border-top: 1px solid var(--home-line);
     padding: 1.8rem 0 2.4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.3rem;
 }
 
-.minimal-home .list-block {
-    min-width: 0;
-}
-
-.minimal-home .simple-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0.65rem;
-}
-
-.minimal-home .simple-links li {
-    padding: 0.5rem 0;
-    border-bottom: 1px dotted var(--home-line);
-}
-
-.minimal-home .simple-links li span {
+.minimal-home .work-anchor {
     display: block;
-    margin-top: 0.25rem;
+    height: 0;
+}
+
+.minimal-home .work-browser-shell {
+    border: 1px solid var(--home-line);
+    background: rgba(255, 255, 255, 0.58);
+    padding: 0.95rem 1rem 1rem;
+}
+
+.minimal-home .work-tabs {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 1rem;
+}
+
+.minimal-home .work-tab {
+    border: 1px solid var(--home-line);
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--home-soft);
+    padding: 0.42rem 0.72rem;
+    font: inherit;
+    font-size: 0.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.minimal-home .work-tab:hover,
+.minimal-home .work-tab:focus-visible,
+.minimal-home .work-tab.is-active {
+    color: var(--home-ink);
+    border-color: var(--home-accent);
+    outline: none;
+}
+
+.minimal-home .work-tab.is-active {
+    background: rgba(60, 95, 127, 0.09);
+}
+
+.minimal-home .work-panel {
+    display: grid;
+    gap: 0.95rem;
+}
+
+.minimal-home .work-panel[hidden] {
+    display: none !important;
+}
+
+.minimal-home .work-panel-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.8rem;
+}
+
+.minimal-home .work-panel-head h2 {
+    font-size: 1.02rem;
+    font-weight: 500;
+    margin: 0 0 0.45rem;
+    color: var(--home-ink);
+}
+
+.minimal-home .list-intro {
+    margin: 0;
     color: var(--home-muted);
-    font-size: 0.84rem;
+    font-size: 0.81rem;
+    line-height: 1.55;
+    max-width: 52ch;
+}
+
+.minimal-home .panel-count,
+.minimal-home .archive-count {
+    margin: 0.15rem 0 0;
+    color: var(--home-muted);
+    font-size: 0.76rem;
+    white-space: nowrap;
+}
+
+.minimal-home .project-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.minimal-home .project-filter {
+    border: 1px solid var(--home-line);
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--home-soft);
+    padding: 0.34rem 0.55rem;
+    font: inherit;
+    font-size: 0.76rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.minimal-home .project-filter:hover,
+.minimal-home .project-filter:focus-visible,
+.minimal-home .project-filter.is-active {
+    color: var(--home-ink);
+    border-color: var(--home-accent);
+    outline: none;
+}
+
+.minimal-home .project-filter.is-active {
+    background: rgba(60, 95, 127, 0.09);
+}
+
+.minimal-home .work-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+}
+
+.minimal-home .work-card {
+    min-width: 0;
+    border: 1px solid var(--home-line);
+    background: rgba(255, 255, 255, 0.62);
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.minimal-home .work-card:hover {
+    border-color: var(--home-accent);
+    background: rgba(255, 255, 255, 0.82);
+}
+
+.minimal-home .work-card-link {
+    display: grid;
+    gap: 0.55rem;
+    height: 100%;
+    padding: 0.95rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.minimal-home .project-link-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.minimal-home .project-type {
+    color: var(--home-muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+.minimal-home .work-card-title {
+    margin: 0;
+    color: var(--home-ink);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.38;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+}
+
+.minimal-home .work-card-link:hover .work-card-title,
+.minimal-home .work-card-link:focus-visible .work-card-title {
+    color: var(--home-accent);
+}
+
+.minimal-home .work-card-link:focus-visible {
+    outline: 2px solid var(--home-accent);
+    outline-offset: -2px;
+}
+
+.minimal-home .work-card-summary {
+    margin: 0;
+    color: var(--home-soft);
+    font-size: 0.86rem;
+    line-height: 1.55;
+}
+
+.minimal-home .project-tech {
+    color: var(--home-muted);
+    font-size: 0.76rem;
+    line-height: 1.45;
 }
 
 .minimal-home footer {
@@ -1052,9 +1212,13 @@ footer {
         padding-bottom: 1.4rem;
     }
 
-    .minimal-home .compact-lists {
+    .minimal-home .work-panel-head {
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+
+    .minimal-home .work-card-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
     }
 
     .minimal-home .footer-shell {

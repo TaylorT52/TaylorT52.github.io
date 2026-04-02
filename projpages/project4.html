@@ -64,11 +64,11 @@
       The pipeline ingests webcam frames, detects hands with a custom-trained YOLOv8 model (EgoHands), extracts 21 hand landmarks with MediaPipe, then classifies gesture commands using ORB feature matching with brute-force cross-checking against reference templates.
     </p>
     
-    <h2>Key Features</h2>
+    <h2>Some Features</h2>
     <ul>
       <li><strong>Detection + Tracking:</strong> YOLOv8 hand detection followed by MediaPipe landmark extraction per frame.</li>
       <li><strong>Gesture Classification:</strong> ORB + brute-force matcher with thresholded feature matches (>= 110) for command mapping.</li>
-      <li><strong>Controller Emulation:</strong> nxbt-based Bluetooth HID spoofing to present as a Switch Pro Controller/JoyCon device.</li>
+      <li><strong>Controller Emulation:</strong> Reverse-engineered Nintendo's HID protocol to spoof a Switch Pro Controller/JoyCon device.</li>
       <li><strong>Edge Deployment:</strong> End-to-end inference and command relay on NVIDIA Jetson Orin (Ubuntu 22.04).</li>
       <li><strong>Measured Performance:</strong> 30 fps runtime with 165 ms average gesture-to-action latency.</li>
     </ul>

@@ -64,7 +64,7 @@
       The build combined mechanical fabrication with a software toolchain that maps animation content onto 12 pentagonal faces. Geometry from Blender was converted into LED index maps and streamed as timed frame buffers to an Arduino Teensy for live playback and parameter tuning on site.
     </p>
     
-    <h2>Key Features</h2>
+    <h2>Some</h2> Features</h2>
     <ul>
       <li><strong>Simulation-First Workflow:</strong> Custom tooling for rapid animation prototyping before hardware deployment.</li>
       <li><strong>Geometry-Aware Mapping:</strong> Blender-derived facet coordinates converted to deterministic LED addressing.</li>
@@ -76,11 +76,6 @@
     <div class="ratio ratio-16x9 mb-4">
       <iframe src="https://www.youtube.com/embed/fPkB9qx3avI" title="3D Dodecahedron for Burning Man 2024" allowfullscreen></iframe>
     </div>
-    
-    <h2>Technical Details</h2>
-    <p>
-      Each facet was modeled as an independent logical panel, then compiled into contiguous pixel buffers with timing metadata for playback. This split made it easy to iterate on effects in software while preserving deterministic output behavior on embedded hardware during installation runs.
-    </p>
     
     <div class="project-navigation mt-5">
       <a href="../index.html#projects" class="btn btn-outline-primary">

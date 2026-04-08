@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A COOL Project - A Custom COOL Compiler</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=20260317b" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=20260317b" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260317b" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="stylesheet" href="../style.css?v=20260408c" />
+</head>
+<body class="minimal-project">
+  <section class="hero project-hero">
+    <div class="container">
+      <div class="d-flex align-items-center mb-4">
+        <a href="../index.html#top" class="back-link">
+          <i class="fas fa-arrow-left me-2"></i>Back to Home
+        </a>
+      </div>
+      <h1>Custom COOL Compiler</h1>
+      <div class="project-tags">
+        <span class="badge bg-primary">In Progress</span>
+        <span class="badge bg-primary">Stanford CS143</span>
+        <span class="badge bg-primary">Compilers</span>
+        <span class="badge bg-primary">Systems</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="container project-content">
+    <div class="project-overview">
+      <p class="lead">
+        I'm currently building a compiler for COOL in Stanford CS143. The project is an end-to-end systems build that moves from parsing and semantic analysis toward backend and code generation work.
+      </p>
+    </div>
+
+    <h2>Right Now: Lexical Analyzers</h2>
+    <p>
+      As the first component, I'm building a lexical analyzer in C++ with Flex. The objective is to parse Cool files and output an appropriate set of tokens which are used to generate code.
+      Flex allows us to implement a lexical analyzer by defining rules that match user-defined regexes and perform specific actions for each matched pattern.
+      It compiles the rule file into C source code implementing a finite automaton recognizing the defined regexes. 
+    </p>
+
+    <section class="lexer-demo" data-lexer-demo aria-labelledby="lexer-demo-title">
+      <div class="lexer-demo-head">
+        <div>
+          <p class="lexer-kicker">Lexer Trace</p>
+          <h3 id="lexer-demo-title">Watching a tiny COOL snippet become tokens</h3>
+        </div>
+        <button type="button" class="lexer-replay" data-lexer-replay>Replay</button>
+      </div>
+      <p class="lexer-demo-note">
+        This is a small representative scan of a COOL program fragment. The highlight shows the lexeme currently being matched, while the token stream on the right fills in as the lexer emits tokens.
+      </p>
+      <div class="lexer-status" data-lexer-status aria-live="off"></div>
+      <div class="lexer-demo-grid">
+        <section class="lexer-panel" aria-label="COOL source code">
+          <p class="lexer-panel-label">Source</p>
+          <pre class="lexer-code"><code><span class="lexer-fragment" data-lexer-fragment data-token="CLASS">class</span> <span class="lexer-fragment" data-lexer-fragment data-token="TYPEID">Main</span> <span class="lexer-fragment" data-lexer-fragment data-token="INHERITS">inherits</span> <span class="lexer-fragment" data-lexer-fragment data-token="TYPEID">IO</span> <span class="lexer-fragment" data-lexer-fragment data-token="LBRACE">{</span>
+  <span class="lexer-fragment" data-lexer-fragment data-token="OBJECTID">main</span><span class="lexer-fragment" data-lexer-fragment data-token="LPAREN">(</span><span class="lexer-fragment" data-lexer-fragment data-token="RPAREN">)</span><span class="lexer-fragment" data-lexer-fragment data-token="COLON">:</span> <span class="lexer-fragment" data-lexer-fragment data-token="TYPEID">Object</span> <span class="lexer-fragment" data-lexer-fragment data-token="LBRACE">{</span>
+    <span class="lexer-fragment" data-lexer-fragment data-token="LET">let</span> <span class="lexer-fragment" data-lexer-fragment data-token="OBJECTID">x</span><span class="lexer-fragment" data-lexer-fragment data-token="COLON">:</span> <span class="lexer-fragment" data-lexer-fragment data-token="TYPEID">Int</span> <span class="lexer-fragment" data-lexer-fragment data-token="ASSIGN">&lt;-</span> <span class="lexer-fragment" data-lexer-fragment data-token="INT_CONST">42</span> <span class="lexer-fragment" data-lexer-fragment data-token="IN">in</span>
+      <span class="lexer-fragment" data-lexer-fragment data-token="OBJECTID">out_string</span><span class="lexer-fragment" data-lexer-fragment data-token="LPAREN">(</span><span class="lexer-fragment" data-lexer-fragment data-token="STR_CONST">"Hello, COOL!\n"</span><span class="lexer-fragment" data-lexer-fragment data-token="RPAREN">)</span><span class="lexer-fragment" data-lexer-fragment data-token="SEMI">;</span>
+  <span class="lexer-fragment" data-lexer-fragment data-token="RBRACE">}</span><span class="lexer-fragment" data-lexer-fragment data-token="SEMI">;</span>
+<span class="lexer-fragment" data-lexer-fragment data-token="RBRACE">}</span><span class="lexer-fragment" data-lexer-fragment data-token="SEMI">;</span></code></pre>
+        </section>
+        <section class="lexer-panel" aria-label="Emitted token stream">
+          <p class="lexer-panel-label">Tokens</p>
+          <ol class="lexer-token-stream" data-lexer-output aria-live="off"></ol>
+        </section>
+      </div>
+    </section>
+
+    <div class="project-navigation mt-5">
+      <a href="../index.html#top" class="btn btn-outline-primary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Home
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-buttons mb-4">
+          <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github me-2"></i>GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/taylortam52/" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin me-2"></i>LinkedIn
+          </a>
+        </div>
+        <p class="copyright mb-0">&copy; 2026 Taylor Tam <span class="bullet">•</span> Built with <i class="fas fa-heart text-danger mx-1"></i></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (() => {
+      const demo = document.querySelector("[data-lexer-demo]");
+
+      if (!demo) {
+        return;
+      }
+
+      const fragments = Array.from(demo.querySelectorAll("[data-lexer-fragment]"));
+      const output = demo.querySelector("[data-lexer-output]");
+      const status = demo.querySelector("[data-lexer-status]");
+      const replayButton = demo.querySelector("[data-lexer-replay]");
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!fragments.length || !output || !status) {
+        return;
+      }
+
+      const tokenData = fragments.map((fragment, index) => {
+        const item = document.createElement("li");
+        const indexLabel = document.createElement("span");
+        const tokenMain = document.createElement("div");
+        const tokenType = document.createElement("span");
+        const lexeme = document.createElement("code");
+
+        item.className = "lexer-token-row";
+        indexLabel.className = "lexer-token-index";
+        tokenMain.className = "lexer-token-main";
+        tokenType.className = "lexer-token-type";
+        lexeme.className = "lexer-token-lexeme";
+
+        indexLabel.textContent = String(index + 1).padStart(2, "0");
+        tokenType.textContent = fragment.dataset.token || "TOKEN";
+        lexeme.textContent = fragment.textContent || "";
+
+        tokenMain.append(tokenType, lexeme);
+        item.append(indexLabel, tokenMain);
+
+        return {
+          index,
+          row: item
+        };
+      });
+
+      const tokenCount = tokenData.length;
+      let rows = [];
+      let cursor = 0;
+      let timerId = 0;
+      const tokenStepMs = 980;
+      const loopPauseMs = 2200;
+      const startDelayMs = 550;
+
+      const syncOutputRows = (activeIndex) => {
+        const desiredCount = activeIndex < 0
+          ? 0
+          : activeIndex >= tokenCount
+            ? tokenCount
+            : activeIndex + 1;
+
+        while (rows.length > desiredCount) {
+          const row = rows.pop();
+
+          if (row) {
+            row.remove();
+          }
+        }
+
+        while (rows.length < desiredCount) {
+          const nextRow = tokenData[rows.length]?.row;
+
+          if (!nextRow) {
+            break;
+          }
+
+          output.appendChild(nextRow);
+          rows.push(nextRow);
+        }
+      };
+
+      const scrollRowIntoView = (row) => {
+        if (!row) {
+          return;
+        }
+
+        const rowTop = row.offsetTop;
+        const rowBottom = rowTop + row.offsetHeight;
+        const visibleTop = output.scrollTop + 24;
+        const visibleBottom = output.scrollTop + output.clientHeight - 68;
+
+        if (rowTop >= visibleTop && rowBottom <= visibleBottom) {
+          return;
+        }
+
+        const targetTop = Math.max(0, rowTop - (output.clientHeight * 0.38));
+        output.scrollTo({
+          top: targetTop,
+          behavior: prefersReducedMotion ? "auto" : "smooth"
+        });
+      };
+
+      const render = (activeIndex) => {
+        fragments.forEach((fragment, index) => {
+          fragment.classList.toggle("is-emitted", activeIndex > index);
+          fragment.classList.toggle("is-current", activeIndex === index);
+        });
+
+        syncOutputRows(activeIndex);
+
+        rows.forEach((row, index) => {
+          const isVisible = activeIndex >= 0 && activeIndex >= index;
+          row.classList.toggle("is-emitted", isVisible);
+          row.classList.toggle("is-current", activeIndex === index);
+        });
+
+        if (activeIndex === -1) {
+          status.textContent = "Preparing lexer pass...";
+          output.scrollTo({ top: 0, behavior: "auto" });
+          return;
+        }
+
+        if (activeIndex >= tokenCount) {
+          status.textContent = "Token stream complete. Restarting the scan...";
+          scrollRowIntoView(rows[rows.length - 1]);
+          return;
+        }
+
+        const fragment = fragments[activeIndex];
+        const lexeme = fragment.textContent || "";
+        const token = fragment.dataset.token || "TOKEN";
+
+        status.textContent = `Scanning ${String(activeIndex + 1).padStart(2, "0")}/${tokenCount}: ${lexeme} -> ${token}`;
+        scrollRowIntoView(rows[activeIndex]);
+      };
+
+      const advance = () => {
+        if (cursor < tokenCount) {
+          render(cursor);
+          cursor += 1;
+          timerId = window.setTimeout(advance, tokenStepMs);
+          return;
+        }
+
+        render(tokenCount);
+        cursor = 0;
+        timerId = window.setTimeout(advance, loopPauseMs);
+      };
+
+      const restart = () => {
+        window.clearTimeout(timerId);
+        cursor = 0;
+
+        if (prefersReducedMotion) {
+          render(tokenCount);
+          status.textContent = "Reduced motion is enabled, so the final token stream is shown at once.";
+
+          if (replayButton) {
+            replayButton.hidden = true;
+          }
+
+          return;
+        }
+
+        render(-1);
+        timerId = window.setTimeout(advance, startDelayMs);
+      };
+
+      if (replayButton) {
+        replayButton.addEventListener("click", restart);
+      }
+
+      restart();
+    })();
+  </script>
+</body>
+</html>

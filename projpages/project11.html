@@ -52,11 +52,21 @@
       </p>
     </div>
 
-    <h2>Right Now: Lexical Analyzers</h2>
+    <h2>Right now: parsers</h2>
     <p>
-      As the first component, I'm building a lexical analyzer in C++ with Flex. The objective is to parse Cool files and output an appropriate set of tokens which are used to generate code.
+      Once I had a lexical analyzer, I could go on to build a parser using a generator called bison and a package for manipulating trees.
+      The purpose of the parser is to ingest tokens output by the lexical analyzer and to use context free grammars to determine whether a sequence of tokens forms a valid program.
+      A CFG defines a language structure via a set of production rules describing how smaller components (i.e., expressions, structures, declarations) can be composed into 
+      larger constructs. 
+      As the parser recognizes valid patterns in the token stream, it builds up an abstract syntax tree (AST).
+      The AST is a simplified, structured representation of the program that captures its barest, logical organization. 
+    </p>
+
+    <h2>Lexical Analyzer</h2>
+    <p>
+      As the first component, I built a lexical analyzer in C++ with Flex. The objective is to parse Cool files and output an appropriate set of tokens which are used to generate code.
       Flex allows us to implement a lexical analyzer by defining rules that match user-defined regexes and perform specific actions for each matched pattern.
-      It compiles the rule file into C source code implementing a finite automaton recognizing the defined regexes. 
+      It compiles the rule file into C source code implementing a finite automaton recognizing the defined regexes. r
     </p>
 
     <section class="lexer-demo" data-lexer-demo aria-labelledby="lexer-demo-title">

@@ -25,7 +25,7 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
-  <link rel="stylesheet" href="../style.css?v=20260408c" />
+  <link rel="stylesheet" href="../style.css?v=20260426b" />
 </head>
 <body class="minimal-project">
   <section class="hero project-hero">
@@ -61,6 +61,79 @@
       As the parser recognizes valid patterns in the token stream, it builds up an abstract syntax tree (AST).
       The AST is a simplified, structured representation of the program that captures its barest, logical organization. 
     </p>
+
+    <section class="parser-demo" data-parser-demo aria-labelledby="parser-demo-title">
+      <div class="parser-demo-head">
+        <div>
+          <p class="parser-kicker">Parser Trace</p>
+          <h3 id="parser-demo-title">Watching a bottom-up LR trace build an AST</h3>
+        </div>
+        <button type="button" class="parser-replay" data-parser-replay>Replay</button>
+      </div>
+      <p class="parser-demo-note">
+        This simplified trace follows a parser as it shifts tokens onto a stack, reduces handles into grammar symbols, and uses those reductions to grow the AST for <code>let x : Int &lt;- 42 in out_string("Hello, COOL!\n")</code>.
+      </p>
+      <div class="parser-status" data-parser-status aria-live="off"></div>
+      <div class="parser-action-strip">
+        <div class="parser-action-card">
+          <p class="parser-action-caption">Current Action</p>
+          <span class="parser-action-badge" data-parser-action>Ready</span>
+        </div>
+        <div class="parser-action-card">
+          <p class="parser-action-caption">Lookahead</p>
+          <code class="parser-lookahead" data-parser-lookahead>LET</code>
+        </div>
+        <div class="parser-action-card parser-action-card-wide">
+          <p class="parser-action-caption">Grammar Move</p>
+          <code class="parser-detail" data-parser-detail>stack = [$]</code>
+        </div>
+      </div>
+      <div class="parser-demo-grid">
+        <div class="parser-trace-column">
+          <section class="parser-panel" aria-label="Parser input buffer">
+            <p class="parser-panel-label">Input Buffer</p>
+            <div class="parser-token-stream" data-parser-tokens></div>
+          </section>
+          <section class="parser-panel" aria-label="LR parse stack">
+            <p class="parser-panel-label">Parse Stack</p>
+            <div class="parser-stack-wrap">
+              <div class="parser-stack-head">Top of stack is highlighted below.</div>
+              <ol class="parser-stack" data-parser-stack aria-live="off"></ol>
+            </div>
+          </section>
+        </div>
+        <section class="parser-panel" aria-label="Abstract syntax tree growth">
+          <p class="parser-panel-label">AST Build</p>
+          <div class="parser-ast" data-parser-stage>
+            <div class="parser-ast-node" data-ast-node="let" style="--node-x: 50%; --node-y: 14%;">
+              <span class="parser-ast-kind">Root</span>
+              <code>let</code>
+            </div>
+            <div class="parser-ast-node" data-ast-node="binding" style="--node-x: 28%; --node-y: 38%;">
+              <span class="parser-ast-kind">Binding</span>
+              <code>x : Int</code>
+            </div>
+            <div class="parser-ast-node" data-ast-node="int" style="--node-x: 18%; --node-y: 68%;">
+              <span class="parser-ast-kind">Initializer</span>
+              <code>42</code>
+            </div>
+            <div class="parser-ast-node" data-ast-node="dispatch" style="--node-x: 73%; --node-y: 38%;">
+              <span class="parser-ast-kind">Body</span>
+              <code>out_string</code>
+            </div>
+            <div class="parser-ast-node" data-ast-node="string" style="--node-x: 76%; --node-y: 68%;">
+              <span class="parser-ast-kind">Argument</span>
+              <code>"Hello, COOL!\n"</code>
+            </div>
+
+            <div class="parser-ast-edge" data-ast-edge="let-binding" data-from="let" data-to="binding"></div>
+            <div class="parser-ast-edge" data-ast-edge="let-dispatch" data-from="let" data-to="dispatch"></div>
+            <div class="parser-ast-edge" data-ast-edge="binding-int" data-from="binding" data-to="int"></div>
+            <div class="parser-ast-edge" data-ast-edge="dispatch-string" data-from="dispatch" data-to="string"></div>
+          </div>
+        </section>
+      </div>
+    </section>
 
     <h2>Lexical Analyzer</h2>
     <p>
@@ -292,6 +365,506 @@
         replayButton.addEventListener("click", restart);
       }
 
+      restart();
+    })();
+
+    (() => {
+      const demo = document.querySelector("[data-parser-demo]");
+
+      if (!demo) {
+        return;
+      }
+
+      const tokenStream = demo.querySelector("[data-parser-tokens]");
+      const stackOutput = demo.querySelector("[data-parser-stack]");
+      const stage = demo.querySelector("[data-parser-stage]");
+      const status = demo.querySelector("[data-parser-status]");
+      const actionBadge = demo.querySelector("[data-parser-action]");
+      const lookahead = demo.querySelector("[data-parser-lookahead]");
+      const detail = demo.querySelector("[data-parser-detail]");
+      const replayButton = demo.querySelector("[data-parser-replay]");
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!tokenStream || !stackOutput || !stage || !status || !actionBadge || !lookahead || !detail) {
+        return;
+      }
+
+      const tokenDefinitions = [
+        { type: "LET", lexeme: "let" },
+        { type: "OBJECTID", lexeme: "x" },
+        { type: "COLON", lexeme: ":" },
+        { type: "TYPEID", lexeme: "Int" },
+        { type: "ASSIGN", lexeme: "<-" },
+        { type: "INT_CONST", lexeme: "42" },
+        { type: "IN", lexeme: "in" },
+        { type: "OBJECTID", lexeme: "out_string" },
+        { type: "LPAREN", lexeme: "(" },
+        { type: "STR_CONST", lexeme: "\"Hello, COOL!\\n\"" },
+        { type: "RPAREN", lexeme: ")" }
+      ];
+
+      const tokenElements = tokenDefinitions.map((token, index) => {
+        const chip = document.createElement("div");
+        const tokenType = document.createElement("span");
+        const tokenLexeme = document.createElement("code");
+
+        chip.className = "parser-token-chip";
+        chip.setAttribute("role", "listitem");
+        tokenType.className = "parser-token-chip-type";
+        tokenLexeme.className = "parser-token-chip-lexeme";
+
+        tokenType.textContent = `${String(index + 1).padStart(2, "0")} ${token.type}`;
+        tokenLexeme.textContent = token.lexeme;
+
+        chip.append(tokenType, tokenLexeme);
+        tokenStream.appendChild(chip);
+
+        return chip;
+      });
+
+      tokenStream.setAttribute("role", "list");
+
+      const nodeMap = new Map(
+        Array.from(demo.querySelectorAll("[data-ast-node]")).map((node) => [node.dataset.astNode, node])
+      );
+      const edges = Array.from(demo.querySelectorAll("[data-ast-edge]"));
+
+      const stages = [
+        {
+          status: "Initialize the LR stack with the end marker and set the first lookahead to LET.",
+          action: "ready",
+          actionLabel: "Ready",
+          lookaheadLabel: "LET",
+          detail: "stack = [$]",
+          stack: ["$"],
+          focusStack: [0],
+          consumedTokens: [],
+          lookaheadIndex: 0,
+          focusTokens: [],
+          visibleNodes: [],
+          highlightNodes: [],
+          visibleEdges: []
+        },
+        {
+          status: "SHIFT LET: push the token onto the stack and advance to the identifier.",
+          action: "shift",
+          actionLabel: "Shift",
+          lookaheadLabel: "OBJECTID",
+          detail: "shift LET",
+          stack: ["$", "LET"],
+          focusStack: [1],
+          consumedTokens: [0],
+          lookaheadIndex: 1,
+          focusTokens: [0],
+          visibleNodes: [],
+          highlightNodes: [],
+          visibleEdges: []
+        },
+        {
+          status: "SHIFT OBJECTID(x): the parser keeps collecting a handle for the binding.",
+          action: "shift",
+          actionLabel: "Shift",
+          lookaheadLabel: "COLON",
+          detail: "shift OBJECTID(x)",
+          stack: ["$", "LET", "OBJECTID(x)"],
+          focusStack: [2],
+          consumedTokens: [0, 1],
+          lookaheadIndex: 2,
+          focusTokens: [1],
+          visibleNodes: [],
+          highlightNodes: [],
+          visibleEdges: []
+        },
+        {
+          status: "SHIFT COLON: keep building the typed binding on the stack.",
+          action: "shift",
+          actionLabel: "Shift",
+          lookaheadLabel: "TYPEID",
+          detail: "shift COLON",
+          stack: ["$", "LET", "OBJECTID(x)", "COLON"],
+          focusStack: [3],
+          consumedTokens: [0, 1, 2],
+          lookaheadIndex: 3,
+          focusTokens: [2],
+          visibleNodes: [],
+          highlightNodes: [],
+          visibleEdges: []
+        },
+        {
+          status: "SHIFT TYPEID(Int): the stack now contains the full handle for a binding.",
+          action: "shift",
+          actionLabel: "Shift",
+          lookaheadLabel: "ASSIGN",
+          detail: "shift TYPEID(Int)",
+          stack: ["$", "LET", "OBJECTID(x)", "COLON", "TYPEID(Int)"],
+          focusStack: [4],
+          consumedTokens: [0, 1, 2, 3],
+          lookaheadIndex: 4,
+          focusTokens: [3],
+          visibleNodes: [],
+          highlightNodes: [],
+          visibleEdges: []
+        },
+        {
+          status: "REDUCE binding -> OBJECTID COLON TYPEID: collapse the handle into one grammar symbol.",
+          action: "reduce",
+          actionLabel: "Reduce",
+          lookaheadLabel: "ASSIGN",
+          detail: "binding -> OBJECTID COLON TYPEID",
+          stack: ["$", "LET", "binding"],
+          focusStack: [2],
+          consumedTokens: [0, 1, 2, 3],
+          lookaheadIndex: 4,
+          focusTokens: [1, 2, 3],
+          visibleNodes: ["binding"],
+          highlightNodes: ["binding"],
+          visibleEdges: []
+        },
+        {
+          status: "SHIFT ASSIGN: the parser is now expecting an initializer expression.",
+          action: "shift",
+          actionLabel: "Shift",
+          lookaheadLabel: "INT_CONST",
+          detail: "shift ASSIGN",
+          stack: ["$", "LET", "binding", "ASSIGN"],
+          focusStack: [3],
+          consumedTokens: [0, 1, 2, 3, 4],
+          lookaheadIndex: 5,
+          focusTokens: [4],
+          visibleNodes: ["binding"],
+          highlightNodes: [],
+          visibleEdges: []
+        },
+        {
+          status: "SHIFT INT_CONST(42): the right-hand side is on the stack, ready to reduce into an expression.",
+          action: "shift",
+          actionLabel: "Shift",
+          lookaheadLabel: "IN",
+          detail: "shift INT_CONST(42)",
+          stack: ["$", "LET", "binding", "ASSIGN", "INT_CONST(42)"],
+          focusStack: [4],
+          consumedTokens: [0, 1, 2, 3, 4, 5],
+          lookaheadIndex: 6,
+          focusTokens: [5],
+          visibleNodes: ["binding"],
+          highlightNodes: [],
+          visibleEdges: []
+        },
+        {
+          status: "REDUCE expr -> INT_CONST: turn the literal into an expression subtree.",
+          action: "reduce",
+          actionLabel: "Reduce",
+          lookaheadLabel: "IN",
+          detail: "expr -> INT_CONST",
+          stack: ["$", "LET", "binding", "ASSIGN", "expr"],
+          focusStack: [4],
+          consumedTokens: [0, 1, 2, 3, 4, 5],
+          lookaheadIndex: 6,
+          focusTokens: [5],
+          visibleNodes: ["binding", "int"],
+          highlightNodes: ["int"],
+          visibleEdges: []
+        },
+        {
+          status: "REDUCE binding_init -> binding ASSIGN expr: the initializer now belongs to the binding clause.",
+          action: "reduce",
+          actionLabel: "Reduce",
+          lookaheadLabel: "IN",
+          detail: "binding_init -> binding ASSIGN expr",
+          stack: ["$", "LET", "binding_init"],
+          focusStack: [2],
+          consumedTokens: [0, 1, 2, 3, 4, 5],
+          lookaheadIndex: 6,
+          focusTokens: [1, 2, 3, 4, 5],
+          visibleNodes: ["binding", "int"],
+          highlightNodes: ["binding", "int"],
+          visibleEdges: ["binding-int"]
+        },
+        {
+          status: "SHIFT IN: the parser moves from the binding clause into the body expression.",
+          action: "shift",
+          actionLabel: "Shift",
+          lookaheadLabel: "OBJECTID",
+          detail: "shift IN",
+          stack: ["$", "LET", "binding_init", "IN"],
+          focusStack: [3],
+          consumedTokens: [0, 1, 2, 3, 4, 5, 6],
+          lookaheadIndex: 7,
+          focusTokens: [6],
+          visibleNodes: ["binding", "int"],
+          highlightNodes: [],
+          visibleEdges: ["binding-int"]
+        },
+        {
+          status: "SHIFT OBJECTID(out_string): begin collecting a dispatch expression.",
+          action: "shift",
+          actionLabel: "Shift",
+          lookaheadLabel: "LPAREN",
+          detail: "shift OBJECTID(out_string)",
+          stack: ["$", "LET", "binding_init", "IN", "OBJECTID(out_string)"],
+          focusStack: [4],
+          consumedTokens: [0, 1, 2, 3, 4, 5, 6, 7],
+          lookaheadIndex: 8,
+          focusTokens: [7],
+          visibleNodes: ["binding", "int"],
+          highlightNodes: [],
+          visibleEdges: ["binding-int"]
+        },
+        {
+          status: "SHIFT LPAREN: the parser enters the argument list.",
+          action: "shift",
+          actionLabel: "Shift",
+          lookaheadLabel: "STR_CONST",
+          detail: "shift LPAREN",
+          stack: ["$", "LET", "binding_init", "IN", "OBJECTID(out_string)", "LPAREN"],
+          focusStack: [5],
+          consumedTokens: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+          lookaheadIndex: 9,
+          focusTokens: [8],
+          visibleNodes: ["binding", "int"],
+          highlightNodes: [],
+          visibleEdges: ["binding-int"]
+        },
+        {
+          status: "SHIFT STR_CONST: the string literal is ready to reduce into an argument expression.",
+          action: "shift",
+          actionLabel: "Shift",
+          lookaheadLabel: "RPAREN",
+          detail: "shift STR_CONST(\"Hello, COOL!\\n\")",
+          stack: ["$", "LET", "binding_init", "IN", "OBJECTID(out_string)", "LPAREN", "STR_CONST"],
+          focusStack: [6],
+          consumedTokens: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+          lookaheadIndex: 10,
+          focusTokens: [9],
+          visibleNodes: ["binding", "int"],
+          highlightNodes: [],
+          visibleEdges: ["binding-int"]
+        },
+        {
+          status: "REDUCE expr -> STR_CONST: build the argument subtree from the string literal.",
+          action: "reduce",
+          actionLabel: "Reduce",
+          lookaheadLabel: "RPAREN",
+          detail: "expr -> STR_CONST",
+          stack: ["$", "LET", "binding_init", "IN", "OBJECTID(out_string)", "LPAREN", "expr"],
+          focusStack: [6],
+          consumedTokens: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+          lookaheadIndex: 10,
+          focusTokens: [9],
+          visibleNodes: ["binding", "int", "string"],
+          highlightNodes: ["string"],
+          visibleEdges: ["binding-int"]
+        },
+        {
+          status: "SHIFT RPAREN: the dispatch handle is complete on the stack.",
+          action: "shift",
+          actionLabel: "Shift",
+          lookaheadLabel: "$",
+          detail: "shift RPAREN",
+          stack: ["$", "LET", "binding_init", "IN", "OBJECTID(out_string)", "LPAREN", "expr", "RPAREN"],
+          focusStack: [7],
+          consumedTokens: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          lookaheadIndex: null,
+          focusTokens: [10],
+          visibleNodes: ["binding", "int", "string"],
+          highlightNodes: [],
+          visibleEdges: ["binding-int"]
+        },
+        {
+          status: "REDUCE dispatch -> OBJECTID LPAREN expr RPAREN: collapse the call into one expression node.",
+          action: "reduce",
+          actionLabel: "Reduce",
+          lookaheadLabel: "$",
+          detail: "dispatch -> OBJECTID LPAREN expr RPAREN",
+          stack: ["$", "LET", "binding_init", "IN", "dispatch"],
+          focusStack: [4],
+          consumedTokens: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          lookaheadIndex: null,
+          focusTokens: [7, 8, 9, 10],
+          visibleNodes: ["binding", "int", "dispatch", "string"],
+          highlightNodes: ["dispatch", "string"],
+          visibleEdges: ["binding-int", "dispatch-string"]
+        },
+        {
+          status: "REDUCE let_expr -> LET binding_init IN dispatch: the whole input collapses into one AST root.",
+          action: "reduce",
+          actionLabel: "Reduce",
+          lookaheadLabel: "$",
+          detail: "let_expr -> LET binding_init IN dispatch",
+          stack: ["$", "let_expr"],
+          focusStack: [1],
+          consumedTokens: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          lookaheadIndex: null,
+          focusTokens: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          visibleNodes: ["let", "binding", "int", "dispatch", "string"],
+          highlightNodes: ["let"],
+          visibleEdges: ["let-binding", "let-dispatch", "binding-int", "dispatch-string"]
+        },
+        {
+          status: "ACCEPT: the parser has reduced the entire input to one valid let-expression.",
+          action: "accept",
+          actionLabel: "Accept",
+          lookaheadLabel: "$",
+          detail: "accept let_expr",
+          stack: ["$", "let_expr"],
+          focusStack: [1],
+          consumedTokens: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          lookaheadIndex: null,
+          focusTokens: [],
+          visibleNodes: ["let", "binding", "int", "dispatch", "string"],
+          highlightNodes: [],
+          visibleEdges: ["let-binding", "let-dispatch", "binding-int", "dispatch-string"]
+        }
+      ];
+
+      let cursor = 0;
+      let timerId = 0;
+      const stepMs = 1020;
+      const loopPauseMs = 2800;
+      const startDelayMs = 650;
+
+      const renderStack = (stackEntries, activeEntries) => {
+        stackOutput.replaceChildren();
+
+        stackEntries.forEach((entry, index) => {
+          const row = document.createElement("li");
+          const depth = document.createElement("span");
+          const symbol = document.createElement("code");
+          const marker = document.createElement("span");
+
+          row.className = "parser-stack-row";
+          depth.className = "parser-stack-depth";
+          symbol.className = "parser-stack-symbol";
+          marker.className = "parser-stack-marker";
+
+          depth.textContent = String(index).padStart(2, "0");
+          symbol.textContent = entry;
+          marker.textContent = index === stackEntries.length - 1 ? "top" : "";
+
+          row.classList.toggle("is-active", activeEntries.includes(index));
+          row.classList.toggle("is-top", index === stackEntries.length - 1);
+          row.append(depth, symbol, marker);
+          stackOutput.appendChild(row);
+        });
+      };
+
+      const drawEdges = () => {
+        const stageRect = stage.getBoundingClientRect();
+
+        edges.forEach((edge) => {
+          const fromNode = nodeMap.get(edge.dataset.from);
+          const toNode = nodeMap.get(edge.dataset.to);
+
+          if (!fromNode || !toNode) {
+            return;
+          }
+
+          const fromRect = fromNode.getBoundingClientRect();
+          const toRect = toNode.getBoundingClientRect();
+          const x1 = fromRect.left + (fromRect.width / 2) - stageRect.left;
+          const y1 = fromRect.top + (fromRect.height / 2) - stageRect.top;
+          const x2 = toRect.left + (toRect.width / 2) - stageRect.left;
+          const y2 = toRect.top + (toRect.height / 2) - stageRect.top;
+          const dx = x2 - x1;
+          const dy = y2 - y1;
+          const length = Math.hypot(dx, dy);
+          const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+          edge.style.width = `${length}px`;
+          edge.style.left = `${x1}px`;
+          edge.style.top = `${y1}px`;
+          edge.style.transform = `translateY(-50%) rotate(${angle}deg)`;
+        });
+      };
+
+      const render = (stageIndex) => {
+        if (stageIndex === -1) {
+          status.textContent = "Preparing LR trace...";
+          actionBadge.textContent = "Ready";
+          actionBadge.className = "parser-action-badge";
+          lookahead.textContent = "LET";
+          detail.textContent = "stack = [$]";
+          renderStack(["$"], [0]);
+
+          tokenElements.forEach((chip) => {
+            chip.classList.remove("is-consumed", "is-lookahead", "is-focus");
+          });
+
+          nodeMap.forEach((node) => {
+            node.classList.remove("is-visible", "is-current");
+          });
+
+          edges.forEach((edge) => {
+            edge.classList.remove("is-visible");
+          });
+
+          drawEdges();
+          return;
+        }
+
+        const currentStage = stages[stageIndex];
+
+        tokenElements.forEach((chip, index) => {
+          chip.classList.toggle("is-consumed", currentStage.consumedTokens.includes(index));
+          chip.classList.toggle("is-lookahead", currentStage.lookaheadIndex === index);
+          chip.classList.toggle("is-focus", currentStage.focusTokens.includes(index));
+        });
+
+        nodeMap.forEach((node, name) => {
+          node.classList.toggle("is-visible", currentStage.visibleNodes.includes(name));
+          node.classList.toggle("is-current", currentStage.highlightNodes.includes(name));
+        });
+
+        edges.forEach((edge) => {
+          edge.classList.toggle("is-visible", currentStage.visibleEdges.includes(edge.dataset.astEdge));
+        });
+
+        actionBadge.textContent = currentStage.actionLabel;
+        actionBadge.className = `parser-action-badge is-${currentStage.action}`;
+        lookahead.textContent = currentStage.lookaheadLabel;
+        detail.textContent = currentStage.detail;
+        status.textContent = currentStage.status;
+        renderStack(currentStage.stack, currentStage.focusStack);
+        drawEdges();
+      };
+
+      const advance = () => {
+        if (cursor < stages.length - 1) {
+          render(cursor);
+          cursor += 1;
+          timerId = window.setTimeout(advance, stepMs);
+          return;
+        }
+
+        render(stages.length - 1);
+        cursor = 0;
+        timerId = window.setTimeout(advance, loopPauseMs);
+      };
+
+      const restart = () => {
+        window.clearTimeout(timerId);
+        cursor = 0;
+
+        if (prefersReducedMotion) {
+          render(stages.length - 1);
+          status.textContent = "Reduced motion is enabled, so the finished AST is shown at once.";
+
+          if (replayButton) {
+            replayButton.hidden = true;
+          }
+
+          return;
+        }
+
+        render(-1);
+        timerId = window.setTimeout(advance, startDelayMs);
+      };
+
+      if (replayButton) {
+        replayButton.addEventListener("click", restart);
+      }
+
+      window.addEventListener("resize", drawEdges);
       restart();
     })();
   </script>

@@ -2025,6 +2025,474 @@ footer {
     opacity: 1;
 }
 
+.minimal-project .semantic-demo {
+    margin: 1rem 0 1.75rem;
+    padding: 1rem;
+    border: 1px solid var(--project-line);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(243, 248, 245, 0.46)),
+        linear-gradient(135deg, rgba(74, 119, 91, 0.08), rgba(60, 95, 127, 0.05));
+}
+
+.minimal-project .semantic-demo-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.55rem;
+}
+
+.minimal-project .semantic-kicker {
+    margin: 0 0 0.2rem;
+    color: var(--project-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.minimal-project .semantic-demo-head h3 {
+    margin: 0;
+}
+
+.minimal-project .semantic-demo-note {
+    max-width: 69ch;
+    margin-bottom: 0.85rem;
+}
+
+.minimal-project .semantic-replay {
+    border: 1px solid var(--project-line);
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.84);
+    color: var(--project-soft);
+    padding: 0.45rem 0.7rem;
+    font: inherit;
+    font-size: 0.82rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.minimal-project .semantic-replay:hover,
+.minimal-project .semantic-replay:focus-visible {
+    color: var(--project-ink);
+    border-color: rgba(74, 119, 91, 0.62);
+    outline: none;
+}
+
+.minimal-project .semantic-status {
+    min-height: 3rem;
+    margin-bottom: 0.9rem;
+    padding: 0.72rem 0.8rem;
+    border: 1px solid var(--project-line);
+    background: rgba(74, 119, 91, 0.09);
+    color: var(--project-ink);
+    font-size: 0.84rem;
+    display: flex;
+    align-items: center;
+}
+
+.minimal-project .semantic-action-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 0.82fr) minmax(0, 1.36fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.minimal-project .semantic-action-card {
+    min-height: 5rem;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid var(--project-line);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(241, 247, 243, 0.8));
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+}
+
+.minimal-project .semantic-action-card-wide {
+    min-width: 0;
+}
+
+.minimal-project .semantic-action-caption {
+    margin: 0;
+    color: var(--project-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.minimal-project .semantic-action-badge,
+.minimal-project .semantic-focus-label,
+.minimal-project .semantic-detail {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid rgba(74, 119, 91, 0.16);
+    background: rgba(255, 255, 255, 0.82);
+    color: var(--project-ink);
+    font-size: 0.8rem;
+    line-height: 1.35;
+}
+
+.minimal-project .semantic-action-badge {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.minimal-project .semantic-action-badge.is-graph {
+    border-color: rgba(60, 95, 127, 0.28);
+    background: rgba(238, 244, 249, 0.98);
+}
+
+.minimal-project .semantic-action-badge.is-scope {
+    border-color: rgba(132, 103, 53, 0.3);
+    background: rgba(252, 248, 238, 0.98);
+}
+
+.minimal-project .semantic-action-badge.is-type {
+    border-color: rgba(74, 119, 91, 0.34);
+    background: rgba(239, 248, 242, 0.98);
+    color: rgba(45, 83, 58, 0.96);
+}
+
+.minimal-project .semantic-action-badge.is-dispatch {
+    border-color: rgba(101, 83, 142, 0.28);
+    background: rgba(245, 241, 251, 0.98);
+}
+
+.minimal-project .semantic-action-badge.is-annotate,
+.minimal-project .semantic-action-badge.is-complete {
+    border-color: rgba(74, 119, 91, 0.38);
+    background: rgba(236, 248, 240, 0.98);
+    color: rgba(45, 83, 58, 0.96);
+    box-shadow: 0 10px 24px rgba(74, 119, 91, 0.08);
+}
+
+.minimal-project .semantic-focus-label {
+    color: var(--project-soft);
+}
+
+.minimal-project .semantic-detail {
+    width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.minimal-project .semantic-demo-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+    gap: 1rem;
+    align-items: start;
+}
+
+.minimal-project .semantic-trace-column {
+    display: grid;
+    align-content: start;
+}
+
+.minimal-project .semantic-check-panel {
+    align-self: start;
+}
+
+.minimal-project .semantic-panel {
+    border: 1px solid var(--project-line);
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.minimal-project .semantic-panel-label {
+    margin: 0;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--project-line);
+    color: var(--project-muted);
+    font-size: 0.76rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.minimal-project .semantic-check-list {
+    list-style: none;
+    margin: 0;
+    padding: 0.85rem;
+    display: grid;
+    gap: 0.55rem;
+}
+
+.minimal-project .semantic-check-row {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+    gap: 0.7rem;
+    align-items: start;
+    padding: 0.55rem 0.6rem;
+    border-left: 2px solid rgba(60, 95, 127, 0.14);
+    background: rgba(255, 255, 255, 0.84);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.minimal-project .semantic-check-row.is-pending {
+    opacity: 0.78;
+}
+
+.minimal-project .semantic-check-row.is-current {
+    border-left-color: rgba(74, 119, 91, 0.58);
+    background: rgba(239, 248, 242, 0.97);
+    box-shadow: 0 10px 24px rgba(74, 119, 91, 0.08);
+    transform: translateX(0.18rem);
+    opacity: 1;
+}
+
+.minimal-project .semantic-check-row.is-done {
+    border-left-color: rgba(60, 95, 127, 0.42);
+    background: rgba(241, 246, 250, 0.95);
+    opacity: 1;
+}
+
+.minimal-project .semantic-check-index {
+    color: var(--project-muted);
+    font-size: 0.74rem;
+    line-height: 1.6;
+}
+
+.minimal-project .semantic-check-main {
+    display: grid;
+    gap: 0.16rem;
+}
+
+.minimal-project .semantic-check-name {
+    color: var(--project-ink);
+    font-size: 0.83rem;
+}
+
+.minimal-project .semantic-check-hint {
+    color: var(--project-muted);
+    font-size: 0.76rem;
+    line-height: 1.5;
+}
+
+.minimal-project .semantic-check-state {
+    align-self: start;
+    padding: 0.18rem 0.42rem;
+    border: 1px solid rgba(60, 95, 127, 0.14);
+    background: rgba(255, 255, 255, 0.86);
+    color: var(--project-muted);
+    font-size: 0.71rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.minimal-project .semantic-check-row.is-current .semantic-check-state {
+    border-color: rgba(74, 119, 91, 0.28);
+    color: rgba(45, 83, 58, 0.96);
+}
+
+.minimal-project .semantic-check-row.is-done .semantic-check-state {
+    border-color: rgba(60, 95, 127, 0.22);
+    color: var(--project-soft);
+}
+
+.minimal-project .semantic-scope {
+    min-height: auto;
+    padding: 0.85rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    align-content: start;
+    gap: 0.65rem;
+    background: transparent;
+}
+
+.minimal-project .semantic-scope-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    align-content: start;
+    min-height: 4.4rem;
+    padding: 0.62rem 0.68rem;
+    border: 1px solid rgba(60, 95, 127, 0.14);
+    border-top: 2px solid rgba(60, 95, 127, 0.16);
+    background: rgba(255, 255, 255, 0.82);
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.minimal-project .semantic-scope-row.is-focus {
+    border-color: rgba(74, 119, 91, 0.18);
+    border-top-color: rgba(74, 119, 91, 0.55);
+    background: rgba(239, 248, 242, 0.97);
+    box-shadow: 0 10px 22px rgba(74, 119, 91, 0.08);
+    transform: translateY(-0.12rem);
+}
+
+.minimal-project .semantic-scope-label {
+    color: var(--project-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.minimal-project .semantic-scope-value {
+    color: var(--project-ink);
+    font-size: 0.8rem;
+    line-height: 1.48;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.minimal-project .semantic-ast-panel {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    overflow: hidden;
+}
+
+.minimal-project .semantic-ast {
+    position: relative;
+    min-height: 22rem;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at top left, rgba(74, 119, 91, 0.08), transparent 48%),
+        radial-gradient(circle at bottom right, rgba(60, 95, 127, 0.08), transparent 44%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.64), rgba(241, 247, 244, 0.88));
+}
+
+.minimal-project .semantic-ast::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(74, 119, 91, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74, 119, 91, 0.045) 1px, transparent 1px);
+    background-size: 2.8rem 2.8rem;
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.minimal-project .semantic-ast-node {
+    position: absolute;
+    left: var(--node-x);
+    top: var(--node-y);
+    z-index: 1;
+    min-width: 7.8rem;
+    max-width: 11rem;
+    padding: 0.65rem 0.72rem;
+    border: 1px solid rgba(60, 95, 127, 0.16);
+    background: rgba(255, 255, 255, 0.92);
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+    pointer-events: none;
+}
+
+.minimal-project .semantic-ast-node.is-checked {
+    border-color: rgba(60, 95, 127, 0.28);
+    background: rgba(243, 247, 250, 0.96);
+}
+
+.minimal-project .semantic-ast-node.is-current {
+    border-color: rgba(74, 119, 91, 0.56);
+    background: rgba(239, 248, 242, 0.98);
+    box-shadow: 0 16px 30px rgba(74, 119, 91, 0.12);
+    transform: translate(-50%, -50%) scale(1.04);
+}
+
+.minimal-project .semantic-ast-node.is-annotated {
+    border-color: rgba(74, 119, 91, 0.3);
+}
+
+.minimal-project .semantic-ast-kind {
+    display: block;
+    margin-bottom: 0.28rem;
+    color: var(--project-muted);
+    font-size: 0.69rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.minimal-project .semantic-ast-node code {
+    display: block;
+    color: var(--project-ink);
+    font-size: 0.82rem;
+    line-height: 1.4;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.minimal-project .semantic-ast-type {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 0.34rem;
+    padding: 0.18rem 0.42rem;
+    border: 1px solid rgba(74, 119, 91, 0.22);
+    background: rgba(255, 255, 255, 0.88);
+    color: rgba(45, 83, 58, 0.96);
+    font-size: 0.72rem;
+    line-height: 1.35;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.minimal-project .semantic-ast-type.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.minimal-project .semantic-ast-edge {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(60, 95, 127, 0.58), rgba(74, 119, 91, 0.58));
+    opacity: 0.28;
+    transform-origin: 0 50%;
+    transition: opacity 0.22s ease, filter 0.22s ease;
+    pointer-events: none;
+}
+
+.minimal-project .semantic-ast-edge::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: rgba(74, 119, 91, 0.72);
+    transform: translateY(-50%);
+}
+
+.minimal-project .semantic-ast-edge.is-active {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(74, 119, 91, 0.18));
+}
+
+.minimal-project .semantic-scope-panel {
+    border-top: 1px solid var(--project-line);
+    background:
+        linear-gradient(180deg, rgba(248, 251, 249, 0.92), rgba(241, 247, 244, 0.98));
+}
+
+.minimal-project .semantic-scope-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+    padding: 0.72rem 0.85rem 0;
+}
+
+.minimal-project .semantic-scope-title {
+    margin: 0;
+    color: var(--project-ink);
+    font-size: 0.82rem;
+}
+
+.minimal-project .semantic-scope-note {
+    margin: 0;
+    max-width: 34ch;
+    color: var(--project-muted);
+    font-size: 0.74rem;
+    line-height: 1.48;
+}
+
 .minimal-project .ratio {
     border-radius: 0;
     border: 1px solid var(--project-line);
@@ -2085,12 +2553,21 @@ footer {
         padding: 0.85rem;
     }
 
+    .minimal-project .semantic-demo {
+        padding: 0.85rem;
+    }
+
     .minimal-project .lexer-demo-head {
         flex-direction: column;
         align-items: flex-start;
     }
 
     .minimal-project .parser-demo-head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .minimal-project .semantic-demo-head {
         flex-direction: column;
         align-items: flex-start;
     }
@@ -2103,14 +2580,36 @@ footer {
         grid-template-columns: 1fr;
     }
 
+    .minimal-project .semantic-demo-grid {
+        grid-template-columns: 1fr;
+    }
+
     .minimal-project .parser-action-strip {
         grid-template-columns: 1fr;
+    }
+
+    .minimal-project .semantic-action-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .minimal-project .semantic-ast-panel {
+        order: -1;
     }
 
     .minimal-project .parser-token-stream,
     .minimal-project .parser-stack-wrap,
     .minimal-project .parser-ast {
         min-height: 18rem;
+    }
+
+    .minimal-project .semantic-ast {
+        min-height: 18rem;
+    }
+
+    .minimal-project .semantic-scope-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
     }
 
     .minimal-project .parser-stack-row {
@@ -2124,6 +2623,20 @@ footer {
 
     .minimal-project .parser-ast-node code {
         font-size: 0.75rem;
+    }
+
+    .minimal-project .semantic-ast-node {
+        min-width: 6.2rem;
+        max-width: 9rem;
+        padding: 0.55rem 0.58rem;
+    }
+
+    .minimal-project .semantic-ast-node code {
+        font-size: 0.75rem;
+    }
+
+    .minimal-project .semantic-scope-row {
+        min-height: auto;
     }
 
     .minimal-project .project-hero h1 {
@@ -2150,7 +2663,14 @@ footer {
     .minimal-project .parser-ast-node,
     .minimal-project .parser-ast-edge,
     .minimal-project .parser-action-badge,
-    .minimal-project .parser-replay {
+    .minimal-project .parser-replay,
+    .minimal-project .semantic-check-row,
+    .minimal-project .semantic-scope-row,
+    .minimal-project .semantic-ast-node,
+    .minimal-project .semantic-ast-edge,
+    .minimal-project .semantic-ast-type,
+    .minimal-project .semantic-action-badge,
+    .minimal-project .semantic-replay {
         transition: none;
     }
 }

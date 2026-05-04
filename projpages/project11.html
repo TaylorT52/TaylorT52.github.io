@@ -52,7 +52,134 @@
       </p>
     </div>
 
-    <h2>Right now: parsers</h2>
+    <h2>Semantic Analyzers</h2>
+    <p>
+      Once the parser produces an AST, the next question is whether that tree actually describes a legal COOL program. That is the semantic analyzer's job. This is the pass where syntax turns into meaning: the analyzer builds the class hierarchy, rejects malformed inheritance, tracks scopes, resolves dispatches, and enforces COOL's type rules before any code is generated.
+    </p>
+    <p>
+      For each class, my semantic analyzer walks the AST, checks every expression against the current environment, and records the static type that later backend stages will rely on. If a node violates the language rules, the compiler can stop here with a precise semantic error; otherwise, it produces an annotated AST that is safe to hand off to code generation.
+    </p>
+
+    <section class="semantic-demo" data-semantic-demo aria-labelledby="semantic-demo-title">
+      <div class="semantic-demo-head">
+        <div>
+          <p class="semantic-kicker">Semantic Pass</p>
+          <h3 id="semantic-demo-title">Watching the analyzer verify and annotate the AST</h3>
+        </div>
+        <button type="button" class="semantic-replay" data-semantic-replay>Replay</button>
+      </div>
+      <p class="semantic-demo-note">
+        This trace picks up from the parser demo's AST for <code>let x : Int &lt;- 42 in out_string("Hello, COOL!\n")</code>. The analyzer checks the current environment, validates each subtree, and stamps expressions with the static types that code generation will consume.
+      </p>
+      <div class="semantic-status" data-semantic-status aria-live="off"></div>
+      <div class="semantic-action-strip">
+        <div class="semantic-action-card">
+          <p class="semantic-action-caption">Current Pass</p>
+          <span class="semantic-action-badge" data-semantic-pass>Ready</span>
+        </div>
+        <div class="semantic-action-card">
+          <p class="semantic-action-caption">Node In Focus</p>
+          <code class="semantic-focus-label" data-semantic-focus>Global</code>
+        </div>
+        <div class="semantic-action-card semantic-action-card-wide">
+          <p class="semantic-action-caption">Rule / Annotation</p>
+          <code class="semantic-detail" data-semantic-detail>build class + method environments</code>
+        </div>
+      </div>
+      <div class="semantic-demo-grid">
+        <div class="semantic-trace-column">
+          <section class="semantic-panel semantic-check-panel" aria-label="Semantic checks">
+            <p class="semantic-panel-label">Checks</p>
+            <ol class="semantic-check-list" data-semantic-checks aria-live="off">
+              <li class="semantic-check-row" data-semantic-check="inheritance">
+                <span class="semantic-check-index">01</span>
+                <div class="semantic-check-main">
+                  <span class="semantic-check-name">Validate inheritance graph</span>
+                  <span class="semantic-check-hint">Make sure the class hierarchy is legal, acyclic, and rooted correctly.</span>
+                </div>
+                <span class="semantic-check-state">pending</span>
+              </li>
+              <li class="semantic-check-row" data-semantic-check="scope">
+                <span class="semantic-check-index">02</span>
+                <div class="semantic-check-main">
+                  <span class="semantic-check-name">Open and extend scope</span>
+                  <span class="semantic-check-hint">Introduce <code>x : Int</code> before checking the body of the <code>let</code>.</span>
+                </div>
+                <span class="semantic-check-state">pending</span>
+              </li>
+              <li class="semantic-check-row" data-semantic-check="initializer">
+                <span class="semantic-check-index">03</span>
+                <div class="semantic-check-main">
+                  <span class="semantic-check-name">Check initializer conformance</span>
+                  <span class="semantic-check-hint">Verify the inferred type of <code>42</code> conforms to the declared binding type.</span>
+                </div>
+                <span class="semantic-check-state">pending</span>
+              </li>
+              <li class="semantic-check-row" data-semantic-check="dispatch">
+                <span class="semantic-check-index">04</span>
+                <div class="semantic-check-main">
+                  <span class="semantic-check-name">Resolve dispatch and arguments</span>
+                  <span class="semantic-check-hint">Match the method signature and confirm the actual argument types fit.</span>
+                </div>
+                <span class="semantic-check-state">pending</span>
+              </li>
+              <li class="semantic-check-row" data-semantic-check="annotation">
+                <span class="semantic-check-index">05</span>
+                <div class="semantic-check-main">
+                  <span class="semantic-check-name">Annotate expression types</span>
+                  <span class="semantic-check-hint">Record the final static types that later compiler stages can trust.</span>
+                </div>
+                <span class="semantic-check-state">pending</span>
+              </li>
+            </ol>
+          </section>
+        </div>
+        <section class="semantic-panel semantic-ast-panel" aria-label="Annotated abstract syntax tree">
+          <p class="semantic-panel-label">Annotated AST</p>
+          <div class="semantic-ast" data-semantic-stage>
+            <div class="semantic-ast-node" data-semantic-node="let" style="--node-x: 50%; --node-y: 15%;">
+              <span class="semantic-ast-kind">Expression</span>
+              <code>let</code>
+              <span class="semantic-ast-type" data-semantic-annotation="let">: SELF_TYPE</span>
+            </div>
+            <div class="semantic-ast-node" data-semantic-node="binding" style="--node-x: 28%; --node-y: 39%;">
+              <span class="semantic-ast-kind">Binding</span>
+              <code>x : Int</code>
+              <span class="semantic-ast-type" data-semantic-annotation="binding">scope + x : Int</span>
+            </div>
+            <div class="semantic-ast-node" data-semantic-node="int" style="--node-x: 17%; --node-y: 69%;">
+              <span class="semantic-ast-kind">Initializer</span>
+              <code>42</code>
+              <span class="semantic-ast-type" data-semantic-annotation="int">: Int</span>
+            </div>
+            <div class="semantic-ast-node" data-semantic-node="dispatch" style="--node-x: 74%; --node-y: 39%;">
+              <span class="semantic-ast-kind">Body</span>
+              <code>out_string</code>
+              <span class="semantic-ast-type" data-semantic-annotation="dispatch">: SELF_TYPE</span>
+            </div>
+            <div class="semantic-ast-node" data-semantic-node="string" style="--node-x: 77%; --node-y: 69%;">
+              <span class="semantic-ast-kind">Argument</span>
+              <code>"Hello, COOL!\n"</code>
+              <span class="semantic-ast-type" data-semantic-annotation="string">: String</span>
+            </div>
+
+            <div class="semantic-ast-edge" data-semantic-edge="let-binding" data-from="let" data-to="binding"></div>
+            <div class="semantic-ast-edge" data-semantic-edge="let-dispatch" data-from="let" data-to="dispatch"></div>
+            <div class="semantic-ast-edge" data-semantic-edge="binding-int" data-from="binding" data-to="int"></div>
+            <div class="semantic-ast-edge" data-semantic-edge="dispatch-string" data-from="dispatch" data-to="string"></div>
+          </div>
+          <div class="semantic-scope-panel">
+            <div class="semantic-scope-head">
+              <p class="semantic-scope-title">Environment</p>
+              <p class="semantic-scope-note">The symbol and method context the current semantic check is using.</p>
+            </div>
+            <div class="semantic-scope" data-semantic-scope></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <h2>Parsers</h2>
     <p>
       Once I had a lexical analyzer, I could go on to build a parser using a generator called bison and a package for manipulating trees.
       The purpose of the parser is to ingest tokens output by the lexical analyzer and to use context free grammars to determine whether a sequence of tokens forms a valid program.
@@ -365,6 +492,377 @@
         replayButton.addEventListener("click", restart);
       }
 
+      restart();
+    })();
+
+    (() => {
+      const demo = document.querySelector("[data-semantic-demo]");
+
+      if (!demo) {
+        return;
+      }
+
+      const stage = demo.querySelector("[data-semantic-stage]");
+      const status = demo.querySelector("[data-semantic-status]");
+      const passBadge = demo.querySelector("[data-semantic-pass]");
+      const focusLabel = demo.querySelector("[data-semantic-focus]");
+      const detail = demo.querySelector("[data-semantic-detail]");
+      const scopeOutput = demo.querySelector("[data-semantic-scope]");
+      const replayButton = demo.querySelector("[data-semantic-replay]");
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!stage || !status || !passBadge || !focusLabel || !detail || !scopeOutput) {
+        return;
+      }
+
+      const nodeMap = new Map(
+        Array.from(demo.querySelectorAll("[data-semantic-node]")).map((node) => [node.dataset.semanticNode, node])
+      );
+      const annotationMap = new Map(
+        Array.from(demo.querySelectorAll("[data-semantic-annotation]")).map((annotation) => [
+          annotation.dataset.semanticAnnotation,
+          annotation
+        ])
+      );
+      const edges = Array.from(demo.querySelectorAll("[data-semantic-edge]"));
+      const checkRows = new Map(
+        Array.from(demo.querySelectorAll("[data-semantic-check]")).map((row) => [row.dataset.semanticCheck, row])
+      );
+
+      const stages = [
+        {
+          status: "Build the class table first so every later type rule has a sound inheritance graph to rely on.",
+          pass: "Graph Check",
+          passTone: "graph",
+          focus: "Main, IO, Object",
+          detail: "Main -> IO -> Object is legal and acyclic",
+          currentCheck: "inheritance",
+          completedChecks: [],
+          scopeEntries: [
+            { label: "Class", value: "Main <: IO <: Object", focus: true },
+            { label: "self", value: "SELF_TYPE" }
+          ],
+          currentNode: null,
+          checkedNodes: [],
+          annotatedNodes: [],
+          highlightedEdges: []
+        },
+        {
+          status: "Enter the let-expression with the class environment ready and begin checking its subexpressions.",
+          pass: "Scope",
+          passTone: "scope",
+          focus: "let",
+          detail: "O = { self : SELF_TYPE }",
+          currentCheck: "scope",
+          completedChecks: ["inheritance"],
+          scopeEntries: [
+            { label: "Class", value: "Main <: IO <: Object" },
+            { label: "self", value: "SELF_TYPE", focus: true }
+          ],
+          currentNode: "let",
+          checkedNodes: ["let"],
+          annotatedNodes: [],
+          highlightedEdges: ["let-binding", "let-dispatch"]
+        },
+        {
+          status: "Read the declared binding and extend the object environment before checking the let body.",
+          pass: "Scope",
+          passTone: "scope",
+          focus: "x : Int",
+          detail: "O' = O U { x : Int }",
+          currentCheck: "scope",
+          completedChecks: ["inheritance"],
+          scopeEntries: [
+            { label: "Class", value: "Main <: IO <: Object" },
+            { label: "self", value: "SELF_TYPE" },
+            { label: "bind", value: "x : Int", focus: true }
+          ],
+          currentNode: "binding",
+          checkedNodes: ["let", "binding"],
+          annotatedNodes: ["binding"],
+          highlightedEdges: ["let-binding", "binding-int"]
+        },
+        {
+          status: "The initializer literal 42 has static type Int, so it conforms to the declared type of x.",
+          pass: "Type Check",
+          passTone: "type",
+          focus: "42",
+          detail: "type(42) = Int <= declared(x) = Int",
+          currentCheck: "initializer",
+          completedChecks: ["inheritance", "scope"],
+          scopeEntries: [
+            { label: "Class", value: "Main <: IO <: Object" },
+            { label: "self", value: "SELF_TYPE" },
+            { label: "bind", value: "x : Int", focus: true }
+          ],
+          currentNode: "int",
+          checkedNodes: ["let", "binding", "int"],
+          annotatedNodes: ["binding", "int"],
+          highlightedEdges: ["binding-int"]
+        },
+        {
+          status: "Resolve the dispatch against IO so the analyzer knows the formal argument types and return type.",
+          pass: "Dispatch",
+          passTone: "dispatch",
+          focus: "out_string",
+          detail: "lookup(IO.out_string) = (String) -> SELF_TYPE",
+          currentCheck: "dispatch",
+          completedChecks: ["inheritance", "scope", "initializer"],
+          scopeEntries: [
+            { label: "Class", value: "Main <: IO <: Object" },
+            { label: "self", value: "SELF_TYPE" },
+            { label: "bind", value: "x : Int" },
+            { label: "method", value: "out_string(String) -> SELF_TYPE", focus: true }
+          ],
+          currentNode: "dispatch",
+          checkedNodes: ["let", "binding", "int", "dispatch"],
+          annotatedNodes: ["binding", "int"],
+          highlightedEdges: ["let-dispatch", "dispatch-string"]
+        },
+        {
+          status: "Check the actual argument against the method signature and annotate the string literal as String.",
+          pass: "Dispatch",
+          passTone: "dispatch",
+          focus: "\"Hello, COOL!\\n\"",
+          detail: "actual args = [String] matches formals = [String]",
+          currentCheck: "dispatch",
+          completedChecks: ["inheritance", "scope", "initializer"],
+          scopeEntries: [
+            { label: "Class", value: "Main <: IO <: Object" },
+            { label: "self", value: "SELF_TYPE" },
+            { label: "bind", value: "x : Int" },
+            { label: "method", value: "out_string(String) -> SELF_TYPE", focus: true }
+          ],
+          currentNode: "string",
+          checkedNodes: ["let", "binding", "int", "dispatch", "string"],
+          annotatedNodes: ["binding", "int", "string"],
+          highlightedEdges: ["dispatch-string"]
+        },
+        {
+          status: "With a valid receiver and argument list, annotate the dispatch with its result type SELF_TYPE.",
+          pass: "Annotate",
+          passTone: "annotate",
+          focus: "out_string(...)",
+          detail: "type(out_string(...)) = SELF_TYPE",
+          currentCheck: "annotation",
+          completedChecks: ["inheritance", "scope", "initializer", "dispatch"],
+          scopeEntries: [
+            { label: "Class", value: "Main <: IO <: Object" },
+            { label: "self", value: "SELF_TYPE" },
+            { label: "bind", value: "x : Int" },
+            { label: "method", value: "out_string(String) -> SELF_TYPE" }
+          ],
+          currentNode: "dispatch",
+          checkedNodes: ["let", "binding", "int", "dispatch", "string"],
+          annotatedNodes: ["binding", "int", "string", "dispatch"],
+          highlightedEdges: ["let-dispatch", "dispatch-string"]
+        },
+        {
+          status: "The let-expression takes the type of its body, so the whole tree can now be stamped with its final static type.",
+          pass: "Annotate",
+          passTone: "annotate",
+          focus: "let",
+          detail: "type(let x : Int <- 42 in out_string(...)) = SELF_TYPE",
+          currentCheck: "annotation",
+          completedChecks: ["inheritance", "scope", "initializer", "dispatch"],
+          scopeEntries: [
+            { label: "Class", value: "Main <: IO <: Object" },
+            { label: "self", value: "SELF_TYPE" },
+            { label: "bind", value: "x : Int" },
+            { label: "method", value: "out_string(String) -> SELF_TYPE" }
+          ],
+          currentNode: "let",
+          checkedNodes: ["let", "binding", "int", "dispatch", "string"],
+          annotatedNodes: ["binding", "int", "string", "dispatch", "let"],
+          highlightedEdges: ["let-binding", "let-dispatch", "binding-int", "dispatch-string"]
+        },
+        {
+          status: "Semantic analysis complete: the AST is type-annotated, and later backend passes can trust the tree.",
+          pass: "Complete",
+          passTone: "complete",
+          focus: "Annotated AST",
+          detail: "emit typed AST or report a semantic error",
+          currentCheck: null,
+          completedChecks: ["inheritance", "scope", "initializer", "dispatch", "annotation"],
+          scopeEntries: [
+            { label: "Class", value: "Main <: IO <: Object" },
+            { label: "self", value: "SELF_TYPE" },
+            { label: "bind", value: "x : Int" },
+            { label: "method", value: "out_string(String) -> SELF_TYPE" }
+          ],
+          currentNode: null,
+          checkedNodes: ["let", "binding", "int", "dispatch", "string"],
+          annotatedNodes: ["binding", "int", "string", "dispatch", "let"],
+          highlightedEdges: ["let-binding", "let-dispatch", "binding-int", "dispatch-string"]
+        }
+      ];
+
+      let cursor = 0;
+      let timerId = 0;
+      const stepMs = 1180;
+      const loopPauseMs = 3000;
+      const startDelayMs = 650;
+
+      const renderScope = (entries) => {
+        scopeOutput.replaceChildren();
+
+        entries.forEach((entry) => {
+          const row = document.createElement("div");
+          const label = document.createElement("span");
+          const value = document.createElement("code");
+
+          row.className = "semantic-scope-row";
+          label.className = "semantic-scope-label";
+          value.className = "semantic-scope-value";
+
+          row.classList.toggle("is-focus", Boolean(entry.focus));
+          label.textContent = entry.label;
+          value.textContent = entry.value;
+
+          row.append(label, value);
+          scopeOutput.appendChild(row);
+        });
+      };
+
+      const renderChecks = (currentCheck, completedChecks) => {
+        checkRows.forEach((row, key) => {
+          const state = row.querySelector(".semantic-check-state");
+          const isDone = completedChecks.includes(key);
+          const isCurrent = currentCheck === key && !isDone;
+
+          row.classList.remove("is-pending", "is-current", "is-done");
+          row.classList.add(isDone ? "is-done" : isCurrent ? "is-current" : "is-pending");
+
+          if (state) {
+            state.textContent = isDone ? "done" : isCurrent ? "running" : "pending";
+          }
+        });
+      };
+
+      const drawEdges = () => {
+        const stageRect = stage.getBoundingClientRect();
+
+        edges.forEach((edge) => {
+          const fromNode = nodeMap.get(edge.dataset.from);
+          const toNode = nodeMap.get(edge.dataset.to);
+
+          if (!fromNode || !toNode) {
+            return;
+          }
+
+          const fromRect = fromNode.getBoundingClientRect();
+          const toRect = toNode.getBoundingClientRect();
+          const x1 = fromRect.left + (fromRect.width / 2) - stageRect.left;
+          const y1 = fromRect.top + (fromRect.height / 2) - stageRect.top;
+          const x2 = toRect.left + (toRect.width / 2) - stageRect.left;
+          const y2 = toRect.top + (toRect.height / 2) - stageRect.top;
+          const dx = x2 - x1;
+          const dy = y2 - y1;
+          const length = Math.hypot(dx, dy);
+          const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+          edge.style.width = `${length}px`;
+          edge.style.left = `${x1}px`;
+          edge.style.top = `${y1}px`;
+          edge.style.transform = `translateY(-50%) rotate(${angle}deg)`;
+        });
+      };
+
+      const render = (stageIndex) => {
+        if (stageIndex === -1) {
+          status.textContent = "Preparing semantic checks...";
+          passBadge.textContent = "Ready";
+          passBadge.className = "semantic-action-badge";
+          focusLabel.textContent = "Global";
+          detail.textContent = "build class + method environments";
+
+          renderChecks(null, []);
+          renderScope([
+            { label: "Class", value: "Main <: IO <: Object" },
+            { label: "self", value: "SELF_TYPE" }
+          ]);
+
+          nodeMap.forEach((node) => {
+            node.classList.remove("is-checked", "is-current", "is-annotated");
+          });
+
+          annotationMap.forEach((annotation) => {
+            annotation.classList.remove("is-visible");
+          });
+
+          edges.forEach((edge) => {
+            edge.classList.remove("is-active");
+          });
+
+          drawEdges();
+          return;
+        }
+
+        const currentStage = stages[stageIndex];
+
+        status.textContent = currentStage.status;
+        passBadge.textContent = currentStage.pass;
+        passBadge.className = `semantic-action-badge is-${currentStage.passTone}`;
+        focusLabel.textContent = currentStage.focus;
+        detail.textContent = currentStage.detail;
+
+        renderChecks(currentStage.currentCheck, currentStage.completedChecks);
+        renderScope(currentStage.scopeEntries);
+
+        nodeMap.forEach((node, key) => {
+          node.classList.toggle("is-checked", currentStage.checkedNodes.includes(key));
+          node.classList.toggle("is-current", currentStage.currentNode === key);
+          node.classList.toggle("is-annotated", currentStage.annotatedNodes.includes(key));
+        });
+
+        annotationMap.forEach((annotation, key) => {
+          annotation.classList.toggle("is-visible", currentStage.annotatedNodes.includes(key));
+        });
+
+        edges.forEach((edge) => {
+          edge.classList.toggle("is-active", currentStage.highlightedEdges.includes(edge.dataset.semanticEdge));
+        });
+
+        drawEdges();
+      };
+
+      const advance = () => {
+        if (cursor < stages.length - 1) {
+          render(cursor);
+          cursor += 1;
+          timerId = window.setTimeout(advance, stepMs);
+          return;
+        }
+
+        render(stages.length - 1);
+        cursor = 0;
+        timerId = window.setTimeout(advance, loopPauseMs);
+      };
+
+      const restart = () => {
+        window.clearTimeout(timerId);
+        cursor = 0;
+
+        if (prefersReducedMotion) {
+          render(stages.length - 1);
+          status.textContent = "Reduced motion is enabled, so the fully annotated AST is shown at once.";
+
+          if (replayButton) {
+            replayButton.hidden = true;
+          }
+
+          return;
+        }
+
+        render(-1);
+        timerId = window.setTimeout(advance, startDelayMs);
+      };
+
+      if (replayButton) {
+        replayButton.addEventListener("click", restart);
+      }
+
+      window.addEventListener("resize", drawEdges);
       restart();
     })();
 

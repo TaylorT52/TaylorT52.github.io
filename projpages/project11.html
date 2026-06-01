@@ -52,6 +52,148 @@
       </p>
     </div>
 
+    <h2>Code Generation</h2>
+    <p>
+      Code generation takes the typed AST from semantic analysis and lowers it into MIPS assembly that the COOL runtime can execute. By this point, the frontend has already rejected malformed programs, so the backend's job is to implement COOL's behavior and emit code that matches the runtime system's expectations.
+    </p>
+    <p>
+      A big part of this work is deciding how objects and methods live at runtime. That means laying out attributes in memory, emitting global constants and prototype objects, building tables like the class name table, object table, and dispatch tables, and then generating initializer code plus method bodies for every class. It is a much more architectural phase than the earlier passes because small design choices around stack frames, register usage, and attribute offsets affect every expression the compiler emits.
+    </p>
+    <p>
+      The implementation strategy I followed is a two-pass approach. First, the code gen layer has to figure out the layout and offsets each class will use. Then, it must recursively walk the annotated AST and emit MIPS for expressions, dispatches, and initializers while preserving the calling conventions expected by the COOL runtime. This part also includes runtime checks for situations like dispatch on void, so the final compiler is not just parsing valid COOL, but actually turning it into executable behavior.
+    </p>
+
+    <section class="codegen-demo" data-codegen-demo aria-labelledby="codegen-demo-title">
+      <div class="codegen-demo-head">
+        <div>
+          <p class="codegen-kicker">Backend Trace</p>
+          <h3 id="codegen-demo-title">Watching the typed AST become runtime-aware MIPS</h3>
+        </div>
+        <button type="button" class="codegen-replay" data-codegen-replay>Replay</button>
+      </div>
+      <p class="codegen-demo-note">
+        This is a compact walkthrough of the backend pass. It starts from the annotated <code>let</code> expression, locks in runtime layout decisions, and progressively emits the MIPS structures and instructions the COOL runtime expects.
+      </p>
+      <div class="codegen-status" data-codegen-status aria-live="off"></div>
+      <div class="codegen-action-strip">
+        <div class="codegen-action-card">
+          <p class="codegen-action-caption">Current Stage</p>
+          <span class="codegen-action-badge" data-codegen-stage>Ready</span>
+        </div>
+        <div class="codegen-action-card">
+          <p class="codegen-action-caption">Focus</p>
+          <code class="codegen-focus-label" data-codegen-focus>ClassTable</code>
+        </div>
+        <div class="codegen-action-card codegen-action-card-wide">
+          <p class="codegen-action-caption">Emission Detail</p>
+          <code class="codegen-detail" data-codegen-detail>collect class tags, object sizes, and method slots</code>
+        </div>
+      </div>
+      <div class="codegen-demo-grid">
+        <section class="codegen-panel" aria-label="Code generation pipeline">
+          <p class="codegen-panel-label">Pipeline</p>
+          <ol class="codegen-step-list">
+            <li class="codegen-step-row" data-codegen-step="layout">
+              <span class="codegen-step-index">01</span>
+              <div class="codegen-step-main">
+                <span class="codegen-step-name">Compute object layout</span>
+                <span class="codegen-step-hint">Assign class tags, object sizes, and attribute offsets.</span>
+              </div>
+              <span class="codegen-step-state">pending</span>
+            </li>
+            <li class="codegen-step-row" data-codegen-step="prototype">
+              <span class="codegen-step-index">02</span>
+              <div class="codegen-step-main">
+                <span class="codegen-step-name">Emit prototype objects</span>
+                <span class="codegen-step-hint">Prebuild the object shape that allocations can copy at runtime.</span>
+              </div>
+              <span class="codegen-step-state">pending</span>
+            </li>
+            <li class="codegen-step-row" data-codegen-step="dispatch">
+              <span class="codegen-step-index">03</span>
+              <div class="codegen-step-main">
+                <span class="codegen-step-name">Build dispatch tables</span>
+                <span class="codegen-step-hint">Lay out inherited and overridden method slots.</span>
+              </div>
+              <span class="codegen-step-state">pending</span>
+            </li>
+            <li class="codegen-step-row" data-codegen-step="init">
+              <span class="codegen-step-index">04</span>
+              <div class="codegen-step-main">
+                <span class="codegen-step-name">Generate initializers</span>
+                <span class="codegen-step-hint">Call parent init code and store attribute defaults.</span>
+              </div>
+              <span class="codegen-step-state">pending</span>
+            </li>
+            <li class="codegen-step-row" data-codegen-step="method">
+              <span class="codegen-step-index">05</span>
+              <div class="codegen-step-main">
+                <span class="codegen-step-name">Emit method bodies</span>
+                <span class="codegen-step-hint">Recursively lower typed expressions into MIPS instructions.</span>
+              </div>
+              <span class="codegen-step-state">pending</span>
+            </li>
+            <li class="codegen-step-row" data-codegen-step="checks">
+              <span class="codegen-step-index">06</span>
+              <div class="codegen-step-main">
+                <span class="codegen-step-name">Insert runtime checks</span>
+                <span class="codegen-step-hint">Guard dynamic operations like dispatch on void before aborting.</span>
+              </div>
+              <span class="codegen-step-state">pending</span>
+            </li>
+          </ol>
+        </section>
+        <section class="codegen-panel codegen-visual-panel" aria-label="Backend snapshot">
+          <p class="codegen-panel-label">Backend Snapshot</p>
+          <div class="codegen-card-grid">
+            <article class="codegen-card" data-codegen-card="ast">
+              <span class="codegen-card-kind">Typed Input</span>
+              <code class="codegen-card-title">Annotated AST</code>
+              <ul class="codegen-card-list">
+                <li><code>let : SELF_TYPE</code></li>
+                <li><code>x : Int &lt;- 42</code></li>
+                <li><code>out_string(...) : SELF_TYPE</code></li>
+              </ul>
+            </article>
+            <article class="codegen-card" data-codegen-card="layout">
+              <span class="codegen-card-kind">Runtime Shape</span>
+              <code class="codegen-card-title">Object Layout</code>
+              <ul class="codegen-card-list">
+                <li><code>tag | size | disp_ptr</code></li>
+                <li><code>x @ +12</code></li>
+                <li><code>prototype copied on alloc</code></li>
+              </ul>
+            </article>
+            <article class="codegen-card" data-codegen-card="dispatch">
+              <span class="codegen-card-kind">Method Map</span>
+              <code class="codegen-card-title">Dispatch Slots</code>
+              <ul class="codegen-card-list">
+                <li><code>0: Object.abort</code></li>
+                <li><code>1: IO.out_string</code></li>
+                <li><code>2: Main.main</code></li>
+              </ul>
+            </article>
+            <article class="codegen-card" data-codegen-card="mips">
+              <span class="codegen-card-kind">Machine Code</span>
+              <code class="codegen-card-title">MIPS Emission</code>
+              <ul class="codegen-card-list">
+                <li><code>$s0 = self</code></li>
+                <li><code>$a0 = receiver/result</code></li>
+                <li><code>stack frames preserve calls</code></li>
+              </ul>
+            </article>
+          </div>
+          <div class="codegen-console">
+            <div class="codegen-console-head">
+              <p class="codegen-console-title">Emitted Assembly</p>
+              <code class="codegen-console-file">main.s</code>
+            </div>
+            <ol class="codegen-console-list" data-codegen-output aria-live="off"></ol>
+          </div>
+        </section>
+      </div>
+    </section>
+
     <h2>Semantic Analyzers</h2>
     <p>
       Once the parser produces an AST, the next question is whether that tree actually describes a legal COOL program. That is the semantic analyzer's job. This is the pass where syntax turns into meaning: the analyzer builds the class hierarchy, rejects malformed inheritance, tracks scopes, resolves dispatches, and enforces COOL's type rules before any code is generated.
@@ -323,6 +465,401 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    (() => {
+      const demo = document.querySelector("[data-codegen-demo]");
+
+      if (!demo) {
+        return;
+      }
+
+      const status = demo.querySelector("[data-codegen-status]");
+      const stageBadge = demo.querySelector("[data-codegen-stage]");
+      const focusLabel = demo.querySelector("[data-codegen-focus]");
+      const detail = demo.querySelector("[data-codegen-detail]");
+      const output = demo.querySelector("[data-codegen-output]");
+      const replayButton = demo.querySelector("[data-codegen-replay]");
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!status || !stageBadge || !focusLabel || !detail || !output) {
+        return;
+      }
+
+      const cardMap = new Map(
+        Array.from(demo.querySelectorAll("[data-codegen-card]")).map((card) => [card.dataset.codegenCard, card])
+      );
+      const stepRows = new Map(
+        Array.from(demo.querySelectorAll("[data-codegen-step]")).map((row) => [row.dataset.codegenStep, row])
+      );
+
+      const stages = [
+        {
+          status: "The backend begins by fixing the runtime shape of each class so later instructions know exactly where every field and method slot lives.",
+          stage: "Layout",
+          tone: "layout",
+          focus: "Main object layout",
+          detail: "header + attrs => [tag, size, dispTab, x]",
+          currentStep: "layout",
+          completedSteps: [],
+          cardStates: {
+            ast: "active",
+            layout: "active",
+            dispatch: "idle",
+            mips: "idle"
+          },
+          outputLines: [
+            "# pass 1: layout classes",
+            "# Main.x -> object offset 12"
+          ],
+          focusLine: 1
+        },
+        {
+          status: "With offsets fixed, the compiler can emit a prototype object that future allocations copy and specialize at runtime.",
+          stage: "Prototype",
+          tone: "prototype",
+          focus: "Main_protObj",
+          detail: "emit class tag, object size, dispatch ptr, and default fields",
+          currentStep: "prototype",
+          completedSteps: ["layout"],
+          cardStates: {
+            ast: "done",
+            layout: "active",
+            dispatch: "idle",
+            mips: "idle"
+          },
+          outputLines: [
+            "# pass 1: layout classes",
+            "# Main.x -> object offset 12",
+            "Main_protObj:",
+            "  .word 5",
+            "  .word 4",
+            "  .word Main_dispTab",
+            "  .word int_const0"
+          ],
+          focusLine: 6
+        },
+        {
+          status: "Next come the dispatch tables, which preserve inheritance and overriding by assigning stable method slots to labels.",
+          stage: "Tables",
+          tone: "dispatch",
+          focus: "Main_dispTab",
+          detail: "map dispatch slots to Object.abort, IO.out_string, and Main.main",
+          currentStep: "dispatch",
+          completedSteps: ["layout", "prototype"],
+          cardStates: {
+            ast: "done",
+            layout: "done",
+            dispatch: "active",
+            mips: "idle"
+          },
+          outputLines: [
+            "# pass 1: layout classes",
+            "# Main.x -> object offset 12",
+            "Main_protObj:",
+            "  .word 5",
+            "  .word 4",
+            "  .word Main_dispTab",
+            "  .word int_const0",
+            "Main_dispTab:",
+            "  .word Object.abort",
+            "  .word IO.out_string",
+            "  .word Main.main"
+          ],
+          focusLine: 10
+        },
+        {
+          status: "Initializer code wires the runtime object together by calling the parent initializer and storing each attribute's starting value.",
+          stage: "Init",
+          tone: "init",
+          focus: "Main_init",
+          detail: "call parent init and write default attribute values into the object body",
+          currentStep: "init",
+          completedSteps: ["layout", "prototype", "dispatch"],
+          cardStates: {
+            ast: "done",
+            layout: "active",
+            dispatch: "done",
+            mips: "active"
+          },
+          outputLines: [
+            "# pass 1: layout classes",
+            "# Main.x -> object offset 12",
+            "Main_protObj:",
+            "  .word 5",
+            "  .word 4",
+            "  .word Main_dispTab",
+            "  .word int_const0",
+            "Main_dispTab:",
+            "  .word Object.abort",
+            "  .word IO.out_string",
+            "  .word Main.main",
+            "Main_init:",
+            "  jal IO_init",
+            "  sw $zero 12($s0)",
+            "  move $a0 $s0"
+          ],
+          focusLine: 14
+        },
+        {
+          status: "Method emission walks the annotated AST recursively and lowers each typed expression into concrete MIPS instructions.",
+          stage: "Methods",
+          tone: "method",
+          focus: "Main.main",
+          detail: "lower let binding and dispatch into stack-frame-aware MIPS",
+          currentStep: "method",
+          completedSteps: ["layout", "prototype", "dispatch", "init"],
+          cardStates: {
+            ast: "active",
+            layout: "done",
+            dispatch: "done",
+            mips: "active"
+          },
+          outputLines: [
+            "# pass 1: layout classes",
+            "# Main.x -> object offset 12",
+            "Main_protObj:",
+            "  .word 5",
+            "  .word 4",
+            "  .word Main_dispTab",
+            "  .word int_const0",
+            "Main_dispTab:",
+            "  .word Object.abort",
+            "  .word IO.out_string",
+            "  .word Main.main",
+            "Main_init:",
+            "  jal IO_init",
+            "  sw $zero 12($s0)",
+            "  move $a0 $s0",
+            "Main.main:",
+            "  la $a0 str_const1",
+            "  jal IO.out_string",
+            "  move $a0 $s0"
+          ],
+          focusLine: 18
+        },
+        {
+          status: "Before dynamic work like dispatch, the generated code inserts runtime guards so operations like dispatch on void abort cleanly.",
+          stage: "Checks",
+          tone: "checks",
+          focus: "dispatch on void guard",
+          detail: "branch to the runtime abort helper if the receiver is void",
+          currentStep: "checks",
+          completedSteps: ["layout", "prototype", "dispatch", "init", "method"],
+          cardStates: {
+            ast: "done",
+            layout: "done",
+            dispatch: "active",
+            mips: "active"
+          },
+          outputLines: [
+            "# pass 1: layout classes",
+            "# Main.x -> object offset 12",
+            "Main_protObj:",
+            "  .word 5",
+            "  .word 4",
+            "  .word Main_dispTab",
+            "  .word int_const0",
+            "Main_dispTab:",
+            "  .word Object.abort",
+            "  .word IO.out_string",
+            "  .word Main.main",
+            "Main_init:",
+            "  jal IO_init",
+            "  sw $zero 12($s0)",
+            "  move $a0 $s0",
+            "Main.main:",
+            "  move $a0 $s0",
+            "  beqz $a0 dispatch_abort",
+            "  la $a1 str_const1",
+            "  jal IO.out_string"
+          ],
+          focusLine: 17
+        },
+        {
+          status: "Backend pass complete: constants, tables, initializers, and method bodies have been emitted into runtime-aware MIPS assembly.",
+          stage: "Complete",
+          tone: "complete",
+          focus: "main.s",
+          detail: "typed AST lowered into executable assembly for the COOL runtime",
+          currentStep: null,
+          completedSteps: ["layout", "prototype", "dispatch", "init", "method", "checks"],
+          cardStates: {
+            ast: "done",
+            layout: "done",
+            dispatch: "done",
+            mips: "done"
+          },
+          outputLines: [
+            "# pass 1: layout classes",
+            "# Main.x -> object offset 12",
+            "Main_protObj:",
+            "  .word 5",
+            "  .word 4",
+            "  .word Main_dispTab",
+            "  .word int_const0",
+            "Main_dispTab:",
+            "  .word Object.abort",
+            "  .word IO.out_string",
+            "  .word Main.main",
+            "Main_init:",
+            "  jal IO_init",
+            "  sw $zero 12($s0)",
+            "  move $a0 $s0",
+            "Main.main:",
+            "  move $a0 $s0",
+            "  beqz $a0 dispatch_abort",
+            "  la $a1 str_const1",
+            "  jal IO.out_string"
+          ],
+          focusLine: 19
+        }
+      ];
+
+      let cursor = 0;
+      let timerId = 0;
+      const stepMs = 1220;
+      const loopPauseMs = 3000;
+      const startDelayMs = 650;
+
+      const scrollRowIntoView = (row) => {
+        if (!row) {
+          return;
+        }
+
+        const rowTop = row.offsetTop;
+        const rowBottom = rowTop + row.offsetHeight;
+        const visibleTop = output.scrollTop + 16;
+        const visibleBottom = output.scrollTop + output.clientHeight - 48;
+
+        if (rowTop >= visibleTop && rowBottom <= visibleBottom) {
+          return;
+        }
+
+        output.scrollTo({
+          top: Math.max(0, rowTop - (output.clientHeight * 0.34)),
+          behavior: prefersReducedMotion ? "auto" : "smooth"
+        });
+      };
+
+      const renderSteps = (currentStep, completedSteps) => {
+        stepRows.forEach((row, key) => {
+          const state = row.querySelector(".codegen-step-state");
+          const isDone = completedSteps.includes(key);
+          const isCurrent = currentStep === key && !isDone;
+
+          row.classList.remove("is-pending", "is-current", "is-done");
+          row.classList.add(isDone ? "is-done" : isCurrent ? "is-current" : "is-pending");
+
+          if (state) {
+            state.textContent = isDone ? "done" : isCurrent ? "running" : "pending";
+          }
+        });
+      };
+
+      const renderCards = (cardStates) => {
+        cardMap.forEach((card, key) => {
+          const state = cardStates[key] || "idle";
+
+          card.classList.remove("is-idle", "is-active", "is-done");
+          card.classList.add(`is-${state}`);
+        });
+      };
+
+      const renderOutput = (lines, focusLine) => {
+        output.replaceChildren();
+
+        lines.forEach((line, index) => {
+          const row = document.createElement("li");
+          const lineNumber = document.createElement("span");
+          const code = document.createElement("code");
+
+          row.className = "codegen-output-row";
+          lineNumber.className = "codegen-output-index";
+          code.className = "codegen-output-code";
+
+          row.classList.add(index <= focusLine ? "is-emitted" : "is-pending");
+          row.classList.toggle("is-focus", index === focusLine);
+
+          lineNumber.textContent = String(index + 1).padStart(2, "0");
+          code.textContent = line;
+
+          row.append(lineNumber, code);
+          output.appendChild(row);
+        });
+
+        scrollRowIntoView(output.children[focusLine] || output.lastElementChild);
+      };
+
+      const render = (stageIndex) => {
+        if (stageIndex === -1) {
+          status.textContent = "Preparing backend pass...";
+          stageBadge.textContent = "Ready";
+          stageBadge.className = "codegen-action-badge";
+          focusLabel.textContent = "ClassTable";
+          detail.textContent = "collect class tags, object sizes, and method slots";
+          renderSteps(null, []);
+          renderCards({
+            ast: "active",
+            layout: "idle",
+            dispatch: "idle",
+            mips: "idle"
+          });
+          renderOutput(["# backend ready"], 0);
+          output.scrollTo({ top: 0, behavior: "auto" });
+          return;
+        }
+
+        const currentStage = stages[stageIndex];
+
+        status.textContent = currentStage.status;
+        stageBadge.textContent = currentStage.stage;
+        stageBadge.className = `codegen-action-badge is-${currentStage.tone}`;
+        focusLabel.textContent = currentStage.focus;
+        detail.textContent = currentStage.detail;
+
+        renderSteps(currentStage.currentStep, currentStage.completedSteps);
+        renderCards(currentStage.cardStates);
+        renderOutput(currentStage.outputLines, currentStage.focusLine);
+      };
+
+      const advance = () => {
+        if (cursor < stages.length - 1) {
+          render(cursor);
+          cursor += 1;
+          timerId = window.setTimeout(advance, stepMs);
+          return;
+        }
+
+        render(stages.length - 1);
+        cursor = 0;
+        timerId = window.setTimeout(advance, loopPauseMs);
+      };
+
+      const restart = () => {
+        window.clearTimeout(timerId);
+        cursor = 0;
+
+        if (prefersReducedMotion) {
+          render(stages.length - 1);
+          status.textContent = "Reduced motion is enabled, so the finished backend snapshot is shown at once.";
+
+          if (replayButton) {
+            replayButton.hidden = true;
+          }
+
+          return;
+        }
+
+        render(-1);
+        timerId = window.setTimeout(advance, startDelayMs);
+      };
+
+      if (replayButton) {
+        replayButton.addEventListener("click", restart);
+      }
+
+      restart();
+    })();
+
     (() => {
       const demo = document.querySelector("[data-lexer-demo]");
 

@@ -563,6 +563,117 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    const createViewportPlaybackController = (element, { onActivate, onDeactivate }) => {
+      let isElementVisible = false;
+      let isPageVisible = !document.hidden;
+      let isActive = false;
+      let observer = null;
+
+      const syncState = () => {
+        const nextActive = isElementVisible && isPageVisible;
+
+        if (nextActive === isActive) {
+          return;
+        }
+
+        isActive = nextActive;
+
+        if (isActive) {
+          onActivate();
+          return;
+        }
+
+        onDeactivate();
+      };
+
+      const handleVisibilityChange = () => {
+        isPageVisible = !document.hidden;
+        syncState();
+      };
+
+      if ("IntersectionObserver" in window) {
+        observer = new IntersectionObserver(([entry]) => {
+          isElementVisible = Boolean(entry?.isIntersecting);
+          syncState();
+        });
+        observer.observe(element);
+      } else {
+        isElementVisible = true;
+        syncState();
+      }
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+
+      return {
+        isActive: () => isActive,
+        disconnect: () => {
+          observer?.disconnect();
+          document.removeEventListener("visibilitychange", handleVisibilityChange);
+        }
+      };
+    };
+
+    const createPausableTimeout = (callback, shouldRun) => {
+      let timerId = 0;
+      let delayRemaining = 0;
+      let scheduledAt = 0;
+
+      const clear = (resetDelay = true) => {
+        if (timerId) {
+          window.clearTimeout(timerId);
+          timerId = 0;
+        }
+
+        scheduledAt = 0;
+
+        if (resetDelay) {
+          delayRemaining = 0;
+        }
+      };
+
+      const fire = () => {
+        clear();
+        callback();
+      };
+
+      return {
+        clear: () => {
+          clear();
+        },
+        schedule: (delay) => {
+          clear();
+          delayRemaining = delay;
+
+          if (!shouldRun()) {
+            return;
+          }
+
+          scheduledAt = window.performance.now();
+          timerId = window.setTimeout(fire, delayRemaining);
+        },
+        pause: () => {
+          if (!timerId) {
+            return;
+          }
+
+          const elapsed = window.performance.now() - scheduledAt;
+
+          delayRemaining = Math.max(0, delayRemaining - elapsed);
+          window.clearTimeout(timerId);
+          timerId = 0;
+          scheduledAt = 0;
+        },
+        resume: () => {
+          if (timerId || delayRemaining <= 0 || !shouldRun()) {
+            return;
+          }
+
+          scheduledAt = window.performance.now();
+          timerId = window.setTimeout(fire, delayRemaining);
+        }
+      };
+    };
+
     (() => {
       const demo = document.querySelector("[data-codegen-demo]");
 
@@ -813,10 +924,10 @@
       ];
 
       let cursor = 0;
-      let timerId = 0;
       const stepMs = 1220;
       const loopPauseMs = 3000;
       const startDelayMs = 650;
+      let playbackController = null;
 
       const scrollRowIntoView = (row) => {
         if (!row) {
@@ -923,17 +1034,19 @@
         if (cursor < stages.length - 1) {
           render(cursor);
           cursor += 1;
-          timerId = window.setTimeout(advance, stepMs);
+          timer.schedule(stepMs);
           return;
         }
 
         render(stages.length - 1);
         cursor = 0;
-        timerId = window.setTimeout(advance, loopPauseMs);
+        timer.schedule(loopPauseMs);
       };
 
+      const timer = createPausableTimeout(advance, () => !prefersReducedMotion && playbackController?.isActive());
+
       const restart = () => {
-        window.clearTimeout(timerId);
+        timer.clear();
         cursor = 0;
 
         if (prefersReducedMotion) {
@@ -948,12 +1061,17 @@
         }
 
         render(-1);
-        timerId = window.setTimeout(advance, startDelayMs);
+        timer.schedule(startDelayMs);
       };
 
       if (replayButton) {
         replayButton.addEventListener("click", restart);
       }
+
+      playbackController = createViewportPlaybackController(demo, {
+        onActivate: () => timer.resume(),
+        onDeactivate: () => timer.pause()
+      });
 
       restart();
     })();
@@ -1004,10 +1122,10 @@
       const tokenCount = tokenData.length;
       let rows = [];
       let cursor = 0;
-      let timerId = 0;
       const tokenStepMs = 980;
       const loopPauseMs = 2200;
       const startDelayMs = 550;
+      let playbackController = null;
 
       const syncOutputRows = (activeIndex) => {
         const desiredCount = activeIndex < 0
@@ -1095,17 +1213,19 @@
         if (cursor < tokenCount) {
           render(cursor);
           cursor += 1;
-          timerId = window.setTimeout(advance, tokenStepMs);
+          timer.schedule(tokenStepMs);
           return;
         }
 
         render(tokenCount);
         cursor = 0;
-        timerId = window.setTimeout(advance, loopPauseMs);
+        timer.schedule(loopPauseMs);
       };
 
+      const timer = createPausableTimeout(advance, () => !prefersReducedMotion && playbackController?.isActive());
+
       const restart = () => {
-        window.clearTimeout(timerId);
+        timer.clear();
         cursor = 0;
 
         if (prefersReducedMotion) {
@@ -1120,12 +1240,17 @@
         }
 
         render(-1);
-        timerId = window.setTimeout(advance, startDelayMs);
+        timer.schedule(startDelayMs);
       };
 
       if (replayButton) {
         replayButton.addEventListener("click", restart);
       }
+
+      playbackController = createViewportPlaybackController(demo, {
+        onActivate: () => timer.resume(),
+        onDeactivate: () => timer.pause()
+      });
 
       restart();
     })();
@@ -1333,10 +1458,10 @@
       ];
 
       let cursor = 0;
-      let timerId = 0;
       const stepMs = 1180;
       const loopPauseMs = 3000;
       const startDelayMs = 650;
+      let playbackController = null;
 
       const renderScope = (entries) => {
         scopeOutput.replaceChildren();
@@ -1465,17 +1590,19 @@
         if (cursor < stages.length - 1) {
           render(cursor);
           cursor += 1;
-          timerId = window.setTimeout(advance, stepMs);
+          timer.schedule(stepMs);
           return;
         }
 
         render(stages.length - 1);
         cursor = 0;
-        timerId = window.setTimeout(advance, loopPauseMs);
+        timer.schedule(loopPauseMs);
       };
 
+      const timer = createPausableTimeout(advance, () => !prefersReducedMotion && playbackController?.isActive());
+
       const restart = () => {
-        window.clearTimeout(timerId);
+        timer.clear();
         cursor = 0;
 
         if (prefersReducedMotion) {
@@ -1490,7 +1617,7 @@
         }
 
         render(-1);
-        timerId = window.setTimeout(advance, startDelayMs);
+        timer.schedule(startDelayMs);
       };
 
       if (replayButton) {
@@ -1498,6 +1625,10 @@
       }
 
       window.addEventListener("resize", drawEdges);
+      playbackController = createViewportPlaybackController(demo, {
+        onActivate: () => timer.resume(),
+        onDeactivate: () => timer.pause()
+      });
       restart();
     })();
 
@@ -1851,10 +1982,10 @@
       ];
 
       let cursor = 0;
-      let timerId = 0;
       const stepMs = 1020;
       const loopPauseMs = 2800;
       const startDelayMs = 650;
+      let playbackController = null;
 
       const renderStack = (stackEntries, activeEntries) => {
         stackOutput.replaceChildren();
@@ -1965,17 +2096,19 @@
         if (cursor < stages.length - 1) {
           render(cursor);
           cursor += 1;
-          timerId = window.setTimeout(advance, stepMs);
+          timer.schedule(stepMs);
           return;
         }
 
         render(stages.length - 1);
         cursor = 0;
-        timerId = window.setTimeout(advance, loopPauseMs);
+        timer.schedule(loopPauseMs);
       };
 
+      const timer = createPausableTimeout(advance, () => !prefersReducedMotion && playbackController?.isActive());
+
       const restart = () => {
-        window.clearTimeout(timerId);
+        timer.clear();
         cursor = 0;
 
         if (prefersReducedMotion) {
@@ -1990,7 +2123,7 @@
         }
 
         render(-1);
-        timerId = window.setTimeout(advance, startDelayMs);
+        timer.schedule(startDelayMs);
       };
 
       if (replayButton) {
@@ -1998,6 +2131,10 @@
       }
 
       window.addEventListener("resize", drawEdges);
+      playbackController = createViewportPlaybackController(demo, {
+        onActivate: () => timer.resume(),
+        onDeactivate: () => timer.pause()
+      });
       restart();
     })();
   </script>

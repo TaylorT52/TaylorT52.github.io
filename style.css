@@ -1399,6 +1399,39 @@ footer {
     margin-bottom: 1.4rem;
 }
 
+.minimal-project .project-jump-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.7rem;
+    align-items: center;
+    margin-top: 0.65rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(60, 95, 127, 0.14);
+    font-size: 0.82rem;
+}
+
+.minimal-project .project-jump-label {
+    color: var(--project-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.minimal-project .project-jump-nav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0;
+    color: var(--project-soft);
+    text-decoration: none;
+}
+
+.minimal-project .project-jump-nav a:hover,
+.minimal-project .project-jump-nav a:focus-visible {
+    color: var(--project-accent);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 4px;
+}
+
 .minimal-project .project-image {
     border: 1px solid var(--project-line);
     border-radius: 0;

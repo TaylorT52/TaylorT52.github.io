@@ -50,9 +50,17 @@
       <p class="lead">
         I'm currently building a compiler for COOL in Stanford CS143. The project is an end-to-end systems build that moves from parsing and semantic analysis toward backend and code generation work.
       </p>
+      <nav class="project-jump-nav" aria-label="Section navigation">
+        <span class="project-jump-label">Jump to:</span>
+        <a href="#code-generation">Codegen</a>
+        <a href="#optimization-passes">Optimizations</a>
+        <a href="#semantic-analyzers">Semantics</a>
+        <a href="#parsers">Parsers</a>
+        <a href="#lexical-analyzer">Lexer</a>
+      </nav>
     </div>
 
-    <h2>Code Generation</h2>
+    <h2 id="code-generation">Code Generation</h2>
     <p>
       Code generation takes the typed AST from semantic analysis and lowers it into MIPS assembly that the COOL runtime can execute. By this point, the frontend has already rejected malformed programs, so the backend's job is to implement COOL's behavior and emit code that matches the runtime system's expectations.
     </p>
@@ -194,7 +202,7 @@
       </div>
     </section>
 
-    <h2>Optimization Passes</h2>
+    <h2 id="optimization-passes">Optimization Passes</h2>
     <p>
       Once the backend was generating correct MIPS, I started tightening the emitted code with a few local optimizations. The goal was simple: preserve program output while reducing instruction count and related runtime work on the same benchmark script.
     </p>
@@ -282,7 +290,7 @@
       </div>
     </section>
 
-    <h2>Semantic Analyzers</h2>
+    <h2 id="semantic-analyzers">Semantic Analyzers</h2>
     <p>
       Once the parser produces an AST, the next question is whether that tree actually describes a legal COOL program. That is the semantic analyzer's job. This is the pass where syntax turns into meaning: the analyzer builds the class hierarchy, rejects malformed inheritance, tracks scopes, resolves dispatches, and enforces COOL's type rules before any code is generated.
     </p>
@@ -409,7 +417,7 @@
       </div>
     </section>
 
-    <h2>Parsers</h2>
+    <h2 id="parsers">Parsers</h2>
     <p>
       Once I had a lexical analyzer, I could go on to build a parser using a generator called bison and a package for manipulating trees.
       The purpose of the parser is to ingest tokens output by the lexical analyzer and to use context free grammars to determine whether a sequence of tokens forms a valid program.
@@ -492,7 +500,7 @@
       </div>
     </section>
 
-    <h2>Lexical Analyzer</h2>
+    <h2 id="lexical-analyzer">Lexical Analyzer</h2>
     <p>
       As the first component, I built a lexical analyzer in C++ with Flex. The objective is to parse Cool files and output an appropriate set of tokens which are used to generate code.
       Flex allows us to implement a lexical analyzer by defining rules that match user-defined regexes and perform specific actions for each matched pattern.

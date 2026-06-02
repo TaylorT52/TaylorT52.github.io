@@ -25,7 +25,7 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
-  <link rel="stylesheet" href="../style.css?v=20260426b" />
+  <link rel="stylesheet" href="../style.css?v=20260601a" />
 </head>
 <body class="minimal-project">
   <section class="hero project-hero">
@@ -191,6 +191,94 @@
             <ol class="codegen-console-list" data-codegen-output aria-live="off"></ol>
           </div>
         </section>
+      </div>
+    </section>
+
+    <h2>Optimization Passes</h2>
+    <p>
+      Once the backend was generating correct MIPS, I started tightening the emitted code with a few local optimizations. The goal was simple: preserve program output while reducing instruction count and related runtime work on the same benchmark script.
+    </p>
+
+    <section class="optimizer-showcase" aria-labelledby="optimizer-showcase-title">
+      <div class="optimizer-showcase-head">
+        <div>
+          <p class="optimizer-kicker">Backend Optimization</p>
+          <h3 id="optimizer-showcase-title">Cutting redundant runtime work out of the generated assembly</h3>
+        </div>
+      </div>
+      <p class="optimizer-showcase-note">
+        I measured a baseline with the unoptimized PA4 compiler, then compared each optimization pass against the same program. With all four optimizations enabled, the compiler still produces the same arithmetic output while doing substantially less work at runtime.
+      </p>
+      <div class="optimizer-metrics">
+        <article class="optimizer-metric">
+          <span class="optimizer-metric-label">Baseline</span>
+          <strong class="optimizer-metric-value">6855 instructions</strong>
+          <span class="optimizer-metric-detail">1476 reads, 1022 writes, 1360 branches</span>
+        </article>
+        <article class="optimizer-metric">
+          <span class="optimizer-metric-label">Final</span>
+          <strong class="optimizer-metric-value">3891 instructions</strong>
+          <span class="optimizer-metric-detail">844 reads, 604 writes, 788 branches</span>
+        </article>
+        <article class="optimizer-metric">
+          <span class="optimizer-metric-label">Impact</span>
+          <strong class="optimizer-metric-value">43% fewer instructions</strong>
+          <span class="optimizer-metric-detail">same COOL output, less generated runtime work</span>
+        </article>
+      </div>
+      <div class="optimizer-showcase-grid">
+        <section class="optimizer-panel" aria-label="Optimization summary">
+          <p class="optimizer-panel-label">What changed</p>
+          <div class="optimizer-panel-body">
+            <p>
+              The first pass adds compile-time constant evaluation directly inside code generation, which lets the compiler collapse constant integer and boolean expressions before they ever become runtime instructions.
+            </p>
+            <p>
+              From there, I layered on local algebraic simplifications such as <code>x + 0</code>, <code>x - 0</code>, <code>x * 1</code>, and <code>x / 1</code>. For cases like <code>x * 0</code>, the compiler still evaluates the non-constant side first so side effects and runtime checks are preserved before returning zero.
+            </p>
+            <p>
+              I also optimized dispatch. Static dispatch can emit a direct <code>jal</code> because the target class is already known, and dynamic dispatch can be conservatively devirtualized when the receiver's static type is a leaf class with no subclasses.
+            </p>
+            <div class="optimizer-command">
+              <p class="optimizer-command-label">Optimized build</p>
+              <code>./cgen -O -o tests/optimizer.opt.s /tmp/optimizer.sem</code>
+            </div>
+          </div>
+        </section>
+        <div class="optimizer-card-grid">
+          <article class="optimizer-card">
+            <span class="optimizer-card-step">01</span>
+            <p class="optimizer-card-title">Constant folding</p>
+            <p class="optimizer-card-copy">
+              Constant expressions are evaluated during code generation instead of at runtime, removing unnecessary arithmetic and object traffic for foldable subtrees.
+            </p>
+            <code class="optimizer-card-metric">6855 to 5587 instructions</code>
+          </article>
+          <article class="optimizer-card">
+            <span class="optimizer-card-step">02</span>
+            <p class="optimizer-card-title">Algebraic identities</p>
+            <p class="optimizer-card-copy">
+              Local rewrites like <code>x + 0</code>, <code>1 * x</code>, and <code>x / 1</code> cut stack movement and arithmetic while preserving evaluation order where it matters.
+            </p>
+            <code class="optimizer-card-metric">5587 to 3923 instructions</code>
+          </article>
+          <article class="optimizer-card">
+            <span class="optimizer-card-step">03</span>
+            <p class="optimizer-card-title">Static dispatch direct calls</p>
+            <p class="optimizer-card-copy">
+              When the program explicitly names the dispatch type, the backend resolves the target method ahead of time and emits a direct call instead of loading through the dispatch table.
+            </p>
+            <code class="optimizer-card-metric">3923 to 3917 instructions</code>
+          </article>
+          <article class="optimizer-card">
+            <span class="optimizer-card-step">04</span>
+            <p class="optimizer-card-title">Leaf-class devirtualization</p>
+            <p class="optimizer-card-copy">
+              If a receiver's static class has no subclasses, the method binding is fixed, so dynamic dispatch can safely become a direct call in optimized builds.
+            </p>
+            <code class="optimizer-card-metric">3917 to 3891 instructions</code>
+          </article>
+        </div>
       </div>
     </section>
 

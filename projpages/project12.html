@@ -75,21 +75,23 @@
         </code></pre>
       Once this json is recieved by the backend, it gets logged and routed to 'live' or 'demo' (have to save those tokens). A JS runner builds a natural-language prompt and launches the agent search. 
       <pre><code>
-      openclaw agent --local --json --session-key agent:apartment-scraper:default --timeout 180 --message "<prompt>" 
+      openclaw agent --local --json \ 
+        --session-key agent:apartment-scraper:default \
+        --timeout 180 \ 
+        --message ""
       </code></pre>
-      OpenClaw then browses the internet and returns json-like output, from which we can extract the relevant information and then normalize to the app's schema. 
-      Since the OpenClaw response often comes back wrapped in raw metadata, the runner looks inside fields like 
+      OpenClaw browses the internet and returns JSON-like output, which I then parse and normalize into the app’s listing schema.
+      Since the OpenClaw response often comes wrapped in metadata, the runner checks fields like: 
         <pre><code>
           payloads[0].text
           finalAssistantVisibleText
           finalAssistantRawText
         </code></pre>
-        And then a normalize listings javascript cleans the data, ensuring that the required fields exist, the URLs work, and deduplicates any repeated listings. 
-        The server then returns the json to the Swift frontend, giving us a bunch of listings. 
+        After that, a normalizeListings script cleans the results, verifies that required fields exist, checks that URLs work, and deduplicates repeated listings. The server then returns clean JSON to the Swift frontend, where I can view the apartment results.
         <br><br>
         <img src="../imgs/results.png" alt="Swift results frontend" class="project-image mb-4" />
         <br>
-        Well, that's pretty cool. I guess I could go click on every link, and then email them, and then track everything myself...but I don't wanna do that, and then what's the point of AI (besides getting rid of low level SWE roles).
+        Well, that's pretty cool. I guess I could go click on every link, and then email them, and then track everything myself...but I don't wanna do that, and then what's the point of AI.
         Let's first select the apartments that I contacted and move them to a separate tab, and save them into UserDefaults so I don't have to rerun queries each time.
         <br><br>
         <img src="../imgs/apartmenttabs.png" alt="Swift results frontend" class="project-image mb-4" />

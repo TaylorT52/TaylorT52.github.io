@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Summer Projects - Taylor Tam</title>
+  <meta name="description" content="Project page for Taylor Tam's summer projects, covering current builds, experiments, and technical focus areas." />
+  <link rel="canonical" href="https://me.taylortam.com/projpages/project12.html" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=20260317b" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=20260317b" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260317b" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="stylesheet" href="../style.css?v=20260601a" />
+</head>
+<body class="minimal-project">
+  <section class="hero project-hero">
+    <div class="container">
+      <div class="d-flex align-items-center mb-4">
+        <a href="../index.html#top" class="back-link">
+          <i class="fas fa-arrow-left me-2"></i>Back to Home
+        </a>
+      </div>
+      <h1>Summer Projects</h1>
+      <div class="project-tags">
+        <span class="badge bg-primary">Current</span>
+        <span class="badge bg-primary">Summer 2026</span>
+        <span class="badge bg-primary">Build Log</span>
+        <span class="badge bg-primary">Experiments</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="container project-content">
+    <h2>Some fun projects I'm going to work on this summer!</h2>
+    <p>
+      This summer, I'll be working on Apple's iCloud Privacy team. But, I'm going to be working on some sort of side project throughout the entire summer. 
+    </p>
+
+    <h2>Apartment Finder</h2>
+    <p>
+      So, I've been a bit of a bum. 1) I start work in one (1) day and didn't find an apartment in Cupertino. 2) I haven't set up OpenClaw, which is also pretty bummy, considering I probably hear about OpenClaw more than the weather (thanks, Stanford).
+      To kill two birds with one stone, I'm going to build out a widget that helps me find short lease apartments in Cupertino, under a certain price (low - if you're curious), and helps me get an apartment! 
+      <br><br>
+      I'm going to set up the frontend as a Swift app (yay Mac!) which posts to a local HTTP server that acts as a bridge between the frontend and soon... my OpenClaw agent. This will give my frontend a stable API, so I can say, 
+      select an area, a max price, a min price, etc. and those values will be sent to my local server. From there, I'm going to have OpenClaw sit behind my server as a reasoning layer--it'll interact with the internet, filter postings, 
+      and give me apartments I can afford... hopefully.
+      <br><br>
+      Right now, this is the json format that my front end inputs are being posted in. 
+      <pre><code>
+        POST /apartments/search payload:
+          {
+            "state": "California",
+            "maxPrice": 3300,
+            "minLeaseDays": 90,
+            "maxLeaseDays": 110,
+            "area": "Cupertino"
+          }
+        </code></pre>
+      Once this json is recieved by the backend, it gets logged and routed to 'live' or 'demo' (have to save those tokens). A JS runner builds a natural-language prompt and launches the agent search. 
+      <pre><code>
+      openclaw agent --local --json --session-key agent:apartment-scraper:default --timeout 180 --message "<prompt>" 
+      </code></pre>
+      OpenClaw then browses the internet and returns json-like output, from which we can extract the relevant information and then normalize to the app's schema. 
+      Since the OpenClaw response often comes back wrapped in raw metadata, the runner looks inside fields like 
+        <pre><code>
+          payloads[0].text
+          finalAssistantVisibleText
+          finalAssistantRawText
+        </code></pre>
+        And then a normalize listings javascript cleans the data, ensuring that the required fields exist, the URLs work, and deduplicates any repeated listings. 
+        The server then returns the json to the Swift frontend, giving us a bunch of listings. 
+        <br><br>
+        <img src="../imgs/results.png" alt="Swift results frontend" class="project-image mb-4" />
+        <br>
+        Well, that's pretty cool. I guess I could go click on every link, and then email them, and then track everything myself...but I don't wanna do that, and then what's the point of AI (besides getting rid of low level SWE roles).
+        Let's first select the apartments that I contacted and move them to a separate tab, and save them into UserDefaults so I don't have to rerun queries each time.
+        <br><br>
+        <img src="../imgs/apartmenttabs.png" alt="Swift results frontend" class="project-image mb-4" />
+        <br>
+
+    </p>
+
+    <div class="project-navigation mt-5">
+      <a href="../index.html#top" class="btn btn-outline-primary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Home
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-buttons mb-4">
+          <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github me-2"></i>GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/taylortam52/" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin me-2"></i>LinkedIn
+          </a>
+        </div>
+        <p class="copyright mb-0">&copy; 2026 Taylor Tam <span class="bullet">•</span> Built with <i class="fas fa-heart text-danger mx-1"></i></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

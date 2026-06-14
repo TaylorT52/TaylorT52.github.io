@@ -1026,6 +1026,21 @@ footer {
     font-size: 0.93rem;
 }
 
+.minimal-home .current-status-column .note-list {
+    gap: 0.85rem;
+}
+
+.minimal-home .current-status-column .note-list li > div {
+    padding: 0.8rem 0.85rem;
+    border: 1px solid #cfd5dc;
+    border-radius: 0.45rem;
+    background: #f1f3f5;
+}
+
+.minimal-home .current-status-column .note-list li > div {
+    border-left-color: transparent;
+}
+
 .minimal-home .experience-entry {
     display: grid;
     grid-template-columns: 3.25rem minmax(0, 1fr);
@@ -1291,6 +1306,7 @@ footer {
 
     .minimal-home .past-experience-column,
     .minimal-home .classes-column,
+    .minimal-home .current-status-column,
     .minimal-home .current-project-column {
         grid-column: auto;
     }

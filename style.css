@@ -1502,6 +1502,38 @@ footer {
     padding-left: 1.05rem;
 }
 
+.minimal-project .summer-project-section {
+    margin-top: 2.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(60, 95, 127, 0.14);
+}
+
+.minimal-project .project-kicker {
+    margin-bottom: 0.35rem;
+    color: var(--project-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.74rem;
+}
+
+.minimal-project .summer-project-image {
+    width: min(100%, 560px);
+}
+
+.minimal-project .summer-project-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+    margin: 0.25rem 0 0.8rem;
+}
+
+.minimal-project .summer-project-image-sm {
+    width: min(100%, 270px);
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .minimal-project .project-content strong {
     font-weight: 500;
     color: var(--project-ink);

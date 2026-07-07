@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Summer Projects - Taylor Tam</title>
-  <meta name="description" content="Project page for Taylor Tam's summer projects, covering current builds, experiments, and technical focus areas." />
+  <meta
+    name="description"
+    content="Project page for Taylor Tam's summer projects, covering current builds, experiments, and technical focus areas."
+  />
   <link rel="canonical" href="https://me.taylortam.com/projpages/project12.html" />
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=20260317b" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=20260317b" />
@@ -33,8 +36,8 @@
   <section class="hero project-hero">
     <div class="container">
       <div class="d-flex align-items-center mb-4">
-        <a href="../index.html#top" class="back-link">
-          <i class="fas fa-arrow-left me-2"></i>Back to Home
+        <a href="../index.html#all-projects" class="back-link">
+          <i class="fas fa-arrow-left me-2"></i>Back to Projects
         </a>
       </div>
       <h1>Summer Projects</h1>
@@ -48,60 +51,134 @@
   </section>
 
   <main class="container project-content">
-    <h2>Some fun projects I'm going to work on this summer!</h2>
-    <p>
-      This summer, I'll be working on Apple's iCloud Privacy team. But, I'm going to be working on some sort of side project throughout the entire summer. 
-    </p>
+    <div class="project-overview">
+      <p class="lead">
+        Some fun projects I&apos;m going to work on this summer.
+      </p>
+      <p>
+        This summer, I&apos;ll be working on Apple&apos;s iCloud Privacy team. But I&apos;m going to be working on some sort of side project throughout the entire summer.
+      </p>
+      <nav class="project-jump-nav" aria-label="Project sections">
+        <span class="project-jump-label">Jump to</span>
+        <a href="#ender3">Ender 3 Printer</a>
+        <a href="#apartment-finder">Apartment Finder</a>
+      </nav>
+    </div>
 
-    <h2>Apartment Finder</h2>
-    <p>
-      So, I've been a bit of a bum. 1) I start work in one (1) day and didn't find an apartment in Cupertino. 2) I haven't set up OpenClaw, which is also pretty bummy, considering I probably hear about OpenClaw more than the weather (thanks, Stanford).
-      To kill two birds with one stone, I'm going to build out a widget that helps me find short lease apartments in Cupertino, under a certain price (low - if you're curious), and helps me get an apartment! 
-      <br><br>
-      I'm going to set up the frontend as a Swift app (yay Mac!) which posts to a local HTTP server that acts as a bridge between the frontend and soon... my OpenClaw agent. This will give my frontend a stable API, so I can say, 
-      select an area, a max price, a min price, etc. and those values will be sent to my local server. From there, I'm going to have OpenClaw sit behind my server as a reasoning layer--it'll interact with the internet, filter postings, 
-      and give me apartments I can afford... hopefully.
-      <br><br>
-      Right now, this is the json format that my front end inputs are being posted in. 
-      <pre><code>
-        POST /apartments/search payload:
-          {
-            "state": "California",
-            "maxPrice": 3300,
-            "minLeaseDays": 90,
-            "maxLeaseDays": 110,
-            "area": "Cupertino"
-          }
-        </code></pre>
-      Once this json is recieved by the backend, it gets logged and routed to 'live' or 'demo' (have to save those tokens). A JS runner builds a natural-language prompt and launches the agent search. 
-      <pre><code>
-      openclaw agent --local --json \ 
-        --session-key agent:apartment-scraper:default \
-        --timeout 180 \ 
-        --message ""
-      </code></pre>
-      OpenClaw browses the internet and returns JSON-like output, which I then parse and normalize into the app’s listing schema.
-      Since the OpenClaw response often comes wrapped in metadata, the runner checks fields like: 
-        <pre><code>
-          payloads[0].text
-          finalAssistantVisibleText
-          finalAssistantRawText
-        </code></pre>
-        After that, a normalizeListings script cleans the results, verifies that required fields exist, checks that URLs work, and deduplicates repeated listings. The server then returns clean JSON to the Swift frontend, where I can view the apartment results.
-        <br><br>
-        <img src="../imgs/results.png" alt="Swift results frontend" class="project-image mb-4" />
-        <br>
-        Well, that's pretty cool. I guess I could go click on every link, and then email them, and then track everything myself...but I don't wanna do that, and then what's the point of AI.
-        Let's first select the apartments that I contacted and move them to a separate tab, and save them into UserDefaults so I don't have to rerun queries each time.
-        <br><br>
-        <img src="../imgs/apartmenttabs.png" alt="Swift results frontend" class="project-image mb-4" />
-        <br>
+    <section id="ender3" class="summer-project-section">
+      <p class="project-kicker">Project One</p>
+      <h2>Ender 3 Printer</h2>
+      <img src="../imgs/ender3.jpeg" alt="Ender 3 printer project" class="project-image summer-project-image mb-4" />
+      <p>
+        After the keyboard phase, naturally, I have to have a 3D printer phase. Right now, I have an Ender 3, and I&apos;m going to set it up and customize it over the summer.
+      </p>
+      <p>
+        Ender 3 printers are common open-source machines, but they are still fairly manual and a little rough around the edges. There is no automatic bed leveling by default, setup can be finicky, and getting consistently good prints usually takes iteration.
+      </p>
+      <p>
+        The goal of this section is to track upgrades, fixes, calibration notes, and what changes actually make the printer better over time.
+      </p>
 
-    </p>
+      <h3>What I&apos;m Tracking</h3>
+      <ul>
+        <li>Printer upgrades and quality-of-life improvements</li>
+        <li>Better calibration and more reliable print settings</li>
+        <li>Experiments with materials, parts, and workflows</li>
+      </ul>
+
+      <h3>Week of 07/22</h3>
+      <div class="summer-project-gallery">
+        <img
+          src="../imgs/update-2026-07-22-b.png"
+          alt="Weekly update photo for the Ender 3 project"
+          class="project-image summer-project-image-sm my-3"
+        />
+        <img
+          src="../imgs/ender3-broken-piece.jpeg"
+          alt="Broken printer part on the Ender 3"
+          class="project-image summer-project-image-sm my-3"
+        />
+      </div>
+      <p>
+        The first signs of trouble showed up fast. I found the correct cable to plug my printer in, and after the moment of truth, nothing happened.
+      </p>
+      <p>
+        The first step was to get the printer running. Unfortunately, with a seven-year-old second-hand printer, something was bound to go wrong, and a bearing for loading the PLA into the extruder broke off. So I ordered a replacement piece so I can start printing.
+      </p>
+      <p>
+        Next steps are getting a first successful print, adding automatic bed leveling, and setting up a Raspberry Pi server so I don&apos;t have to load files manually with an SD card.
+      </p>
+    </section>
+
+    <section id="apartment-finder" class="summer-project-section">
+      <p class="project-kicker">Project Two</p>
+      <h2>Apartment Finder</h2>
+      <p>
+        So, I&apos;ve been a bit of a bum. 1) I start work in one day and didn&apos;t find an apartment in Cupertino. 2) I haven&apos;t set up OpenClaw, which is also pretty bummy, considering I probably hear about OpenClaw more than the weather.
+      </p>
+      <p>
+        To kill two birds with one stone, I&apos;m going to build out a widget that helps me find short-lease apartments in Cupertino under a certain price and helps me actually get an apartment.
+      </p>
+      <p>
+        I&apos;m setting up the frontend as a Swift app that posts to a local HTTP server acting as a bridge between the frontend and, soon, my OpenClaw agent. This gives the frontend a stable API so I can select an area, max price, min price, and lease length, then send those values to the local server.
+      </p>
+      <p>
+        From there, OpenClaw sits behind the server as a reasoning layer. It interacts with the internet, filters postings, and returns apartments I can hopefully afford.
+      </p>
+
+      <h3>Search Payload</h3>
+      <pre><code>POST /apartments/search payload:
+{
+  "state": "California",
+  "maxPrice": 3300,
+  "minLeaseDays": 90,
+  "maxLeaseDays": 110,
+  "area": "Cupertino"
+}</code></pre>
+
+      <p>
+        Once this JSON is received by the backend, it gets logged and routed to either live or demo mode. A JavaScript runner builds a natural-language prompt and launches the agent search.
+      </p>
+
+      <pre><code>openclaw agent --local --json \
+  --session-key agent:apartment-scraper:default \
+  --timeout 180 \
+  --message ""</code></pre>
+
+      <p>
+        OpenClaw browses the internet and returns JSON-like output, which I then parse and normalize into the app&apos;s listing schema. Since the OpenClaw response often comes wrapped in metadata, the runner checks fields like:
+      </p>
+
+      <pre><code>payloads[0].text
+finalAssistantVisibleText
+finalAssistantRawText</code></pre>
+
+      <p>
+        After that, a `normalizeListings` script cleans the results, verifies that required fields exist, checks that URLs work, and deduplicates repeated listings. The server then returns clean JSON to the Swift frontend, where I can view apartment results.
+      </p>
+
+      <img src="../imgs/results.png" alt="Swift results frontend" class="project-image summer-project-image mb-4" />
+
+      <p>
+        That part is already pretty cool. But I still don&apos;t want to click every link, email each place manually, and track everything myself.
+      </p>
+      <p>
+        The next step is selecting apartments I contacted, moving them into a separate tab, and saving them into `UserDefaults` so I don&apos;t have to rerun queries every time.
+      </p>
+
+      <img src="../imgs/apartmenttabs.png" alt="Swift apartment tabs frontend" class="project-image summer-project-image mb-4" />
+
+      <p>
+        After that, I want to add details in one place and use the Apple Mail API to poll my inbox every five minutes for any emails from apartments. I can also add a status tracker to manage applications.
+      </p>
+      <p>
+        OpenClaw can then help draft responses or suggest next actions, like calling them, based on the email correspondence.
+      </p>
+    </section>
 
     <div class="project-navigation mt-5">
-      <a href="../index.html#top" class="btn btn-outline-primary">
-        <i class="fas fa-arrow-left me-2"></i>Back to Home
+      <a href="../index.html#all-projects" class="btn btn-outline-primary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Projects
       </a>
     </div>
   </main>

@@ -68,7 +68,10 @@
     <section id="ender3" class="summer-project-section">
       <p class="project-kicker">Project One</p>
       <h2>Ender 3 Printer</h2>
-      <img src="../imgs/ender3.jpeg" alt="Ender 3 printer project" class="project-image summer-project-image mb-4" />
+      <figure class="summer-project-hero-card">
+        <img src="../imgs/ender3.jpeg" alt="Ender 3 printer project" class="project-image summer-project-image" />
+        <figcaption>The starting point for the summer printer upgrade project.</figcaption>
+      </figure>
       <p>
         After the keyboard phase, naturally, I have to have a 3D printer phase. Right now, I have an Ender 3, and I&apos;m going to set it up and customize it over the summer.
       </p>
@@ -86,18 +89,24 @@
         <li>Experiments with materials, parts, and workflows</li>
       </ul>
 
-      <h3>Week of 07/22</h3>
-      <div class="summer-project-gallery">
-        <img
-          src="../imgs/update-2026-07-22-b.png"
-          alt="Weekly update photo for the Ender 3 project"
-          class="project-image summer-project-image-sm my-3"
-        />
-        <img
-          src="../imgs/ender3-broken-piece.jpeg"
-          alt="Broken printer part on the Ender 3"
-          class="project-image summer-project-image-sm my-3"
-        />
+      <h3>Week of 06/22</h3>
+      <div class="summer-project-gallery summer-project-gallery-featured">
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/update-2026-07-22-b.png"
+            alt="Weekly update photo for the Ender 3 project"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>First troubleshooting session after powering the printer on.</figcaption>
+        </figure>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/ender3-broken-piece.jpeg"
+            alt="Broken printer part on the Ender 3"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>The broken extruder part that stopped the first setup attempt.</figcaption>
+        </figure>
       </div>
       <p>
         The first signs of trouble showed up fast. I found the correct cable to plug my printer in, and after the moment of truth, nothing happened.
@@ -108,6 +117,69 @@
       <p>
         Next steps are getting a first successful print, adding automatic bed leveling, and setting up a Raspberry Pi server so I don&apos;t have to load files manually with an SD card.
       </p>
+      <h3>Week of 07/06</h3>
+      <div class="summer-project-gallery summer-project-gallery-featured">
+        <p class="summer-project-gallery-note">Made a tiny mistake on the extruder piece. Turns out that, for an Ender3, there are two variants on the
+        extruder stepper motor. One variant has a small screw that allows you to remove the gear, and another has a press-on 
+        gold gear you can&apos;t remove. I had the latter (unfortunately). So I reordered another extruder replacement matching the
+        stepper motor and gear I had, and replaced it!</p>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7420.jpeg"
+            alt="Replacement extruder kit installed on the Ender 3"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>Installed replacement extruder assembly.</figcaption>
+        </figure>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7427.jpeg"
+            alt="Correct replacement kit parts for the Ender 3 extruder"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>The correct kit after ordering the wrong variant first.</figcaption>
+        </figure>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7434.jpeg"
+            alt="Ender 3 stepper motor with the press-on gear"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>The press-fit gear that caused the mismatch.</figcaption>
+        </figure>
+      </div>
+      <p>
+       This also came with a new stepper and the first gear component I mentioned--
+        but the wasn't sticking, so I put some adhesive foam under the gear to make them mesh and I had a *working* extruder. I spent the red of the night
+        tuning some print settings to produce two prints the next day: a calibration cube and, of course, benchy.
+        
+      </p>
+      <div class="summer-project-gallery summer-project-gallery-featured">
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7442.jpeg"
+            alt="Early failed print attempts from the Ender 3"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>Early failures while dialing in the settings.</figcaption>
+        </figure>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_1949.jpeg"
+            alt="Calibration cube printed on the Ender 3"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>First calibration cube after the extruder fix.</figcaption>
+        </figure>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7446.jpeg"
+            alt="Benchy test print on the Ender 3"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>Benchy, because it had to happen.</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section id="apartment-finder" class="summer-project-section">
@@ -157,7 +229,10 @@ finalAssistantRawText</code></pre>
         After that, a `normalizeListings` script cleans the results, verifies that required fields exist, checks that URLs work, and deduplicates repeated listings. The server then returns clean JSON to the Swift frontend, where I can view apartment results.
       </p>
 
-      <img src="../imgs/results.png" alt="Swift results frontend" class="project-image summer-project-image mb-4" />
+      <figure class="summer-project-hero-card">
+        <img src="../imgs/results.png" alt="Swift results frontend" class="project-image summer-project-image" />
+        <figcaption>Apartment search results rendered in the Swift frontend.</figcaption>
+      </figure>
 
       <p>
         That part is already pretty cool. But I still don&apos;t want to click every link, email each place manually, and track everything myself.
@@ -166,7 +241,10 @@ finalAssistantRawText</code></pre>
         The next step is selecting apartments I contacted, moving them into a separate tab, and saving them into `UserDefaults` so I don&apos;t have to rerun queries every time.
       </p>
 
-      <img src="../imgs/apartmenttabs.png" alt="Swift apartment tabs frontend" class="project-image summer-project-image mb-4" />
+      <figure class="summer-project-hero-card">
+        <img src="../imgs/apartmenttabs.png" alt="Swift apartment tabs frontend" class="project-image summer-project-image" />
+        <figcaption>The tabbed view for tracking contacted apartments separately.</figcaption>
+      </figure>
 
       <p>
         After that, I want to add details in one place and use the Apple Mail API to poll my inbox every five minutes for any emails from apartments. I can also add a status tracker to manage applications.

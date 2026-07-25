@@ -19,11 +19,22 @@
   const appendParagraphs = (parent, body) => {
     body
       .split(/\n\s*\n/)
-      .map((paragraph) => paragraph.trim())
+      .map((block) => block.trim())
       .filter(Boolean)
-      .forEach((paragraph) => {
+      .forEach((block) => {
+        const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
+        if (lines.length > 0 && lines.every((line) => line.startsWith("- "))) {
+          const list = document.createElement("ul");
+          lines.forEach((line) => {
+            const item = document.createElement("li");
+            item.textContent = line.slice(2).trim();
+            list.append(item);
+          });
+          parent.append(list);
+          return;
+        }
         const element = document.createElement("p");
-        element.textContent = paragraph;
+        element.textContent = block;
         parent.append(element);
       });
   };

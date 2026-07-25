@@ -1448,6 +1448,10 @@ footer {
     text-underline-offset: 4px;
 }
 
+.minimal-project [data-summer-project-nav] {
+    display: contents;
+}
+
 .minimal-project .project-image {
     border: 1px solid var(--project-line);
     border-radius: 0;
@@ -1599,6 +1603,35 @@ footer {
     font-size: 0.9rem;
     line-height: 1.45;
     color: rgba(19, 28, 46, 0.72);
+}
+
+.minimal-project .summer-live-updates:not(:empty) {
+    border-top: 1px solid var(--line);
+    margin-top: 2.2rem;
+    padding-top: 0.2rem;
+}
+
+.minimal-project .summer-added-project {
+    background:
+        linear-gradient(90deg, rgba(15, 118, 110, 0.045), transparent 72%);
+    border-top-color: rgba(15, 118, 110, 0.24);
+}
+
+.minimal-project .summer-log-entry {
+    padding: 2rem 0 0;
+}
+
+.minimal-project .summer-log-entry + .summer-log-entry {
+    border-top: 1px solid var(--line);
+    margin-top: 2rem;
+}
+
+.minimal-project .summer-log-date {
+    margin-bottom: 0.35rem;
+}
+
+.minimal-project .summer-log-entry h3 {
+    margin-bottom: 1rem;
 }
 
 .minimal-project .project-content strong {

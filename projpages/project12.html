@@ -60,10 +60,13 @@
       </p>
       <nav class="project-jump-nav" aria-label="Project sections">
         <span class="project-jump-label">Jump to</span>
+        <span data-summer-project-nav></span>
         <a href="#ender3">Ender 3 Printer</a>
         <a href="#apartment-finder">Apartment Finder</a>
       </nav>
     </div>
+
+    <div data-summer-projects></div>
 
     <section id="ender3" class="summer-project-section">
       <p class="project-kicker">Project One</p>
@@ -180,6 +183,7 @@
           <figcaption>Benchy, because it had to happen.</figcaption>
         </figure>
       </div>
+      <div class="summer-live-updates" data-summer-updates="ender3"></div>
     </section>
 
     <section id="apartment-finder" class="summer-project-section">
@@ -252,6 +256,7 @@ finalAssistantRawText</code></pre>
       <p>
         OpenClaw can then help draft responses or suggest next actions, like calling them, based on the email correspondence.
       </p>
+      <div class="summer-live-updates" data-summer-updates="apartment-finder"></div>
     </section>
 
     <div class="project-navigation mt-5">
@@ -278,5 +283,6 @@ finalAssistantRawText</code></pre>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../summer-updates.js?v=20260724" defer></script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 
   const projectRoot = document.querySelector("[data-summer-projects]");
   const projectNav = document.querySelector("[data-summer-project-nav]");
+  const projectCount = document.querySelector("[data-summer-project-count]");
 
   const formatDate = (dateString) => {
     const date = new Date(`${dateString}T12:00:00`);
@@ -117,6 +118,9 @@
     })
     .then((data) => {
       const projects = Array.isArray(data.projects) ? data.projects : [];
+      if (projectCount) {
+        projectCount.textContent = String(projects.length + 2).padStart(2, "0");
+      }
       projects
         .slice()
         .reverse()

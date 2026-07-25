@@ -754,6 +754,553 @@ footer {
     }
 }
 
+/* Summer build journal */
+.summer-page {
+    --summer-paper: #f6f1e7;
+    --summer-card: #fffdf8;
+    --summer-ink: #17211e;
+    --summer-soft: #52615b;
+    --summer-line: rgba(28, 63, 53, 0.14);
+    --summer-forest: #173f36;
+    --summer-forest-dark: #102d27;
+    --summer-orange: #ff6847;
+    --summer-yellow: #f4c55d;
+    background:
+        radial-gradient(circle at 8% 26%, rgba(244, 197, 93, 0.18), transparent 26rem),
+        radial-gradient(circle at 94% 56%, rgba(47, 126, 104, 0.12), transparent 30rem),
+        var(--summer-paper);
+    color: var(--summer-ink);
+    font-family: "Manrope", "Segoe UI", sans-serif;
+}
+
+.summer-page .summer-page-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 31rem;
+    padding: 2rem 0 7.2rem;
+    border: 0;
+    background:
+        linear-gradient(125deg, rgba(16, 45, 39, 0.98), rgba(23, 63, 54, 0.95)),
+        var(--summer-forest);
+    color: #fffaf0;
+}
+
+.summer-page .summer-page-hero::before {
+    content: "";
+    position: absolute;
+    width: clamp(18rem, 34vw, 31rem);
+    aspect-ratio: 1;
+    top: -10rem;
+    right: -4rem;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 36% 34%, #ffd985 0 7%, var(--summer-yellow) 36%, var(--summer-orange) 100%);
+    box-shadow: 0 0 0 1.6rem rgba(255, 255, 255, 0.035);
+    opacity: 0.94;
+}
+
+.summer-page .summer-page-hero::after {
+    content: "";
+    position: absolute;
+    right: 8%;
+    bottom: -3rem;
+    width: 24rem;
+    height: 10rem;
+    border-radius: 50% 50% 0 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transform: rotate(-8deg);
+}
+
+.summer-page .summer-page-hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+.summer-page .summer-hero-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.summer-page .summer-page-hero .back-link {
+    color: rgba(255, 250, 240, 0.76);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.summer-page .summer-page-hero .back-link:hover {
+    color: #ffffff;
+}
+
+.summer-page .summer-season {
+    color: rgba(255, 250, 240, 0.68);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.summer-page .summer-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(2rem, 8vw, 8rem);
+    align-items: end;
+    padding-top: clamp(3.5rem, 8vw, 6.7rem);
+}
+
+.summer-page .summer-hero-kicker {
+    margin: 0 0 1rem;
+    color: #ffc36d;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+}
+
+.summer-page .project-hero h1 {
+    max-width: 12ch;
+    margin: 0;
+    color: #fffaf0;
+    font-size: clamp(3rem, 7vw, 5.7rem);
+    font-weight: 750;
+    line-height: 0.98;
+    letter-spacing: -0.06em;
+}
+
+.summer-page .summer-hero-copy {
+    max-width: 55ch;
+    margin: 1.5rem 0 0;
+    color: rgba(255, 250, 240, 0.72);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.summer-page .summer-hero-index {
+    display: grid;
+    min-width: 10rem;
+    padding: 1.4rem 0 0.25rem 1.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.summer-page .summer-hero-index-value {
+    color: #fffaf0;
+    font-size: clamp(2.8rem, 5vw, 4.4rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+}
+
+.summer-page .summer-hero-index-label {
+    margin-top: 0.5rem;
+    color: #ffc36d;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.summer-page .summer-hero-index-note {
+    margin-top: 1rem;
+    color: rgba(255, 250, 240, 0.55);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+}
+
+.summer-page .project-content {
+    position: relative;
+    z-index: 2;
+    width: min(1080px, calc(100% - 2rem));
+    max-width: none;
+    margin-top: -4rem;
+    padding: 0 0 5rem;
+}
+
+.summer-page .summer-overview {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+    gap: clamp(2rem, 6vw, 5.5rem);
+    align-items: end;
+    margin: 0 0 2rem;
+    padding: clamp(1.7rem, 4vw, 2.7rem);
+    border: 1px solid rgba(23, 63, 54, 0.1);
+    border-radius: 1.8rem;
+    background: rgba(255, 253, 248, 0.97);
+    box-shadow: 0 1.5rem 4rem rgba(29, 53, 46, 0.13);
+}
+
+.summer-page .project-content .summer-overview .lead {
+    max-width: 27ch;
+    margin: 0 0 0.85rem;
+    color: var(--summer-ink);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 650;
+    line-height: 1.32;
+    letter-spacing: -0.025em;
+}
+
+.summer-page .summer-overview-copy > p:last-child {
+    max-width: 60ch;
+    margin-bottom: 0;
+    color: var(--summer-soft);
+}
+
+.summer-page .project-jump-nav {
+    display: flex;
+    align-content: flex-start;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    gap: 0.55rem;
+}
+
+.summer-page .project-jump-label {
+    flex-basis: 100%;
+    margin-bottom: 0.2rem;
+    color: #74817c;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.65rem;
+}
+
+.summer-page .project-jump-nav a {
+    padding: 0.5rem 0.72rem;
+    border: 1px solid var(--summer-line);
+    border-radius: 999px;
+    background: #f8f5ed;
+    color: #30423c;
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.summer-page .project-jump-nav a:hover,
+.summer-page .project-jump-nav a:focus-visible {
+    border-color: var(--summer-orange);
+    background: #fff4ec;
+    color: #a83c24;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.summer-page .summer-project-section {
+    scroll-margin-top: 1.5rem;
+    margin: 2rem 0 0;
+    padding: clamp(1.5rem, 5vw, 3.5rem);
+    border: 1px solid var(--summer-line);
+    border-radius: clamp(1.4rem, 3vw, 2.2rem);
+    background: var(--summer-card);
+    box-shadow: 0 1rem 3.2rem rgba(29, 53, 46, 0.08);
+}
+
+.summer-page .summer-added-project {
+    position: relative;
+    overflow: hidden;
+    border-top: 0.38rem solid var(--summer-orange);
+    background:
+        radial-gradient(circle at 100% 0, rgba(244, 197, 93, 0.13), transparent 24rem),
+        var(--summer-card);
+}
+
+.summer-page .summer-added-project::after {
+    content: "CURRENT BUILD";
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    color: rgba(23, 63, 54, 0.28);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.13em;
+}
+
+.summer-page .project-kicker {
+    margin-bottom: 0.55rem;
+    color: #d74c2d;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+}
+
+.summer-page .project-content h2 {
+    max-width: 18ch;
+    margin: 0 0 1.5rem;
+    color: var(--summer-ink);
+    font-size: clamp(2rem, 5vw, 3.65rem);
+    font-weight: 750;
+    line-height: 1.03;
+    letter-spacing: -0.055em;
+}
+
+.summer-page .project-content h3 {
+    margin: 2.25rem 0 0.8rem;
+    color: var(--summer-ink);
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    font-weight: 750;
+    letter-spacing: -0.025em;
+}
+
+.summer-page .project-content p,
+.summer-page .project-content li {
+    max-width: 76ch;
+    color: var(--summer-soft);
+    font-size: 0.96rem;
+    line-height: 1.8;
+}
+
+.summer-page .project-content p {
+    margin-bottom: 1rem;
+}
+
+.summer-page .project-content ul {
+    display: grid;
+    gap: 0.62rem;
+    max-width: 75ch;
+    margin: 1.2rem 0 1.8rem;
+    padding: 0;
+    list-style: none;
+}
+
+.summer-page .project-content li {
+    position: relative;
+    padding: 0.65rem 0.8rem 0.65rem 2.25rem;
+    border: 1px solid rgba(23, 63, 54, 0.1);
+    border-radius: 0.8rem;
+    background: rgba(241, 245, 239, 0.72);
+}
+
+.summer-page .project-content li::before {
+    content: "↗";
+    position: absolute;
+    left: 0.8rem;
+    top: 0.68rem;
+    color: var(--summer-orange);
+    font-weight: 800;
+}
+
+.summer-page .project-content pre {
+    max-width: 100%;
+    margin: 1rem 0 1.7rem;
+    padding: 1.2rem 1.35rem;
+    border: 0;
+    border-radius: 1rem;
+    background: var(--summer-forest-dark);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    color: #e9f3ed;
+}
+
+.summer-page .project-content pre code {
+    color: inherit;
+    font-size: 0.78rem;
+    line-height: 1.65;
+}
+
+.summer-page .summer-project-hero-card {
+    width: 100%;
+    margin: 1.5rem 0 2rem;
+    padding: 0.8rem;
+    border: 1px solid var(--summer-line);
+    border-radius: 1.5rem;
+    background: #eef0e9;
+    box-shadow: none;
+}
+
+.summer-page .summer-project-hero-card img {
+    aspect-ratio: 16 / 9;
+    border-radius: 1rem;
+    box-shadow: none;
+}
+
+.summer-page .summer-project-hero-card figcaption,
+.summer-page .summer-project-photo-card figcaption {
+    margin: 0;
+    padding: 0.8rem 0.35rem 0.15rem;
+    color: #64716c;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.7rem;
+    line-height: 1.5;
+}
+
+.summer-page .summer-project-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+    margin: 1.25rem 0 2rem;
+}
+
+.summer-page .summer-project-gallery-note {
+    grid-column: 1 / -1;
+    max-width: 76ch;
+}
+
+.summer-page .summer-project-photo-card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-width: 0;
+    margin: 0;
+    padding: 0.65rem;
+    border: 1px solid var(--summer-line);
+    border-radius: 1.3rem;
+    background: #f1f2ec;
+    box-shadow: none;
+}
+
+.summer-page .summer-project-photo-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 0.85rem;
+    object-fit: cover;
+    box-shadow: none;
+}
+
+.summer-page .summer-added-project .summer-project-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+}
+
+.summer-page .summer-added-project .summer-project-photo-card {
+    background: #ecefe8;
+}
+
+.summer-page .summer-added-project .summer-project-photo-card img {
+    height: clamp(22rem, 52vw, 37rem);
+    aspect-ratio: auto;
+    object-fit: contain;
+    background: #dfe4dc;
+}
+
+.summer-page .summer-live-updates:not(:empty) {
+    margin-top: 2.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed rgba(23, 63, 54, 0.22);
+}
+
+.summer-page .summer-log-entry {
+    padding-top: 1.8rem;
+}
+
+.summer-page .summer-log-entry + .summer-log-entry {
+    margin-top: 2rem;
+    border-top: 1px solid var(--summer-line);
+}
+
+.summer-page .project-navigation {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 0 0;
+}
+
+.summer-page .project-navigation .btn {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--summer-line);
+    border-radius: 999px;
+    background: var(--summer-card);
+    color: var(--summer-forest);
+    text-decoration: none;
+}
+
+.summer-page footer {
+    padding: 2.5rem 0;
+    background: var(--summer-forest-dark);
+}
+
+.summer-page .footer-content {
+    color: rgba(255, 250, 240, 0.72);
+}
+
+.summer-page .footer-content .btn,
+.summer-page .footer-content .copyright {
+    color: rgba(255, 250, 240, 0.72);
+}
+
+@media (max-width: 780px) {
+    .summer-page .summer-page-hero {
+        min-height: 0;
+        padding-bottom: 6rem;
+    }
+
+    .summer-page .summer-page-hero::before {
+        top: -5rem;
+        right: -8rem;
+        opacity: 0.64;
+    }
+
+    .summer-page .summer-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding-top: 3.8rem;
+    }
+
+    .summer-page .project-hero h1 {
+        font-size: clamp(2.8rem, 14vw, 4.4rem);
+    }
+
+    .summer-page .summer-hero-index {
+        grid-template-columns: auto 1fr;
+        min-width: 0;
+        padding: 0 0 0 1rem;
+    }
+
+    .summer-page .summer-hero-index-note {
+        grid-column: 2;
+        margin-top: 0.25rem;
+    }
+
+    .summer-page .project-content {
+        margin-top: -3rem;
+    }
+
+    .summer-page .summer-overview {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .summer-page .summer-project-section {
+        margin-top: 1.2rem;
+    }
+
+    .summer-page .summer-project-gallery,
+    .summer-page .summer-added-project .summer-project-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .summer-page .summer-added-project .summer-project-photo-card img {
+        height: auto;
+        max-height: 36rem;
+    }
+
+    .summer-page .summer-added-project::after {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .summer-page .summer-hero-topline {
+        align-items: flex-start;
+    }
+
+    .summer-page .summer-season {
+        text-align: right;
+    }
+
+    .summer-page .project-content {
+        width: min(100% - 1rem, 1080px);
+    }
+
+    .summer-page .summer-overview,
+    .summer-page .summer-project-section {
+        border-radius: 1.2rem;
+    }
+
+    .summer-page .summer-project-section {
+        padding: 1.25rem;
+    }
+}
+
 @keyframes home-caret-blink {
     0%,
     45% {

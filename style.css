@@ -814,7 +814,7 @@ footer {
     grid-template-columns: minmax(0, 1fr) 12rem;
     gap: 2.5rem;
     align-items: end;
-    padding-top: 2.6rem;
+    padding-top: 2rem;
 }
 
 .minimal-project.summer-page .summer-hero-kicker {

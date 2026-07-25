@@ -754,6 +754,375 @@ footer {
     }
 }
 
+/* Summer page — aligned with the portfolio's minimal system */
+.minimal-project.summer-page {
+    --summer-bg: #f3f4f2;
+    --summer-ink: #1a1a1a;
+    --summer-soft: #4a4a4a;
+    --summer-muted: #7d7d7d;
+    --summer-line: #d2d6d1;
+    --summer-accent: #3c5f7f;
+    background-color: var(--summer-bg);
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
+    background-size: 140px 140px;
+    color: var(--summer-ink);
+    font-family: "IBM Plex Mono", monospace;
+}
+
+.minimal-project.summer-page .summer-page-hero {
+    min-height: 0;
+    overflow: visible;
+    padding: 2rem 0 2.2rem;
+    border-bottom: 1px solid var(--summer-line);
+    background: transparent;
+    color: var(--summer-ink);
+}
+
+.minimal-project.summer-page .summer-page-hero::before,
+.minimal-project.summer-page .summer-page-hero::after {
+    display: none;
+    content: none;
+}
+
+.minimal-project.summer-page .summer-hero-topline {
+    padding-bottom: 0.9rem;
+    border-bottom: 1px dotted var(--summer-line);
+}
+
+.minimal-project.summer-page .summer-page-hero .back-link {
+    color: var(--summer-soft);
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 4px;
+}
+
+.minimal-project.summer-page .summer-page-hero .back-link:hover {
+    color: var(--summer-accent);
+}
+
+.minimal-project.summer-page .summer-season {
+    color: var(--summer-muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+}
+
+.minimal-project.summer-page .summer-hero-grid {
+    grid-template-columns: minmax(0, 1fr) 12rem;
+    gap: 2.5rem;
+    align-items: end;
+    padding-top: 2.6rem;
+}
+
+.minimal-project.summer-page .summer-hero-kicker {
+    margin-bottom: 0.75rem;
+    color: var(--summer-muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.07em;
+}
+
+.minimal-project.summer-page .project-hero h1 {
+    max-width: 22ch;
+    color: var(--summer-accent);
+    font-size: clamp(2rem, 4.8vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+}
+
+.minimal-project.summer-page .summer-hero-copy {
+    max-width: 62ch;
+    margin-top: 1rem;
+    color: var(--summer-soft);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+.minimal-project.summer-page .summer-hero-index {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid var(--summer-line);
+    background: rgba(255, 255, 255, 0.56);
+}
+
+.minimal-project.summer-page .summer-hero-index-value {
+    color: var(--summer-accent);
+    font-size: 2.3rem;
+    font-weight: 500;
+    letter-spacing: -0.05em;
+}
+
+.minimal-project.summer-page .summer-hero-index-label {
+    margin-top: 0.35rem;
+    color: var(--summer-soft);
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.minimal-project.summer-page .summer-hero-index-note {
+    margin-top: 0.75rem;
+    color: var(--summer-muted);
+    font-size: 0.65rem;
+}
+
+.minimal-project.summer-page .project-content {
+    width: min(1060px, 90vw);
+    max-width: 1060px;
+    margin-top: 0;
+    padding: 1.6rem 0 3rem;
+}
+
+.minimal-project.summer-page .summer-overview {
+    grid-template-columns: minmax(0, 1.2fr) minmax(17rem, 0.8fr);
+    gap: 2rem;
+    margin: 0 0 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--summer-line);
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.58);
+    box-shadow: none;
+}
+
+.minimal-project.summer-page .project-content .summer-overview .lead {
+    max-width: 44ch;
+    margin: 0 0 0.55rem;
+    color: var(--summer-ink);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.55;
+    letter-spacing: 0;
+}
+
+.minimal-project.summer-page .summer-overview-copy > p:last-child {
+    color: var(--summer-soft);
+}
+
+.minimal-project.summer-page .project-jump-nav {
+    gap: 0.4rem;
+}
+
+.minimal-project.summer-page .project-jump-label {
+    color: var(--summer-muted);
+    font-size: 0.68rem;
+}
+
+.minimal-project.summer-page .project-jump-nav a {
+    padding: 0.35rem 0.55rem;
+    border: 1px solid var(--summer-line);
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--summer-soft);
+    font-size: 0.72rem;
+    font-weight: 500;
+}
+
+.minimal-project.summer-page .project-jump-nav a:hover,
+.minimal-project.summer-page .project-jump-nav a:focus-visible {
+    border-color: var(--summer-accent);
+    background: rgba(60, 95, 127, 0.08);
+    color: var(--summer-accent);
+    transform: none;
+}
+
+.minimal-project.summer-page .summer-project-section {
+    scroll-margin-top: 1rem;
+    margin: 1.5rem 0 0;
+    padding: clamp(1rem, 3vw, 1.6rem);
+    border: 1px solid var(--summer-line);
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.64);
+    box-shadow: none;
+}
+
+.minimal-project.summer-page .summer-added-project {
+    overflow: visible;
+    border-top: 1px solid var(--summer-line);
+    border-left: 3px solid var(--summer-accent);
+    background: rgba(60, 95, 127, 0.055);
+}
+
+.minimal-project.summer-page .summer-added-project::after {
+    display: none;
+    content: none;
+}
+
+.minimal-project.summer-page .project-kicker {
+    margin-bottom: 0.4rem;
+    color: var(--summer-muted);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.07em;
+}
+
+.minimal-project.summer-page .project-content h2 {
+    max-width: 28ch;
+    margin: 0 0 1rem;
+    color: var(--summer-accent);
+    font-size: clamp(1.55rem, 3.2vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+}
+
+.minimal-project.summer-page .project-content h3 {
+    margin: 1.8rem 0 0.65rem;
+    color: var(--summer-ink);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+.minimal-project.summer-page .project-content p,
+.minimal-project.summer-page .project-content li {
+    color: var(--summer-soft);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.minimal-project.summer-page .project-content p {
+    margin-bottom: 0.75rem;
+}
+
+.minimal-project.summer-page .project-content ul {
+    gap: 0.5rem;
+    margin: 0.9rem 0 1.35rem;
+}
+
+.minimal-project.summer-page .project-content li {
+    padding: 0.25rem 0 0.25rem 1.5rem;
+    border: 0;
+    border-left: 1px dotted var(--summer-line);
+    border-radius: 0;
+    background: transparent;
+}
+
+.minimal-project.summer-page .project-content li::before {
+    content: "—";
+    left: 0.45rem;
+    top: 0.25rem;
+    color: var(--summer-muted);
+    font-weight: 400;
+}
+
+.minimal-project.summer-page .project-content pre {
+    margin: 0.8rem 0 1.4rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--summer-line);
+    border-radius: 0;
+    background: #eceeeb;
+    box-shadow: none;
+    color: var(--summer-ink);
+}
+
+.minimal-project.summer-page .project-content pre code {
+    color: inherit;
+}
+
+.minimal-project.summer-page .summer-project-hero-card,
+.minimal-project.summer-page .summer-project-photo-card {
+    border: 1px solid var(--summer-line);
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.74);
+    box-shadow: none;
+}
+
+.minimal-project.summer-page .summer-project-hero-card {
+    width: min(100%, 720px);
+    padding: 0.65rem;
+}
+
+.minimal-project.summer-page .summer-project-hero-card img,
+.minimal-project.summer-page .summer-project-photo-card img {
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.minimal-project.summer-page .summer-project-hero-card figcaption,
+.minimal-project.summer-page .summer-project-photo-card figcaption {
+    color: var(--summer-muted);
+    font-size: 0.68rem;
+}
+
+.minimal-project.summer-page .summer-project-gallery {
+    gap: 0.8rem;
+}
+
+.minimal-project.summer-page .summer-project-photo-card {
+    padding: 0.5rem;
+}
+
+.minimal-project.summer-page .summer-added-project .summer-project-photo-card {
+    background: rgba(255, 255, 255, 0.74);
+}
+
+.minimal-project.summer-page .summer-added-project .summer-project-photo-card img {
+    background: #e7e9e6;
+}
+
+.minimal-project.summer-page .summer-live-updates:not(:empty) {
+    border-top: 1px dotted var(--summer-line);
+}
+
+.minimal-project.summer-page .project-navigation .btn {
+    border: 1px solid var(--summer-line);
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.58);
+    color: var(--summer-soft);
+}
+
+.minimal-project.summer-page footer {
+    padding: 1.2rem 0 1.5rem;
+    border-top: 1px solid var(--summer-line);
+    background: transparent;
+}
+
+.minimal-project.summer-page .footer-content,
+.minimal-project.summer-page .footer-content .btn,
+.minimal-project.summer-page .footer-content .copyright {
+    color: var(--summer-muted);
+}
+
+@media (max-width: 760px) {
+    .minimal-project.summer-page .summer-page-hero {
+        padding-bottom: 1.6rem;
+    }
+
+    .minimal-project.summer-page .summer-hero-grid,
+    .minimal-project.summer-page .summer-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .minimal-project.summer-page .summer-hero-grid {
+        gap: 1.4rem;
+        padding-top: 2rem;
+    }
+
+    .minimal-project.summer-page .project-hero h1 {
+        font-size: clamp(1.9rem, 10vw, 2.7rem);
+    }
+
+    .minimal-project.summer-page .summer-hero-index {
+        grid-template-columns: auto 1fr;
+        max-width: 18rem;
+    }
+
+    .minimal-project.summer-page .summer-hero-index-note {
+        grid-column: 2;
+    }
+
+    .minimal-project.summer-page .project-content {
+        width: min(100% - 1rem, 1060px);
+        padding-top: 0.8rem;
+    }
+
+    .minimal-project.summer-page .summer-overview {
+        gap: 1.25rem;
+    }
+}
+
 /* Summer build journal */
 .summer-page {
     --summer-paper: #f6f1e7;

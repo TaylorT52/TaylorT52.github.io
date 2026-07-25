@@ -197,7 +197,7 @@ PORTAL_HTML = r"""<!doctype html>
         </section>
 
         <div class="actions">
-          <button class="btn btn-primary" type="submit">Save draft</button>
+          <button class="btn btn-primary" id="save-draft" type="submit">Save draft</button>
           <button class="btn" id="reset" type="button">Clear form</button>
         </div>
       </form>
@@ -225,7 +225,7 @@ PORTAL_HTML = r"""<!doctype html>
   </main>
 
   <script>
-    const state = { data: null, editingId: null, editingKind: null, images: [] };
+    const state = { data: null, editingId: null, editingKind: null, images: [], saving: false };
     const $ = (id) => document.getElementById(id);
     const tokenFromUrl = new URLSearchParams(location.search).get("token");
     if (tokenFromUrl) {
@@ -434,6 +434,9 @@ PORTAL_HTML = r"""<!doctype html>
 
     $("editor").onsubmit = async (event) => {
       event.preventDefault();
+      if (state.saving) return;
+      state.saving = true;
+      $("save-draft").disabled = true;
       const kind = $("kind").value;
       const item = {
         id: state.editingId || `${kind}-${crypto.randomUUID()}`,
@@ -458,6 +461,9 @@ PORTAL_HTML = r"""<!doctype html>
         }
       } catch (error) {
         setStatus(error.message, "error");
+      } finally {
+        state.saving = false;
+        $("save-draft").disabled = false;
       }
     };
 
@@ -634,7 +640,7 @@ class PortalHandler(BaseHTTPRequestHandler):
                 if not isinstance(image, dict):
                     raise ValueError("Invalid image data.")
                 src = str(image.get("src", ""))
-                if not re.fullmatch(r"imgs/summer/[A-Za-z0-9._-]+", src):
+                if not re.fullmatch(r"imgs/(?:summer/)?[A-Za-z0-9._-]+", src):
                     raise ValueError("An image has an invalid path.")
                 cleaned_images.append({
                     "src": src,
@@ -752,12 +758,19 @@ class PortalHandler(BaseHTTPRequestHandler):
             raise ValueError("Switch this repository to the main branch before publishing.")
 
         tracked_paths = list(SETUP_FILES)
-        if IMAGE_DIR.exists():
-            tracked_paths.extend(
-                str(path.relative_to(ROOT))
-                for path in IMAGE_DIR.iterdir()
-                if path.is_file()
-            )
+        try:
+            content = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            raise ValueError(f"Could not read the summer content before publishing: {error}") from error
+        for item in [*content.get("projects", []), *content.get("updates", [])]:
+            for image in item.get("images", []):
+                relative = str(image.get("src", ""))
+                if not re.fullmatch(r"imgs/(?:summer/)?[A-Za-z0-9._-]+", relative):
+                    raise ValueError("Summer content references an invalid image path.")
+                if not (ROOT / relative).is_file():
+                    raise ValueError(f"Summer content references a missing image: {relative}")
+                if relative not in tracked_paths:
+                    tracked_paths.append(relative)
 
         add = run_git("add", "--", *tracked_paths)
         if add.returncode != 0:

@@ -1,20 +1,34 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-25T08:06:35.923Z",
+  "updatedAt": "2026-07-25T08:14:18Z",
   "projects": [
     {
       "id": "project-d046edf4-962a-4371-a671-763645dd9671",
       "date": "2026-07-25",
       "title": "RunAlong",
       "body": "Well, I signed up to run a marathon. A good idea? Who knows. Only time will tell (by time, I mean we'll know by Sunday). In good news, I have some friends coming to watch (yay)! But how, in the vast land of San Francisco, will they know where I am? Whether I'm still alive and kicking? So, with the new powers of GPT 5.6 Sol, I decided to build an app. And well, 5.6 Sol was cooking something. Not only does this have impeccable UI, but several incredible features: \n\n- Create public or passcode-protected races of any distance\n- Live GPS location, pace, distance, progress, and finish estimate\n- Anonymous spectators through the iOS app or website\n- Live runner messages and manual force updates\n- Background tracking with offline and stale-location warnings\n- Save, resume, and finish races from My Races\n- Shareable race links—no app required for spectators\n\nRegardless of how the race goes, at least I've gotten a cool app out of it. And I'll update (or not...) soon after.",
-      "images": []
-    },
-    {
-      "id": "project-eed2323f-191d-4e9c-9b77-8320989659fa",
-      "date": "2026-07-25",
-      "title": "RunAlong",
-      "body": "Well, I signed up to run a marathon. A good idea? Who knows. Only time will tell (by time, I mean we'll know by Sunday). In good news, I have some friends coming to watch (yay)! But how, in the vast land of San Francisco, will they know where I am? Whether I'm still alive and kicking? So, with the new powers of GPT 5.6 Sol, I decided to build an app. And well, 5.6 Sol was cooking something. Not only does this have impeccable UI, but several incredible features: \n\n- Create public or passcode-protected races of any distance\n- Live GPS location, pace, distance, progress, and finish estimate\n- Anonymous spectators through the iOS app or website\n- Live runner messages and manual force updates\n- Background tracking with offline and stale-location warnings\n- Save, resume, and finish races from My Races\n- Shareable race links—no app required for spectators\n\nRegardless of how the race goes, at least I've gotten a cool app out of it. And I'll update (or not...) soon after.",
-      "images": []
+      "images": [
+        {
+          "src": "imgs/runner_perspective.png",
+          "caption": "Runner dashboard with live location, pace, distance, and course progress.",
+          "alt": "RunAlong iPhone runner dashboard showing Taylor's live position on a San Francisco map"
+        },
+        {
+          "src": "imgs/website.png",
+          "caption": "Shareable spectator website with live location and race-day stats.",
+          "alt": "RunAlong spectator website showing Taylor's live location, pace, distance, and course progress"
+        },
+        {
+          "src": "imgs/update.png",
+          "caption": "Runner controls for posting updates, syncing location, and finishing the race.",
+          "alt": "RunAlong iPhone controls for race updates, pausing tracking, syncing, and finishing a race"
+        },
+        {
+          "src": "imgs/create_race.png",
+          "caption": "Race-created confirmation with a private viewer passcode and sharing controls.",
+          "alt": "RunAlong iPhone race-created screen with a private viewer passcode and sharing buttons"
+        }
+      ]
     }
   ],
   "updates": []

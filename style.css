@@ -1764,31 +1764,45 @@ footer {
 
 .minimal-home .home-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 1.4rem;
-    padding-bottom: 1.8rem;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    column-gap: clamp(2.5rem, 7vw, 5.5rem);
+    row-gap: 2.8rem;
+    padding-bottom: 2.4rem;
 }
 
 .minimal-home .home-column {
     min-width: 0;
 }
 
+.minimal-home .intro-column {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 12rem;
+    column-gap: clamp(2rem, 6vw, 5rem);
+    padding: 0.8rem 0 2.4rem;
+    border-bottom: 1px solid var(--home-line);
+}
+
 .minimal-home .past-experience-column {
-    grid-column: 1 / 2;
+    grid-column: 1;
+    grid-row: auto;
 }
 
 .minimal-home .classes-column {
-    grid-column: 2 / 3;
+    grid-column: 2;
+    grid-row: auto;
 }
 
 .minimal-home .current-project-column {
-    grid-column: 3 / 4;
+    grid-column: 1 / -1;
 }
 
 .minimal-home .intro-column h1,
 .minimal-home .intro-title {
+    grid-column: 1;
     color: var(--home-accent);
-    font-size: clamp(1.7rem, 2.7vw, 2.5rem);
+    font-size: clamp(2.15rem, 4vw, 3.35rem);
     line-height: 1.15;
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
@@ -1819,18 +1833,66 @@ footer {
 }
 
 .minimal-home .intro-copy {
+    grid-column: 1;
     color: var(--home-soft);
-    margin-bottom: 1.5rem;
-    max-width: 33ch;
+    margin-bottom: 1.7rem;
+    max-width: 46ch;
     font-size: 1.03rem;
 }
 
+.minimal-home .intro-now {
+    grid-column: 1;
+    max-width: 74ch;
+    margin: 0 0 1rem;
+    color: var(--home-ink);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.minimal-home .intro-detail {
+    grid-column: 1;
+    margin: 0;
+    color: var(--home-muted);
+    font-size: 0.82rem;
+}
+
+.minimal-home .intro-detail .inline-link {
+    font-size: inherit;
+}
+
 .minimal-home .intro-photo {
-    width: 230px;
+    grid-column: 2;
+    grid-row: 1 / 5;
+    width: 100%;
     max-width: 100%;
+    aspect-ratio: 1 / 1.15;
     height: auto;
-    margin: 1.3rem 0 1.4rem;
+    margin: 0;
     border: 1px solid var(--home-line);
+    object-fit: cover;
+}
+
+.minimal-home .intro-footer {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px dotted var(--home-line);
+}
+
+.minimal-home .intro-email {
+    color: var(--home-muted);
+    font-size: 0.78rem;
+}
+
+.minimal-home .intro-footer .contact-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.35rem;
+    margin: 0;
 }
 
 .minimal-home .mini-block {
@@ -1869,7 +1931,7 @@ footer {
 .minimal-home .current-project-card {
     display: grid;
     gap: 0.4rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.75rem;
     padding: 0.9rem 0.95rem;
     border: 1px solid var(--home-line);
     border-radius: 0.35rem;
@@ -1942,21 +2004,6 @@ footer {
     font-size: 0.93rem;
 }
 
-.minimal-home .current-status-column .note-list {
-    gap: 0.85rem;
-}
-
-.minimal-home .current-status-column .note-list li > div {
-    padding: 0.8rem 0.85rem;
-    border: 1px solid #cfd5dc;
-    border-radius: 0.45rem;
-    background: #f1f3f5;
-}
-
-.minimal-home .current-status-column .note-list li > div {
-    border-left-color: transparent;
-}
-
 .minimal-home .experience-entry {
     display: grid;
     grid-template-columns: 3.25rem minmax(0, 1fr);
@@ -1986,6 +2033,13 @@ footer {
     display: block;
 }
 
+.minimal-home .experience-monogram {
+    color: var(--home-ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1.65rem;
+    line-height: 1;
+}
+
 .minimal-home strong {
     font-weight: 500;
     color: var(--home-ink);
@@ -1998,8 +2052,11 @@ footer {
 }
 
 .minimal-home .work-browser {
-    border-top: 1px solid var(--home-line);
+    width: 100%;
+    margin-left: 0;
     padding: 1.8rem 0 2.4rem;
+    border-top: 0;
+    transform: none;
 }
 
 .minimal-home .work-anchor {
@@ -2008,25 +2065,29 @@ footer {
 }
 
 .minimal-home .work-browser-shell {
-    border: 1px solid var(--home-line);
-    background: rgba(255, 255, 255, 0.58);
-    padding: 0.95rem 1rem 1rem;
+    border: 0;
+    background: transparent;
+    padding: 0;
 }
 
 .minimal-home .work-tabs {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
-    gap: 0.45rem;
-    margin-bottom: 1rem;
+    gap: 1.2rem;
+    width: 100%;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--home-line);
 }
 
 .minimal-home .work-tab {
-    border: 1px solid var(--home-line);
-    background: rgba(255, 255, 255, 0.72);
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
     color: var(--home-soft);
-    padding: 0.42rem 0.72rem;
+    padding: 0 0 0.6rem;
     font: inherit;
-    font-size: 0.8rem;
+    font-size: 0.84rem;
+    font-weight: 500;
     line-height: 1;
     cursor: pointer;
 }
@@ -2040,12 +2101,13 @@ footer {
 }
 
 .minimal-home .work-tab.is-active {
-    background: rgba(60, 95, 127, 0.09);
+    border-color: var(--home-accent);
+    background: transparent;
 }
 
 .minimal-home .work-panel {
     display: grid;
-    gap: 0.95rem;
+    gap: 1rem;
 }
 
 .minimal-home .work-panel[hidden] {
@@ -2057,26 +2119,31 @@ footer {
     align-items: flex-start;
     justify-content: space-between;
     gap: 0.8rem;
+    padding-bottom: 0.15rem;
 }
 
 .minimal-home .work-panel-head h2 {
-    font-size: 1.02rem;
+    font-family: inherit;
+    font-size: 1.25rem;
     font-weight: 500;
-    margin: 0 0 0.45rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.55rem;
     color: var(--home-ink);
 }
 
 .minimal-home .list-intro {
     margin: 0;
     color: var(--home-muted);
-    font-size: 0.81rem;
+    font-family: inherit;
+    font-size: 0.82rem;
     line-height: 1.55;
-    max-width: 52ch;
+    max-width: 60ch;
 }
 
 .minimal-home .panel-count,
 .minimal-home .archive-count {
-    margin: 0.15rem 0 0;
+    margin: 0.25rem 0 0;
     color: var(--home-muted);
     font-size: 0.76rem;
     white-space: nowrap;
@@ -2085,12 +2152,13 @@ footer {
 .minimal-home .project-filter-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.45rem;
+    gap: 0.6rem;
+    padding-bottom: 0.25rem;
 }
 
 .minimal-home .project-filter {
     border: 1px solid var(--home-line);
-    background: rgba(255, 255, 255, 0.72);
+    background: transparent;
     color: var(--home-soft);
     padding: 0.34rem 0.55rem;
     font: inherit;
@@ -2113,32 +2181,38 @@ footer {
 
 .minimal-home .work-card-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.9rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
 }
 
 .minimal-home .work-card {
     min-width: 0;
-    border: 1px solid var(--home-line);
-    background: rgba(255, 255, 255, 0.62);
+    border: 0;
+    border-top: 1px solid var(--home-line);
+    background: transparent;
     transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .minimal-home .work-card:hover {
     border-color: var(--home-accent);
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.28);
 }
 
 .minimal-home .work-card-link {
     display: grid;
-    gap: 0.55rem;
+    grid-template-columns: minmax(7rem, 0.55fr) minmax(14rem, 1.35fr) minmax(18rem, 2fr);
+    column-gap: clamp(1.2rem, 2.5vw, 2.2rem);
+    row-gap: 0.55rem;
+    align-items: start;
     height: 100%;
-    padding: 0.95rem;
+    padding: 1.15rem 0 1.35rem;
     text-decoration: none;
     color: inherit;
 }
 
 .minimal-home .project-link-top {
+    grid-column: 1;
+    grid-row: 1 / 3;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
@@ -2153,23 +2227,23 @@ footer {
 }
 
 .minimal-home .project-type {
-    color: var(--home-muted);
-    font-size: 0.72rem;
+    color: var(--home-accent);
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     white-space: nowrap;
 }
 
 .minimal-home .work-card-title {
+    grid-column: 2;
+    grid-row: 1 / 3;
     margin: 0;
     color: var(--home-ink);
-    font-size: 1rem;
+    font-family: inherit;
+    font-size: 0.92rem;
     font-weight: 500;
     line-height: 1.38;
-    text-decoration-line: underline;
-    text-decoration-style: dotted;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
+    text-decoration: none;
 }
 
 .minimal-home .work-card-link:hover .work-card-title,
@@ -2183,15 +2257,20 @@ footer {
 }
 
 .minimal-home .work-card-summary {
+    grid-column: 3;
+    grid-row: 1;
     margin: 0;
     color: var(--home-soft);
-    font-size: 0.86rem;
+    font-family: inherit;
+    font-size: 0.82rem;
     line-height: 1.55;
 }
 
 .minimal-home .project-tech {
+    grid-column: 3;
+    grid-row: 2;
     color: var(--home-muted);
-    font-size: 0.76rem;
+    font-size: 0.75rem;
     line-height: 1.45;
 }
 
@@ -2210,21 +2289,23 @@ footer {
     font-size: 0.8rem;
 }
 
-@media (max-width: 1240px) {
+@media (max-width: 900px) {
     .minimal-home .home-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 1.2rem;
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
-    .minimal-home .intro-column {
-        grid-column: 1 / -1;
-    }
-
+    .minimal-home .intro-column,
     .minimal-home .past-experience-column,
     .minimal-home .classes-column,
-    .minimal-home .current-status-column,
     .minimal-home .current-project-column {
-        grid-column: auto;
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .minimal-home .work-card-link {
+        grid-template-columns: minmax(6rem, 0.45fr) minmax(12rem, 1fr) minmax(15rem, 1.45fr);
+        column-gap: 1.2rem;
     }
 }
 
@@ -2245,6 +2326,23 @@ footer {
         padding-bottom: 1.4rem;
     }
 
+    .minimal-home .classes-column .note-list {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+    }
+
+    .minimal-home .intro-column {
+        grid-template-columns: minmax(0, 1fr) 7rem;
+        column-gap: 1.1rem;
+        padding-bottom: 1.8rem;
+    }
+
+    .minimal-home .intro-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-top: 1.5rem;
+    }
+
     .minimal-home .work-panel-head {
         flex-direction: column;
         gap: 0.35rem;
@@ -2252,6 +2350,24 @@ footer {
 
     .minimal-home .work-card-grid {
         grid-template-columns: 1fr;
+    }
+
+    .minimal-home .work-tabs {
+        margin-bottom: 0.75rem;
+    }
+
+    .minimal-home .work-card-link {
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
+        padding: 1.2rem 0 1.4rem;
+    }
+
+    .minimal-home .project-link-top,
+    .minimal-home .work-card-title,
+    .minimal-home .work-card-summary,
+    .minimal-home .project-tech {
+        grid-column: 1;
+        grid-row: auto;
     }
 
     .minimal-home .footer-shell {

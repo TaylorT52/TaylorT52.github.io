@@ -44,7 +44,7 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
-  <link rel="stylesheet" href="./style.css?v=20260408" />
+  <link rel="stylesheet" href="./style.css?v=20260917" />
 </head>
 <body id="top" class="minimal-home">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -56,7 +56,7 @@
         <span class="brand-text">Taylor Tam</span>
       </a>
       <div class="nav-links">
-        <a href="#selected-projects" class="nav-link">Projects</a>
+        <a href="#all-projects" class="nav-link">Projects</a>
         <a href="#research-list" class="nav-link">Research</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
@@ -66,105 +66,50 @@
   <main id="main-content" class="home-main">
     <div class="container">
       <section class="home-grid">
-      <article class="home-column intro-column">
+      <article class="home-column intro-column" id="contact">
         <h1 class="intro-title" data-typing-text="Hi, I'm Taylor." aria-label="Hi, I'm Taylor.">
           <span class="typing-text" aria-hidden="true">Hi, I'm Taylor.</span><span class="typing-caret" aria-hidden="true"></span>
         </h1>
         <p class="intro-copy">
-          Stanford EE + CS student | iCloud Private Cloud Compute @ Apple 
+          Stanford EE + CS student | prev. iCloud Privacy Platform @ Apple 
         </p>
 
-        <a href="mailto:taylor52@stanford.edu" class="inline-link">taylor52@stanford.edu -></a>
+        <p class="intro-now">
+          <strong>Currently:</strong> researching medical computer vision at Stanford's Melcher Lab, training for Boston Marathon qualifiers
+        </p>
+
+        <p class="intro-detail">
+          Stanford / Bay Area &middot;
+          <a href="https://www.strava.com/activities/19475262402" target="_blank" rel="noopener noreferrer" class="inline-link">SF Marathon -></a>
+        </p>
 
         <img src="./profile.png" alt="Taylor Tam" class="intro-photo" />
 
-        <div class="contact-stack">
-          <a href="https://github.com/TaylorT52" target="_blank" rel="noopener noreferrer" class="inline-link">github.com/TaylorT52 -></a>
-          <a href="https://www.linkedin.com/in/taylortam52/" target="_blank" rel="noopener noreferrer" class="inline-link">linkedin.com/in/taylortam52 -></a>
-          <a href="other-assets/Taylor%20Tam%20-%20Resume,%20AI.pdf" target="_blank" rel="noopener noreferrer" class="inline-link">Resume -></a>
+        <div class="intro-footer">
+          <div class="contact-stack">
+            <a href="mailto:taylor52@stanford.edu" class="inline-link">Email</a>
+            <a href="https://github.com/TaylorT52" target="_blank" rel="noopener noreferrer" class="inline-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/taylortam52/" target="_blank" rel="noopener noreferrer" class="inline-link">LinkedIn</a>
+            <a href="other-assets/Taylor%20Tam%20-%20Resume,%20AI.pdf" target="_blank" rel="noopener noreferrer" class="inline-link">Resume</a>
+          </div>
+          <span class="intro-email">taylor52@stanford.edu</span>
         </div>
       </article>
 
-      <section class="home-column" id="selected-projects">
-        <h2>Selected Work:</h2>
-        <ol class="note-list">
-          <li>
-            <span class="item-index">01</span>
-            <div>
-              <a href="papers/cs231n-rust-apple-silicon.pdf" target="_blank" rel="noopener noreferrer" class="inline-link">Fail Fast, Run Faster: Shape Safe Deep Learning in Rust on Apple Silicon (PDF) -></a>
-              <p>Const-generic Rust deep learning pipeline with compile-time tensor shape checks and Apple Silicon acceleration.</p>
-            </div>
-          </li>
-          <li>
-            <span class="item-index">02</span>
-            <div>
-              <a href="projpages/project1.html" class="inline-link">Automated Liver Tissue Analysis Pipeline -></a>
-              <p>Point-of-care biopsy analysis with U-Net segmentation and on-device steatosis scoring on Jetson Nano.</p>
-            </div>
-          </li>
-          <li>
-            <span class="item-index">03</span>
-            <div>
-              <a href="projpages/project11.html" class="inline-link">A COOL Project: My Custom COOL Compiler -></a>
-              <p>Custom COOL compiler for Stanford CS143 with lexical analysis, parsing, semantic analysis, code generation, and backend optimizations.</p>
-            </div>
-          </li>
-          <li>
-            <span class="item-index">04</span>
-            <div>
-              <a href="#all-projects" class="inline-link">View full portfolio -></a>
-            </div>
-          </li>
-        </ol>
-      </section>
-
-      <section class="home-column">
-        <h2>Currently:</h2>
-        <ol class="note-list">
-          <li>
-            <span class="item-index">01</span>
-            <div>
-              <p>Researching medical computer vision at Stanford's Melcher Lab.</p>
-            </div>
-          </li>
-          <li>
-            <span class="item-index">02</span>
-            <div>
-              <p>Incoming Software Engineering Intern at Apple.</p>
-            </div>
-          </li>
-          <li>
-            <span class="item-index">03</span>
-            <div>
-              <p>Based in Stanford / Bay Area.</p>
-            </div>
-          </li>
-          <li>
-            <span class="item-index">04</span>
-            <div>
-              <p>Recently ran Napa Half Marathon <a href="https://www.strava.com/activities/17567565412" target="_blank" rel="noopener noreferrer" class="inline-link">Strava -></a></p>
-            </div>
-          </li>
-          <li>
-            <span class="item-index">05</span>
-            <div>
-              <p>Upcoming SF Marathon.</p>
-            </div>
-          </li>
-          <li>
-            <span class="item-index">06</span>
-            <div>
-              <p>Fluent in Spanish!</p>
-            </div>
-          </li>
-        </ol>
-      </section>
-
-      <section class="home-column past-experience-column" id="contact">
+      <section class="home-column past-experience-column">
         <h2>Past Experience:</h2>
         <ol class="note-list">
           <li>
             <span class="item-index">01</span>
+            <div>
+              <div class="experience-entry">
+                <span class="org-mark experience-monogram" aria-hidden="true">&#63743;</span>
+                <p><strong>Apple (Software Engineering Intern, 2026):</strong> Built out a token refund mechanism for the iCloud Privacy Platform.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="item-index">02</span>
             <div>
               <div class="experience-entry">
                 <span class="org-mark">
@@ -175,7 +120,7 @@
             </div>
           </li>
           <li>
-            <span class="item-index">02</span>
+            <span class="item-index">03</span>
             <div>
               <div class="experience-entry">
                 <span class="org-mark">
@@ -186,7 +131,7 @@
             </div>
           </li>
           <li>
-            <span class="item-index">03</span>
+            <span class="item-index">04</span>
             <div>
               <div class="experience-entry">
                 <span class="org-mark">
@@ -247,18 +192,6 @@
         </ol>
       </section>
 
-      <section class="home-column current-status-column">
-        <h2>Currently:</h2>
-        <ol class="note-list">
-          <li>
-            <span class="item-index">01</span>
-            <div>
-              <a href="projpages/project12.html" class="inline-link">Summer Projects -></a>
-              <p>A dedicated page for some summer projects.</p>
-            </div>
-          </li>
-        </ol>
-      </section>
       </section>
 
       <section class="work-browser" id="research-list" data-work-browser>

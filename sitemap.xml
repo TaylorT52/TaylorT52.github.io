@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://me.taylortam.com/</loc>
-    <lastmod>2026-06-02</lastmod>
+    <lastmod>2026-09-27</lastmod>
   </url>
   <url>
     <loc>https://me.taylortam.com/projpages/project1.html</loc>
@@ -47,5 +47,13 @@
   <url>
     <loc>https://me.taylortam.com/projpages/project11.html</loc>
     <lastmod>2026-06-02</lastmod>
+  </url>
+  <url>
+    <loc>https://me.taylortam.com/projpages/project13.html</loc>
+    <lastmod>2026-09-24</lastmod>
+  </url>
+  <url>
+    <loc>https://me.taylortam.com/projpages/project14.html</loc>
+    <lastmod>2026-09-27</lastmod>
   </url>
 </urlset>

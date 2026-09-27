@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pinwise</title>
+  <meta name="description" content="Project details coming soon." />
+  <link rel="canonical" href="https://me.taylortam.com/projpages/project14.html" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=20260917c" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=20260917c" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260917c" />
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style.css?v=20260927" />
+</head>
+<body class="minimal-project pinwise-page">
+  <!-- Hero Section -->
+  <section class="hero project-hero">
+    <div class="container">
+      <div class="d-flex align-items-center mb-4">
+        <a href="../index.html#all-projects" class="back-link">
+          <i class="fas fa-arrow-left me-2"></i>Back to Projects
+        </a>
+      </div>
+      <h1>Pinwise</h1>
+      <p>
+        If there's one incredibly positive thing that has come out of social media, I think it's shared knowledge of places.
+        This quarter, I found myself abroad in Madrid with no idea where to eat, shop, go out, or even buy toilteries! But luckily, I was getting tons of 
+        reels showing me where to go.
+      </p>
+      <p>
+        The current process, if you're getting content recommendations, is EXCEPTIONALLY annoying. First, you save the location. Then, maybe write it down or pin it in maps
+        separately. If you remember you saved it, you scroll through Saved to find it, or navigate Google map's nasty UI (someone had to say it) to find the pin.
+        Or, you scroll through your friends DMs and texts to find the place, and navigate separately. Or, you navigate away from the reel, write the place in your notes app, and
+        separately open maps to find it.
+        <br> 
+        <br> 
+        Even with these methods, it's easy to pass by a place and not remember that you wanted to go there, or forget about it entirely. Depending on how save recommendations, it can take four steps 
+        between two or three different apps--which is ridiculous! So, in Stanford CS fashion, I made an app.
+      </p>
+      <div class="pinwise-screenshots">
+        <img src="../imgs/shareviapinwise.png" alt="Share via Pinwise" loading="lazy" />
+        <img src="../imgs/continuesharing.png" alt="Continue sharing" loading="lazy" />
+      </div>
+      <p>
+        First, you can export reels via share and save them as locations to your pinned map. The app tries to automatically scrape the locations from the caption, 
+        or you can manually input the name which will load through the Apple Maps API. Additionally, with each place you add a category (shopping, drinks, culture) 
+        so it's organized for you.
+      </p>
+      <div class="pinwise-screenshots">
+        <img src="../imgs/savedplaces.png" alt="Saved places" loading="lazy" />
+        <img src="../imgs/filter.png" alt="Filter places" loading="lazy" />
+        <img src="../imgs/viewlocation.png" alt="View location" loading="lazy" />
+        <img src="../imgs/manualadd.PNG" alt="Manually add a place" loading="lazy" />
+      </div>
+      <p>
+        Once in the city, you can see a view of all of your pins, filter by category, see what you're nearby, and leave notes as well as ratings on each. 
+        Also, you can add a photo of it as a memory! If you're somewhere you like, you can add your current location to your favorites map.
+      </p>
+      <div class="pinwise-screenshots">
+        <img src="../imgs/scroll.PNG" alt="Scroll saved locations" loading="lazy" />
+      </div>
+      <p>
+        In an alternate tab, you can scroll your saved locations by-city, and filter by category. There's a also a link back to the original reel if you want to remember
+        why you were interested. So if anyone asks where you want to go to dinner, your desired locations are already saved and in a viewable format.
+      </p>
+
+      <p>
+       I also hate when I walk by, or am close to somewhere I want to go, and I don't know it. Using location services, I have the app also send a ping to your phone if you're within 0.5 miles 
+       (configurable) of a location that you've saved, or want to go to. 
+      </p>
+            <div class="pinwise-screenshots">
+        <img src="../imgs/profile.PNG" alt="Profile" loading="lazy" />
+        <img src="../imgs/sharepinwise.png" alt="Share via Pinwise" loading="lazy" />
+      </div>
+      <p>
+        Another thing I've thought a lot about travel as well is the social aspect. Before coming here, SO many people were telling me: "i have so many recommendations for you!" -- 
+        but, I never recieved them. Or if I did, then it'd be in a weird format (shared note, text) that wasn't easy for me to parse or save. I remember thinking: I wish you could just
+        save your pins per-city. Via firebase, I added an optional auth method that allows you to share all your recommendations by-city - your notes, pictures, ratings for each place you've traveled to.
+        This then auto-populates into a friend's map, and voila, the recs are actually recieved.
+      </p>
+      <p>
+        I'm still adding a Tik Tok integration (as a non-user), but it was incredible to see how easy it was to build this app via Codex. I've been building apps since my freshman year 
+        of highschool (2020!) -- when SwiftUI was first developing, XCode was impossible to use, and Stackoverflow wasn't quite yet populated with every question (back in the day, I used to contribute). 
+        Now, with a couple prompts, guidance, using the app and making modifications throughout the day, this was possible to build in only two weeks -- and I could've done it faster 
+        had I dedicated my entire day to it. I was even able to automate most of the Firebase setup.
+      </p>
+      <p>
+        Experiences like these just remind me how we're able to build out tooling for ANYTHING now, regardless of how the nuances of frameworks or languages change. Even weird problems like 'where do i go in a city?'
+        can be fixed and developed for in days or weeks. I know this is a bit, 'fork found in kitchen,' but we're truly living in an exciting time for engineering, and solving any issue we want! 
+      </p>
+
+    </div>
+  </section>
+  
+  <!-- Main Project Content -->
+  <main class="container project-content">
+    <!-- Add project content here. -->
+
+    <div class="project-navigation mt-5">
+      <a href="../index.html#all-projects" class="btn btn-outline-primary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Projects
+      </a>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-buttons mb-4">
+          <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github me-2"></i>GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/taylortam52/" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin me-2"></i>LinkedIn
+          </a>
+        </div>
+        <p class="copyright mb-0">&copy; 2026 Taylor Tam <span class="bullet">•</span> Built with <i class="fas fa-heart text-danger mx-1"></i></p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

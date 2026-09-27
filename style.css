@@ -2231,7 +2231,8 @@ footer {
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 .minimal-home .work-card-title {
@@ -4538,4 +4539,21 @@ footer {
     .minimal-project .semantic-replay {
         transition: none;
     }
+}
+
+/* Pinwise app screenshots */
+.pinwise-page .pinwise-screenshots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 220px));
+  justify-content: center;
+  align-items: start;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.pinwise-page .pinwise-screenshots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
 }

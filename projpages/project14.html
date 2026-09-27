@@ -45,8 +45,8 @@
       <h1>Pinwise</h1>
       <p>
         If there's one incredibly positive thing that has come out of social media, I think it's shared knowledge of places.
-        This quarter, I found myself abroad in Madrid with no idea where to eat, shop, go out, or even buy toilteries! But luckily, I was getting tons of 
-        reels showing me where to go.
+        This quarter, I found myself abroad in Madrid with no idea where to eat, shop, go out, or even buy toiletries! But luckily, I was getting tons of 
+        content showing me where to go.
       </p>
       <p>
         The current process, if you're getting content recommendations, is EXCEPTIONALLY annoying. First, you save the location. Then, maybe write it down or pin it in maps
@@ -55,7 +55,7 @@
         separately open maps to find it.
         <br> 
         <br> 
-        Even with these methods, it's easy to pass by a place and not remember that you wanted to go there, or forget about it entirely. Depending on how save recommendations, it can take four steps 
+        Even with these methods, it's easy to pass by a place and not remember that you wanted to go there. Depending on how you save recommendations, it can take four steps 
         between two or three different apps--which is ridiculous! So, in Stanford CS fashion, I made an app.
       </p>
       <div class="pinwise-screenshots">
@@ -85,8 +85,11 @@
         why you were interested. So if anyone asks where you want to go to dinner, your desired locations are already saved and in a viewable format.
       </p>
 
+      <div class="pinwise-screenshots">
+        <img src="../imgs/notifs.jpeg" alt="Pinwise nearby place notifications" loading="lazy" />
+      </div>
       <p>
-       I also hate when I walk by, or am close to somewhere I want to go, and I don't know it. Using location services, I have the app also send a ping to your phone if you're within 0.5 miles 
+       I also hate when I walk by, or am close to somewhere I want to go, and I don't know it. Using location services, I have the app send a ping to your phone if you're within 0.5 miles 
        (configurable) of a location that you've saved, or want to go to. 
       </p>
             <div class="pinwise-screenshots">
@@ -94,9 +97,9 @@
         <img src="../imgs/sharepinwise.png" alt="Share via Pinwise" loading="lazy" />
       </div>
       <p>
-        Another thing I've thought a lot about travel as well is the social aspect. Before coming here, SO many people were telling me: "i have so many recommendations for you!" -- 
+        Another thing I've thought a lot about travel is the social aspect. Before coming here, SO many people were telling me: "I have tons of recommendations for you!" -- 
         but, I never recieved them. Or if I did, then it'd be in a weird format (shared note, text) that wasn't easy for me to parse or save. I remember thinking: I wish you could just
-        save your pins per-city. Via firebase, I added an optional auth method that allows you to share all your recommendations by-city - your notes, pictures, ratings for each place you've traveled to.
+        save your pins per-city. Via Firebase, I added an optional auth method that allows you to share all your recommendations by-city - your notes, pictures, ratings for each place you've traveled to.
         This then auto-populates into a friend's map, and voila, the recs are actually recieved.
       </p>
       <p>
@@ -104,6 +107,17 @@
         of highschool (2020!) -- when SwiftUI was first developing, XCode was impossible to use, and Stackoverflow wasn't quite yet populated with every question (back in the day, I used to contribute). 
         Now, with a couple prompts, guidance, using the app and making modifications throughout the day, this was possible to build in only two weeks -- and I could've done it faster 
         had I dedicated my entire day to it. I was even able to automate most of the Firebase setup.
+      </p>
+      
+      <div class="pinwise-screenshots">
+        <img src="../imgs/xcode1.jpeg" alt="Xcode screenshot 1" loading="lazy" />
+        <img src="../imgs/xcode2.jpeg" alt="Xcode screenshot 2" loading="lazy" />
+        <img src="../imgs/xcode3.jpeg" alt="Xcode screenshot 3" loading="lazy" />
+      </div>
+      <p> 
+        If you ever used Xcode early-on, you would know it was legitimately INFURIATING. To put it nicely. But now, the concept of IDEs being 'hard to use' or navigate, is pretty much obselete.
+       I've been thinking about how we're evolving towards a format where IDE setup, learning where everything is in Xcode, or package managers
+       will be completely under-the-hood--if it isn't mostly already! 
       </p>
       <p>
         Experiences like these just remind me how we're able to build out tooling for ANYTHING now, regardless of how the nuances of frameworks or languages change. Even weird problems like 'where do i go in a city?'

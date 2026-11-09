@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://me.taylortam.com/</loc>
-    <lastmod>2026-09-27</lastmod>
+    <lastmod>2026-11-09</lastmod>
   </url>
   <url>
     <loc>https://me.taylortam.com/projpages/project1.html</loc>
@@ -51,5 +51,9 @@
   <url>
     <loc>https://me.taylortam.com/projpages/project14.html</loc>
     <lastmod>2026-09-27</lastmod>
+  </url>
+  <url>
+    <loc>https://me.taylortam.com/projpages/restoring-3d-printer.html</loc>
+    <lastmod>2026-11-09</lastmod>
   </url>
 </urlset>

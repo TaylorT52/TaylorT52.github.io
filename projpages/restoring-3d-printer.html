@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Restoring a 3D Printer - Taylor Tam</title>
+  <meta
+    name="description"
+    content="Restoring a second-hand Ender 3: extruder repairs, calibration, and the first successful test prints."
+  />
+  <link rel="canonical" href="https://me.taylortam.com/projpages/restoring-3d-printer.html" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=20260917c" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=20260917c" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260917c" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="stylesheet" href="../style.css?v=20260725d" />
+</head>
+<body class="minimal-project summer-page">
+  <section class="hero project-hero">
+    <div class="container">
+      <a href="../index.html#all-projects" class="back-link"><i class="fas fa-arrow-left me-2"></i>Back to Projects</a>
+      <h1>Restoring a 3D Printer</h1>
+      <p class="lead">Bringing a second-hand Ender 3 back to life, one fix and test print at a time.</p>
+    </div>
+  </section>
+  <main class="container project-content">
+    <section id="ender3" class="summer-project-section">
+      <p class="project-kicker">Repair log</p>
+      <h2>Ender 3 Printer</h2>
+      <figure class="summer-project-hero-card">
+        <img src="../imgs/ender3.jpeg" alt="Ender 3 printer project" class="project-image summer-project-image" />
+        <figcaption>The starting point for the summer printer upgrade project.</figcaption>
+      </figure>
+      <p>
+        After the keyboard phase, naturally, I have to have a 3D printer phase. Right now, I have an Ender 3, and I&apos;m going to set it up and customize it over the summer.
+      </p>
+      <p>
+        Ender 3 printers are common open-source machines, but they are still fairly manual and a little rough around the edges. There is no automatic bed leveling by default, setup can be finicky, and getting consistently good prints usually takes iteration.
+      </p>
+      <p>
+        The goal of this section is to track upgrades, fixes, calibration notes, and what changes actually make the printer better over time.
+      </p>
+
+      <h3>What I&apos;m Tracking</h3>
+      <ul>
+        <li>Printer upgrades and quality-of-life improvements</li>
+        <li>Better calibration and more reliable print settings</li>
+        <li>Experiments with materials, parts, and workflows</li>
+      </ul>
+
+      <h3>Week of 06/22</h3>
+      <div class="summer-project-gallery summer-project-gallery-featured">
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/update-2026-07-22-b.png"
+            alt="Weekly update photo for the Ender 3 project"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>First troubleshooting session after powering the printer on.</figcaption>
+        </figure>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/ender3-broken-piece.jpeg"
+            alt="Broken printer part on the Ender 3"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>The broken extruder part that stopped the first setup attempt.</figcaption>
+        </figure>
+      </div>
+      <p>
+        The first signs of trouble showed up fast. I found the correct cable to plug my printer in, and after the moment of truth, nothing happened.
+      </p>
+      <p>
+        The first step was to get the printer running. Unfortunately, with a seven-year-old second-hand printer, something was bound to go wrong, and a bearing for loading the PLA into the extruder broke off. So I ordered a replacement piece so I can start printing.
+      </p>
+      <p>
+        Next steps are getting a first successful print, adding automatic bed leveling, and setting up a Raspberry Pi server so I don&apos;t have to load files manually with an SD card.
+      </p>
+      <h3>Week of 07/06</h3>
+      <div class="summer-project-gallery summer-project-gallery-featured">
+        <p class="summer-project-gallery-note">Made a tiny mistake on the extruder piece. Turns out that, for an Ender3, there are two variants on the
+        extruder stepper motor. One variant has a small screw that allows you to remove the gear, and another has a press-on 
+        gold gear you can&apos;t remove. I had the latter (unfortunately). So I reordered another extruder replacement matching the
+        stepper motor and gear I had, and replaced it!</p>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7420.jpeg"
+            alt="Replacement extruder kit installed on the Ender 3"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>Installed replacement extruder assembly.</figcaption>
+        </figure>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7427.jpeg"
+            alt="Correct replacement kit parts for the Ender 3 extruder"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>The correct kit after ordering the wrong variant first.</figcaption>
+        </figure>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7434.jpeg"
+            alt="Ender 3 stepper motor with the press-on gear"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>The press-fit gear that caused the mismatch.</figcaption>
+        </figure>
+      </div>
+      <p>
+       This also came with a new stepper and the first gear component I mentioned--
+        but the wasn't sticking, so I put some adhesive foam under the gear to make them mesh and I had a *working* extruder. I spent the red of the night
+        tuning some print settings to produce two prints the next day: a calibration cube and, of course, benchy.
+        
+      </p>
+      <div class="summer-project-gallery summer-project-gallery-featured">
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7442.jpeg"
+            alt="Early failed print attempts from the Ender 3"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>Early failures while dialing in the settings.</figcaption>
+        </figure>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_1949.jpeg"
+            alt="Calibration cube printed on the Ender 3"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>First calibration cube after the extruder fix.</figcaption>
+        </figure>
+        <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7446.jpeg"
+            alt="Benchy test print on the Ender 3"
+            class="project-image summer-project-image-sm"
+          />
+          <figcaption>Benchy, because it had to happen.</figcaption>
+        </figure>
+      </div>
+      <div class="summer-live-updates" data-summer-updates="ender3"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-buttons mb-4">
+          <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github me-2"></i>GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/taylortam52/" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin me-2"></i>LinkedIn
+          </a>
+        </div>
+        <p class="copyright mb-0">&copy; 2026 Taylor Tam <span class="bullet">•</span> Built with <i class="fas fa-heart text-danger mx-1"></i></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../summer-updates.js?v=20260725b" defer></script>
+</body>
+</html>

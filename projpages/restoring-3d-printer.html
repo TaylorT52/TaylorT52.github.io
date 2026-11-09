@@ -30,24 +30,28 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
-  <link rel="stylesheet" href="../style.css?v=20260725d" />
+  <link rel="stylesheet" href="../style.css?v=20261109b" />
 </head>
-<body class="minimal-project summer-page">
+<body class="minimal-project summer-page printer-page">
   <section class="hero project-hero">
     <div class="container">
-      <a href="../index.html#all-projects" class="back-link"><i class="fas fa-arrow-left me-2"></i>Back to Projects</a>
+      <div class="d-flex align-items-center mb-4">
+        <a href="../index.html#all-projects" class="back-link">
+          <i class="fas fa-arrow-left me-2"></i>Back to Projects
+        </a>
+      </div>
       <h1>Restoring a 3D Printer</h1>
-      <p class="lead">Bringing a second-hand Ender 3 back to life, one fix and test print at a time.</p>
+      <div class="project-tags">
+        <span class="badge bg-primary">Ender 3</span>
+        <span class="badge bg-primary">Hardware Repair</span>
+        <span class="badge bg-primary">3D Printing</span>
+      </div>
     </div>
   </section>
   <main class="container project-content">
     <section id="ender3" class="summer-project-section">
       <p class="project-kicker">Repair log</p>
       <h2>Ender 3 Printer</h2>
-      <figure class="summer-project-hero-card">
-        <img src="../imgs/ender3.jpeg" alt="Ender 3 printer project" class="project-image summer-project-image" />
-        <figcaption>The starting point for the summer printer upgrade project.</figcaption>
-      </figure>
       <p>
         After the keyboard phase, naturally, I have to have a 3D printer phase. Right now, I have an Ender 3, and I&apos;m going to set it up and customize it over the summer.
       </p>
@@ -65,100 +69,128 @@
         <li>Experiments with materials, parts, and workflows</li>
       </ul>
 
-      <h3>Week of 06/22</h3>
-      <div class="summer-project-gallery summer-project-gallery-featured">
-        <figure class="summer-project-photo-card">
+      <figure class="summer-project-hero-card">
+        <img src="../imgs/ender3.jpeg" alt="Ender 3 printer project" class="project-image summer-project-image" />
+        <figcaption>The starting point for the summer printer upgrade project.</figcaption>
+      </figure>
+
+      <section class="printer-update">
+        <p class="project-kicker">June 22</p>
+        <h3>Getting the printer running</h3>
+        <div class="printer-update-copy">
+          <p>
+        The first signs of trouble showed up fast. I found the correct cable to plug my printer in, and after the moment of truth, nothing happened.
+      </p>
+          <p>
+        The first step was to get the printer running. Unfortunately, with a seven-year-old second-hand printer, something was bound to go wrong, and a bearing for loading the PLA into the extruder broke off. So I ordered a replacement piece so I can start printing.
+      </p>
+          <p>
+        Next steps are getting a first successful print, adding automatic bed leveling, and setting up a Raspberry Pi server so I don&apos;t have to load files manually with an SD card.
+      </p>
+        </div>
+        <details class="printer-photos">
+          <summary>View 2 photos from this update</summary>
+          <div class="printer-photo-grid">
+            <figure class="summer-project-photo-card">
           <img
             src="../imgs/update-2026-07-22-b.png"
             alt="Weekly update photo for the Ender 3 project"
-            class="project-image summer-project-image-sm"
+            class="project-image summer-project-image-sm" loading="lazy"
           />
           <figcaption>First troubleshooting session after powering the printer on.</figcaption>
         </figure>
-        <figure class="summer-project-photo-card">
+            <figure class="summer-project-photo-card">
           <img
             src="../imgs/ender3-broken-piece.jpeg"
             alt="Broken printer part on the Ender 3"
-            class="project-image summer-project-image-sm"
+            class="project-image summer-project-image-sm" loading="lazy"
           />
           <figcaption>The broken extruder part that stopped the first setup attempt.</figcaption>
         </figure>
-      </div>
-      <p>
-        The first signs of trouble showed up fast. I found the correct cable to plug my printer in, and after the moment of truth, nothing happened.
-      </p>
-      <p>
-        The first step was to get the printer running. Unfortunately, with a seven-year-old second-hand printer, something was bound to go wrong, and a bearing for loading the PLA into the extruder broke off. So I ordered a replacement piece so I can start printing.
-      </p>
-      <p>
-        Next steps are getting a first successful print, adding automatic bed leveling, and setting up a Raspberry Pi server so I don&apos;t have to load files manually with an SD card.
-      </p>
-      <h3>Week of 07/06</h3>
-      <div class="summer-project-gallery summer-project-gallery-featured">
-        <p class="summer-project-gallery-note">Made a tiny mistake on the extruder piece. Turns out that, for an Ender3, there are two variants on the
-        extruder stepper motor. One variant has a small screw that allows you to remove the gear, and another has a press-on 
+          </div>
+        </details>
+      </section>
+
+      <section class="printer-update">
+        <p class="project-kicker">July 6</p>
+        <h3>Replacing the extruder &amp; first prints</h3>
+        <div class="printer-update-copy">
+          <p>Made a tiny mistake on the extruder piece. Turns out that, for an Ender3, there are two variants on the
+        extruder stepper motor. One variant has a small screw that allows you to remove the gear, and another has a press-on
         gold gear you can&apos;t remove. I had the latter (unfortunately). So I reordered another extruder replacement matching the
         stepper motor and gear I had, and replaced it!</p>
-        <figure class="summer-project-photo-card">
-          <img
-            src="../imgs/IMG_7420.jpeg"
-            alt="Replacement extruder kit installed on the Ender 3"
-            class="project-image summer-project-image-sm"
-          />
-          <figcaption>Installed replacement extruder assembly.</figcaption>
-        </figure>
-        <figure class="summer-project-photo-card">
-          <img
-            src="../imgs/IMG_7427.jpeg"
-            alt="Correct replacement kit parts for the Ender 3 extruder"
-            class="project-image summer-project-image-sm"
-          />
-          <figcaption>The correct kit after ordering the wrong variant first.</figcaption>
-        </figure>
-        <figure class="summer-project-photo-card">
-          <img
-            src="../imgs/IMG_7434.jpeg"
-            alt="Ender 3 stepper motor with the press-on gear"
-            class="project-image summer-project-image-sm"
-          />
-          <figcaption>The press-fit gear that caused the mismatch.</figcaption>
-        </figure>
-      </div>
-      <p>
+          <p>
        This also came with a new stepper and the first gear component I mentioned--
         but the wasn't sticking, so I put some adhesive foam under the gear to make them mesh and I had a *working* extruder. I spent the red of the night
         tuning some print settings to produce two prints the next day: a calibration cube and, of course, benchy.
-        
+
       </p>
-      <div class="summer-project-gallery summer-project-gallery-featured">
-        <figure class="summer-project-photo-card">
+        </div>
+        <details class="printer-photos">
+          <summary>View 6 photos from this update</summary>
+          <div class="printer-photo-grid">
+            <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7420.jpeg"
+            alt="Replacement extruder kit installed on the Ender 3"
+            class="project-image summer-project-image-sm" loading="lazy"
+          />
+          <figcaption>Installed replacement extruder assembly.</figcaption>
+        </figure>
+            <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7427.jpeg"
+            alt="Correct replacement kit parts for the Ender 3 extruder"
+            class="project-image summer-project-image-sm" loading="lazy"
+          />
+          <figcaption>The correct kit after ordering the wrong variant first.</figcaption>
+        </figure>
+            <figure class="summer-project-photo-card">
+          <img
+            src="../imgs/IMG_7434.jpeg"
+            alt="Ender 3 stepper motor with the press-on gear"
+            class="project-image summer-project-image-sm" loading="lazy"
+          />
+          <figcaption>The press-fit gear that caused the mismatch.</figcaption>
+        </figure>
+            <figure class="summer-project-photo-card">
           <img
             src="../imgs/IMG_7442.jpeg"
             alt="Early failed print attempts from the Ender 3"
-            class="project-image summer-project-image-sm"
+            class="project-image summer-project-image-sm" loading="lazy"
           />
           <figcaption>Early failures while dialing in the settings.</figcaption>
         </figure>
-        <figure class="summer-project-photo-card">
+            <figure class="summer-project-photo-card">
           <img
             src="../imgs/IMG_1949.jpeg"
             alt="Calibration cube printed on the Ender 3"
-            class="project-image summer-project-image-sm"
+            class="project-image summer-project-image-sm" loading="lazy"
           />
           <figcaption>First calibration cube after the extruder fix.</figcaption>
         </figure>
-        <figure class="summer-project-photo-card">
+            <figure class="summer-project-photo-card">
           <img
             src="../imgs/IMG_7446.jpeg"
             alt="Benchy test print on the Ender 3"
-            class="project-image summer-project-image-sm"
+            class="project-image summer-project-image-sm" loading="lazy"
           />
           <figcaption>Benchy, because it had to happen.</figcaption>
         </figure>
-      </div>
+          </div>
+        </details>
+      </section>
       <div class="summer-live-updates" data-summer-updates="ender3"></div>
     </section>
 
+    <section class="summer-project-section" aria-labelledby="printer-notes-heading">
+      <h2 id="printer-notes-heading">Notes &amp; next steps</h2>
+
+      <p>I fear this point is where I went abroad to Madrid. With two suitcases already weighed down with clothes
+        and a very non-Californian coat, the Ender3 did not fit (as much as I wanted it to). So, the adventure will resume in winter -
+        where I already have a BLTouch sensor waiting, a new hotend replacement, many pis, and many ideas.
+      </p>
+    </section>
   </main>
 
   <footer>

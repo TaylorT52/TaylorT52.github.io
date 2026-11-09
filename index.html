@@ -44,7 +44,7 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
-  <link rel="stylesheet" href="./style.css?v=20260924" />
+  <link rel="stylesheet" href="./style.css?v=20261109c" />
 </head>
 <body id="top" class="minimal-home">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -198,8 +198,9 @@
 
       <section class="work-browser" id="research-list" data-work-browser>
         <span id="all-projects" class="work-anchor" aria-hidden="true"></span>
+        <span id="archive" class="work-anchor" aria-hidden="true"></span>
         <div class="work-browser-shell">
-          <div class="work-tabs" role="tablist" aria-label="Browse research and projects">
+          <div class="work-tabs" role="tablist" aria-label="Browse research, projects, and archive">
             <button
               type="button"
               class="work-tab is-active"
@@ -221,6 +222,17 @@
               data-tab="projects"
             >
               Projects
+            </button>
+            <button
+              type="button"
+              class="work-tab"
+              id="work-tab-archive"
+              role="tab"
+              aria-controls="work-panel-archive"
+              aria-selected="false"
+              data-tab="archive"
+            >
+              Archive
             </button>
           </div>
 
@@ -305,10 +317,10 @@
           >
             <div class="work-panel-head">
               <div>
-                <h2>Project Archive</h2>
+                <h2>Projects</h2>
                 <p class="list-intro">Apps, robotics, hardware, and course builds beyond the featured work.</p>
               </div>
-              <p class="archive-count" aria-live="polite">11 projects</p>
+              <p class="archive-count" aria-live="polite">7 projects</p>
             </div>
             <div class="project-filter-bar" role="toolbar" aria-label="Project filters">
               <button type="button" class="project-filter is-active" data-filter="all" aria-pressed="true">All</button>
@@ -388,6 +400,24 @@
                   <span class="project-tech">Swift, ARKit LiDAR, Open3D, Trimesh, OpenCV</span>
                 </a>
               </article>
+            </div>
+          </section>
+          <section
+            class="work-panel"
+            id="work-panel-archive"
+            role="tabpanel"
+            aria-labelledby="work-tab-archive"
+            data-tab-panel="archive"
+            hidden
+          >
+              <div class="work-panel-head">
+                <div>
+                  <h2 id="project-archive-heading">Archive</h2>
+                  <p class="list-intro">Earlier work in computer vision, embedded systems, robotics, and hardware.</p>
+                </div>
+                <p class="archive-count" data-archived-count aria-live="polite">4 projects</p>
+              </div>
+              <div class="work-card-grid" data-archived-projects>
               <article class="work-card project-card" data-groups="software vision robotics">
                 <a href="projpages/project4.html" class="work-card-link">
                   <div class="project-link-top">
@@ -428,7 +458,7 @@
                   <span class="project-tech">Dual-source power switching, Motor transients, Capacitor tuning</span>
                 </a>
               </article>
-            </div>
+              </div>
           </section>
         </div>
       </section>
@@ -457,22 +487,21 @@
         return;
       }
 
-      const items = Array.from(archive.querySelectorAll(".project-card"));
+      const collections = [
+        { grid: archive, count: countEl },
+      ].filter(({ grid, count }) => grid && count);
 
       const updateArchive = (filter) => {
-        let visibleCount = 0;
-
-        items.forEach((item) => {
-          const groups = (item.dataset.groups || "").split(/\s+/).filter(Boolean);
-          const matches = filter === "all" || groups.includes(filter);
-          item.hidden = !matches;
-
-          if (matches) {
-            visibleCount += 1;
-          }
+        collections.forEach(({ grid, count }) => {
+          let visibleCount = 0;
+          grid.querySelectorAll(".project-card").forEach((item) => {
+            const groups = (item.dataset.groups || "").split(/\s+/).filter(Boolean);
+            const matches = filter === "all" || groups.includes(filter);
+            item.hidden = !matches;
+            if (matches) visibleCount += 1;
+          });
+          count.textContent = `${visibleCount} project${visibleCount === 1 ? "" : "s"}`;
         });
-
-        countEl.textContent = `${visibleCount} project${visibleCount === 1 ? "" : "s"}`;
       };
 
       const activateTab = (name, updateHash = false) => {
@@ -489,7 +518,7 @@
         });
 
         if (updateHash && window.history && typeof window.history.replaceState === "function") {
-          const hash = name === "projects" ? "#all-projects" : "#research-list";
+          const hash = { projects: "#all-projects", archive: "#archive", research: "#research-list" }[name];
           window.history.replaceState(null, "", hash);
         }
       };
@@ -525,7 +554,7 @@
       });
 
       const syncTabToHash = () => {
-        activateTab(window.location.hash === "#all-projects" ? "projects" : "research");
+        activateTab({ "#all-projects": "projects", "#archive": "archive" }[window.location.hash] || "research");
       };
 
       window.addEventListener("hashchange", syncTabToHash);

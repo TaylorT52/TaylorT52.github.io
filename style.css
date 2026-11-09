@@ -824,7 +824,7 @@ footer {
     letter-spacing: 0.07em;
 }
 
-.minimal-project.summer-page .project-hero h1 {
+.minimal-project.summer-page .summer-page-hero h1 {
     max-width: 22ch;
     color: var(--summer-accent);
     font-size: clamp(2rem, 4.8vw, 3.5rem);
@@ -1100,7 +1100,7 @@ footer {
         padding-top: 2rem;
     }
 
-    .minimal-project.summer-page .project-hero h1 {
+    .minimal-project.summer-page .summer-page-hero h1 {
         font-size: clamp(1.9rem, 10vw, 2.7rem);
     }
 
@@ -1230,7 +1230,7 @@ footer {
     text-transform: uppercase;
 }
 
-.summer-page .project-hero h1 {
+.summer-page .summer-page-hero h1 {
     max-width: 12ch;
     margin: 0;
     color: #fffaf0;
@@ -1604,7 +1604,7 @@ footer {
         padding-top: 3.8rem;
     }
 
-    .summer-page .project-hero h1 {
+    .summer-page .summer-page-hero h1 {
         font-size: clamp(2.8rem, 14vw, 4.4rem);
     }
 
@@ -4556,4 +4556,68 @@ footer {
   width: 100%;
   height: auto;
   border-radius: 12px;
+}
+
+/* Keep each printer update readable as one continuous entry. */
+.printer-page .printer-update {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--summer-line);
+}
+
+.minimal-project.printer-page .printer-update h3 {
+    margin: 0 0 1rem;
+}
+
+.printer-page .printer-update-copy {
+    max-width: 65ch;
+}
+
+.minimal-project.printer-page .printer-update-copy p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.printer-page .printer-photos {
+    margin-top: 1.25rem;
+    border-top: 1px solid var(--summer-line);
+    padding-top: 0.75rem;
+}
+
+.printer-page .printer-photos summary {
+    cursor: pointer;
+    color: var(--project-accent);
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+}
+
+.printer-page .printer-photos summary:focus-visible {
+    outline: 2px solid var(--project-accent);
+    outline-offset: 4px;
+}
+
+.printer-page .printer-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+.minimal-project.printer-page .printer-photo-grid figure {
+    width: auto;
+    min-width: 0;
+    margin: 0;
+}
+
+.minimal-project.printer-page .printer-photo-grid img {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    background: rgba(60, 95, 127, 0.04);
+}
+
+@media (max-width: 575px) {
+    .printer-page .printer-photo-grid {
+        grid-template-columns: 1fr;
+    }
 }

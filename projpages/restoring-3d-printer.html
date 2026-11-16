@@ -6,7 +6,7 @@
   <title>Restoring a 3D Printer - Taylor Tam</title>
   <meta
     name="description"
-    content="Restoring a second-hand Ender 3: extruder repairs, calibration, and the first successful test prints."
+    content="Restoring a second-hand Ender 3"
   />
   <link rel="canonical" href="https://me.taylortam.com/projpages/restoring-3d-printer.html" />
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=20260917c" />
@@ -31,6 +31,7 @@
     referrerpolicy="no-referrer"
   />
   <link rel="stylesheet" href="../style.css?v=20261109b" />
+  <link rel="stylesheet" href="../printer-explorer.css" />
 </head>
 <body class="minimal-project summer-page printer-page">
   <section class="hero project-hero">
@@ -50,39 +51,37 @@
   </section>
   <main class="container project-content">
     <section id="ender3" class="summer-project-section">
-      <p class="project-kicker">Repair log</p>
-      <h2>Ender 3 Printer</h2>
-      <p>
-        After the keyboard phase, naturally, I have to have a 3D printer phase. Right now, I have an Ender 3, and I&apos;m going to set it up and customize it over the summer.
-      </p>
-      <p>
-        Ender 3 printers are common open-source machines, but they are still fairly manual and a little rough around the edges. There is no automatic bed leveling by default, setup can be finicky, and getting consistently good prints usually takes iteration.
-      </p>
-      <p>
-        The goal of this section is to track upgrades, fixes, calibration notes, and what changes actually make the printer better over time.
-      </p>
-
-      <h3>What I&apos;m Tracking</h3>
-      <ul>
-        <li>Printer upgrades and quality-of-life improvements</li>
-        <li>Better calibration and more reliable print settings</li>
-        <li>Experiments with materials, parts, and workflows</li>
-      </ul>
-
-      <figure class="summer-project-hero-card">
-        <img src="../imgs/ender3.jpeg" alt="Ender 3 printer project" class="project-image summer-project-image" />
-        <figcaption>The starting point for the summer printer upgrade project.</figcaption>
-      </figure>
-
+      <p class="project-kicker">Explore</p>
+      <h2>My Ender3</h2>
+      <div class="printer-explorer">
+        <div class="printer-map">
+          <img src="../imgs/ender3.jpeg" alt="My Ender 3, with numbered points on the extruder, drive motor, print bed, and hotend" />
+          <button style="left:29%;top:39%" data-part="0" aria-label="1: Extruder repair" aria-pressed="true">1</button>
+          <button style="left:29%;top:44%" data-part="1" aria-label="2: Stepper motor and gear" aria-pressed="false">2</button>
+          <button style="left:48%;top:63%" data-part="2" aria-label="3: Calibration and first prints" aria-pressed="false">3</button>
+          <button style="left:69%;top:56%" data-part="3" aria-label="4: Planned hotend and leveling upgrades" aria-pressed="false">4</button>
+        </div>
+        <div class="printer-inspector">
+          <nav class="printer-part-list" aria-label="Printer parts">
+            <button data-part="0" aria-pressed="true">01 Extruder</button>
+            <button data-part="1" aria-pressed="false">02 Motor &amp; gear</button>
+            <button data-part="2" aria-pressed="false">03 Benchy!</button>
+            <button data-part="3" aria-pressed="false">04 Next upgrades</button>
+          </nav>
+          <div aria-live="polite" aria-atomic="true" id="printer-detail"></div>
+          <noscript><p>Read the full repair log below for all part details and photos.</p></noscript>
+        </div>
+      </div>
+      <h2 class="printer-log-title">The repair log</h2>
       <section class="printer-update">
         <p class="project-kicker">June 22</p>
         <h3>Getting the printer running</h3>
         <div class="printer-update-copy">
           <p>
-        The first signs of trouble showed up fast. I found the correct cable to plug my printer in, and after the moment of truth, nothing happened.
+        The first signs of trouble showed up...early, but what can you expect from a $50 printer of FB marketplace? I was all excited to print, found the correct cable to plug my printer in, and after the moment of truth... nothing happened.
       </p>
           <p>
-        The first step was to get the printer running. Unfortunately, with a seven-year-old second-hand printer, something was bound to go wrong, and a bearing for loading the PLA into the extruder broke off. So I ordered a replacement piece so I can start printing.
+        The first step was to get the printer running. Unfortunately, with a seven-year-old second-hand printer, something was bound to go wrong, and a bearing for loading the PLA into the extruder broke off. So I ordered a replacement piece so I could start printing.
       </p>
           <p>
         Next steps are getting a first successful print, adding automatic bed leveling, and setting up a Raspberry Pi server so I don&apos;t have to load files manually with an SD card.
@@ -118,11 +117,12 @@
           <p>Made a tiny mistake on the extruder piece. Turns out that, for an Ender3, there are two variants on the
         extruder stepper motor. One variant has a small screw that allows you to remove the gear, and another has a press-on
         gold gear you can&apos;t remove. I had the latter (unfortunately). So I reordered another extruder replacement matching the
-        stepper motor and gear I had, and replaced it!</p>
+        stepper motor and gear I had, and replaced it! As a software person, this was definitely a learning moment... </p>
           <p>
        This also came with a new stepper and the first gear component I mentioned--
         but the wasn't sticking, so I put some adhesive foam under the gear to make them mesh and I had a *working* extruder. I spent the red of the night
-        tuning some print settings to produce two prints the next day: a calibration cube and, of course, benchy.
+        tuning some print settings to produce two prints the next day: a calibration cube and, of course, benchy. I'm going to have to figure out a better fix for 
+        this at some point, but for now, the adhesive works.
 
       </p>
         </div>
@@ -175,10 +175,31 @@
             alt="Benchy test print on the Ender 3"
             class="project-image summer-project-image-sm" loading="lazy"
           />
-          <figcaption>Benchy, because it had to happen.</figcaption>
+          <figcaption>Benchy x</figcaption>
         </figure>
           </div>
         </details>
+      </section>
+      <section class="printer-update">
+        <p class="project-kicker">July 15</p>
+        <h3>In hot water with my hot end</h3>
+        <div class="printer-update-copy">
+          <p>Everything was going well! My next steps were to add a BLTouch sensor for automatic bed-leveling and begin working on my clipper installation. 
+            But, I started noticing some weird issues printing - primarily, some spaghettied prints and then certain parts of the print being super thin. 
+            It didn't look right, and I realized the nozzle was really clogged. 
+            
+            </p><p>I was lucky in that the previous owner had gifted a ton of nozzles, but as I got my 
+            socket wrench and started to try and dislodge the nozzle (burning myself a couple times, since you need to heat up the hotend, so the metal expands and you can get the nozzle out. 
+            Great design imo for locking the nozzle in, but terrible if your hotend is going to get clogged a lot...and it does...). Unfortunately, it was almost impossible to get out, since
+            molten plastic had been leaking out and effectively locked the nozzle into place. By the time I was able to get it out, I realized that the entire socket was
+            COMPLETELY stripped. ie., there would be no new nozzle going there.
+          </p>
+          <p>
+            My boyfriend had a another hotend, and I took out the old one and started to replace it with the new one.
+          </p>
+
+        </div>
+        
       </section>
       <div class="summer-live-updates" data-summer-updates="ender3"></div>
     </section>
@@ -211,5 +232,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../summer-updates.js?v=20260725b" defer></script>
+  <script src="../printer-explorer.js" defer></script>
 </body>
 </html>

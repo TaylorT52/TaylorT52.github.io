@@ -42,7 +42,7 @@
           <i class="fas fa-arrow-left me-2"></i>Back to Projects
         </a>
       </div>
-      <h1>Gesture-Controlled Nintendo Switch Hack</h1>
+      <h1>Gesture-Controlled Nintendo Switch</h1>
       <div class="project-tags">
         <span class="badge bg-primary">Computer Vision</span>
         <span class="badge bg-primary">YOLO</span>
@@ -67,19 +67,14 @@
     </p>
     
     <h2>Some Features</h2>
-    <ul>
-      <li><strong>Detection + Tracking:</strong> YOLOv8 hand detection followed by MediaPipe landmark extraction per frame.</li>
-      <li><strong>Gesture Classification:</strong> ORB + brute-force matcher with thresholded feature matches (>= 110) for command mapping.</li>
-      <li><strong>Controller Emulation:</strong> Reverse-engineered Nintendo's HID protocol to spoof a Switch Pro Controller/JoyCon device.</li>
-      <li><strong>Edge Deployment:</strong> End-to-end inference and command relay on NVIDIA Jetson Orin (Ubuntu 22.04).</li>
-      <li><strong>Measured Performance:</strong> 30 fps runtime with 165 ms average gesture-to-action latency.</li>
-    </ul>
-    
-    <h2>Technical Details</h2>
     <p>
-      Six Mario Kart controls were mapped to reference gestures and serialized to HID inputs after classification. The model stack was optimized for real-time gameplay, with YOLO handling robust hand localization, MediaPipe providing rotation-stable keypoints, and ORB matching adding lightweight geometric verification before transmission to the Switch.
+      I first detect hands in a frame using YOLOv8, followed by MediaPipe landmark extraction per-frame. Then, to classify gestures, 
+      I use ORB + a brute-force matcher with thresholded feature matches (>= 110) for command mapping against pre-imaged gesturse.
+      To transmit the controls, I think reverse-engineered Nintendo's HID protocol to spoof a Switch Pro Controller/JoyCon device, so that
+      my Nvidia Jetson Orin was able to communicate as the controller. And it worked! I was able to achieve 30 fps runtime with 165 ms average
+      gesture-to-action latency.
     </p>
-    
+
     <div class="project-navigation mt-5">
       <a href="../index.html#projects" class="btn btn-outline-primary">
         <i class="fas fa-arrow-left me-2"></i>Back to Projects

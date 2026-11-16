@@ -54,38 +54,23 @@
 
   <main class="container project-content">
     <div class="project-overview">
-      <img src="../imgs/ee108-synth.png" alt="Report overview for an FPGA polyphonic music synthesizer project" class="project-image mb-4" />
       <p class="lead">
-        Built for Stanford EE108, this Verilog music player reads songs from ROM and synthesizes polyphonic audio with weighted harmonics, ADSR dynamics, echo, stereo panning, and a past/present/future note display.
+        Verilog music player reads songs from ROM and synthesizes polyphonic audio with weighted harmonics, ADSR dynamics, echo, stereo panning, and a past/present/future note display.
+      </p>
+      <h2>Some Context</h2>
+      <p class="lead">
+        Well well, the CS major decided to branch out. Look out, there's probably a rift in the universe opening somewhere. After many, many AI classes, from 231n to 229, I was deciding to make 
+        a switch from CS AI to Systems. Mainly, I think that lower-level programming is more interesting, and if I'm not going to be doing model-training, I'd love to work on hardware-software optimization. 
+        Also, the application layer seems to be getting extremely saturated -- we know all of the b2b SaaS AI jokes, but they're real. I do believe that large AI labs will be able to crowd out a lot of early-stage application
+        layer startups. So! Long-winded way of saying, systems. 
+      </p>
+      <p>
+        I ultimately decided to take this awesome digital design class with Prof. Mitra (who is incredible -- read his research). It was an awesome introduction to basic logic gates, composing them into boolean expressions, 
+        understanding timing, and learning Verilog! And this was my final project.
       </p>
     </div>
 
-    <section class="project-snapshot">
-      <h2>At a Glance</h2>
-      <dl class="snapshot-grid">
-        <div class="snapshot-item">
-          <dt>Course</dt>
-          <dd>Stanford EE108 final project</dd>
-        </div>
-        <div class="snapshot-item">
-          <dt>Team</dt>
-          <dd>Taylor Tam, Benji Warburton, Danica Sun</dd>
-        </div>
-        <div class="snapshot-item">
-          <dt>Core Features</dt>
-          <dd>3-voice chords, harmonics, ADSR, echo, stereo, note display</dd>
-        </div>
-        <div class="snapshot-item">
-          <dt>Tools</dt>
-          <dd>Verilog, Vivado, FPGA audio pipeline, VGA display logic</dd>
-        </div>
-      </dl>
-      <div class="project-link-row">
-        <a href="../papers/ee108-final-report.pdf" target="_blank" rel="noopener noreferrer" class="project-link-btn">Final report</a>
-        <a href="../papers/ee108-planning.pdf" target="_blank" rel="noopener noreferrer" class="project-link-btn">Planning doc</a>
-        <a href="../papers/ee108-waveforms.pdf" target="_blank" rel="noopener noreferrer" class="project-link-btn">Waveform verification</a>
-      </div>
-    </section>
+
 
     <h2>System Overview</h2>
     <p>
@@ -110,12 +95,7 @@
 
     <h2>Timing and Design Tradeoffs</h2>
     <p>
-      According to the final report, the 100 MHz logic, 25 MHz display, and 48 MHz codec domains each met intra-domain timing. Remaining violations were isolated to unsynchronized 100 MHz to 25 MHz crossings, which made clock-domain behavior the main systems risk rather than any single synthesis block. The project also forced careful overflow handling in the chord mixer and echo stage so parallel features did not degrade audio quality.
-    </p>
-
-    <h2>Why This Project Matters</h2>
-    <p>
-      This was a good end-to-end digital systems project: ROM control, signal synthesis, display logic, verification, and timing all had to work together. The most useful takeaway was learning to treat synchronization, sample timing, and interface consistency as part of the product itself, not as cleanup after the main functionality works.
+      The 100 MHz logic, 25 MHz display, and 48 MHz codec domains each met intra-domain timing. Remaining violations were isolated to unsynchronized 100 MHz to 25 MHz crossings, which made clock-domain behavior the main systems risk rather than any single synthesis block. The project also forced careful overflow handling in the chord mixer and echo stage so parallel features did not degrade audio quality.
     </p>
 
     <div class="project-navigation mt-5">

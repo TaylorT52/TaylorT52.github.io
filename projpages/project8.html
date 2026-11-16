@@ -52,6 +52,16 @@
             </p>
         </div>
         <h2>Project Overview</h2>
+         <p>
+            This was for CS153: Frontier Systems -- yes, we did something other than meeting Jensen Huang (**I'm back in Nov 2026, this aged well). 
+            For our project, we were thinking about something really annoying: random validation errors in webforms. I bet at some point, you've had to call
+            your grandma and help her fill out some random form, where she can't figure out what she's doing wrong... So we thought, what if we made these forms more 
+            conversational? 
+        </p>
+        <p>
+            As a side note, this project uses Discord. Ovbiously, your grandma will not be on Discord (& if she is, kudos to you, but she's probably then not calling you up for help with this). 
+            So, consider this a fun proof-of-concept about conversational webforms. 
+        </p>
         <p>
             Developers define question schemas in a portal, then embed a generated widget on any site. The widget
             collects a Discord ID, starts a DM-based question flow, and enforces format/validation constraints via agent
@@ -59,19 +69,12 @@
         </p>
 
         <h2>Key Features</h2>
-        <ul>
-            <li><strong>Embeddable Widget:</strong> Drop-in JS snippet with no heavy SDK requirements.</li>
-            <li><strong>Agent Orchestration:</strong> Discord.js workflow for prompt sequencing, retries, and state.</li>
-            <li><strong>Input Validation:</strong> Mistral-backed conversational correction with schema-aware formatting.</li>
-            <li><strong>Webhook Delivery:</strong> Final responses emitted as structured JSON for downstream automation.</li>
-        </ul>
-
-        <h2>Technical Details</h2>
         <p>
-            Architecture: widget -> Node/Express API -> Discord.js agent worker -> Mistral inference -> webhook emitter.
-            Session state tracks question order, validated field types, and completion status before posting final
-            payloads.
+            We built an embeddable, drop-in JS snippet with no heavy SDK requirements that replaces the form. Then, this triggers a Discord.js workflow for 
+            prompt sequencing, retries, and state. For input validation, we just Mistral-backed conversational correction with schema-aware formatting. And, we use
+            a webhook to deliver the final responses as sturctured JSON responses.
         </p>
+
         <div class="project-navigation mt-5">
             <a href="../index.html#projects" class="btn btn-outline-primary">
                 <i class="fas fa-arrow-left me-2"></i>Back to Projects

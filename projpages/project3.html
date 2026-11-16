@@ -60,6 +60,12 @@
         iOS pipeline that captures foot geometry with ARKit LiDAR, reconstructs a dense mesh with Open3D (alpha-shape + smoothing), and exports print-ready insole models (OBJ/STL) in about 2 minutes.
       </p>
     </div>
+
+    <h2>Some Context</h2>
+    <p>
+      We need a fun project for Treehacks! Apparently, my boyfriend had flat feet ... so, why not build out a fun proof-of-concept for 3D printing custom-fit shoe insoles? 
+      This was also the start of a fun 3d printer obessession... see later work.
+    </p>
     
     <h2>Project Overview</h2>
     <p>
@@ -67,16 +73,16 @@
     </p>
     
     <h2>Some Features</h2>
-    <ul>
-      <li><strong>ARKit LiDAR Capture:</strong> Uses iPhone LiDAR to acquire high-resolution foot surface data.</li>
-      <li><strong>Mesh Reconstruction:</strong> Generates printable geometry with Open3D alpha-shape meshing and smoothing.</li>
-      <li><strong>Insole Synthesis:</strong> Applies Trimesh-based inversion/shaping and OpenCV contour refinement.</li>
-      <li><strong>Print Pipeline:</strong> Produces OBJ/STL files compatible with low-cost FDM printers in about 2 minutes.</li>
-    </ul>
-    
-    <h2>Learn More</h2>
     <p>
-      For additional details and to view the project submission, visit the devpost 
+      Using iPhone's ARKit LiDAR capture, we use iPhone LiDAR to acquire high-resolution foot surface data. We convert this into printable geometry with Open3D alpha-shape meshing and smoothing (this took awhile to fine-tune). 
+      To do this, we apply Trimesh-based inversion/shaping and OpenCV contour refinement. This products OBJ/STL files compatible with low-cost FDM printers in about 2 minutes.
+      With our app, it was possible to scan your foot, generate the .obj in 2 minutes, and then print on a $50 3D printer. While we definitely would not be using PLA in a final product, this was a great proof-of-concept 
+      and, I'm sure, would look even better had we had better printing materials.
+    </p>
+
+    <h2>Devpost</h2>
+    <p>
+      For additional details, visit the devpost!
       <a href="https://devpost.com/software/solemate-9jmhuf?ref_content=user-portfolio&ref_feature=in_progress" target="_blank" rel="noopener noreferrer">Devpost</a>.
     </p>
     

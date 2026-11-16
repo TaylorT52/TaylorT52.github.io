@@ -65,21 +65,40 @@
     <p>
       The system runs on Ubuntu/Jetson Nano using Python, TensorFlow, OpenCV, and Argus API for camera ingestion. It captures biopsy images at 1080 x 720, applies quality/background filtering, tiles frames into 256 x 256 patches, performs U-Net inference, and aggregates per-pixel fat masks into a final steatosis percentage.
     </p>
+
+    <h2>Some Context</h2>
+    <p>
+      For liver transplants, pathologists need to be available around-the-clock, even in rural hospitals. This is ovbiously unsustainable, and with modern technology, should be fixable. 
+      That's what we set out to do at the Melcher Lab for this project. 
+    </p>
+    <p>
+      The scope of this project was ovbiously narrower: figuring out how to automate analysis of percent steatosis (liver fattiness) in donor livers using computer vision. 
+      Thanks to Marc Melcher -- the goat! -- we had access to a large dataset of liver images, non-normalized, but at least the same dimensions. These had been taken by pathologists
+      at Stanford Hospital, and were our dataset for this project. 
+    </p>
+    <p>
+      There were several steps to normalize the dataset. I wrote a computer vision pipeline (my first!), intially using lapalacian filters to measure image blurriness, and rule out images that were too blurry.
+      This served two purposes; first, we didn't want to train on unreliable images, and, if we wanted to create a system for doctors to upload images, then we didn't want to attempt to analyze blurry images. 
+      If an image was too blurry, we should advise a doctor to retake the slide image. The second consideration was whether there was enough tissue in an image to actually make an accurate analysis. I was able to determine
+      this by using contours and blobs. And bang, we had a filtered dataset plus a way to advise pathologists/doctors whether their images were quality.
+    </p>
+    <p>
+      We then developed a UNet that could accurately predict percent steatosis in an image based off our dataset. But, we wanted this to be usable for surgeons. So I developed a device using an Nvidia Jetson
+      (thanks again Marc!) with a camera and screen. This allowed a pathologist to say, take a microscope image, then run the model on-device and recieve back an analysis. Back in those dark days before Chat, I also developed
+      an iOS app that would allow surgeons with pre-imaged liver slides to upload them, analyze for quality, and then recieve back an analysis from our model in the cloud. (I'm particularly proud of this one -- if you know
+      how annoying figuring out XCode was back in 2021). 
+    </p>
+    <p>
+      And that was that! We had an accurate prediction model for percent steatosis, and a device as well as an app for it. Great project with the Melcher Lab!
+    </p>
     
     <h2>Validation (Frontiers 2023)</h2>
     <p>
       In the <em>Frontiers in Transplantation</em> brief report 
       (<a href="https://www.frontiersin.org/journals/transplantation/articles/10.3389/frtra.2023.1206085/full#B11" target="_blank" rel="noopener noreferrer">full article</a>), device-based scores on 33 donor-liver biopsy slides showed strong correlation with prior cloud analysis (r = 0.9399), demonstrating that near-real-time steatosis assessment can be performed offline at the donor site.
     </p>
-    
-    <h2>Some Features:</h2>
-    <ul>
-      <li><strong>Hardware:</strong> Jetson Nano GPU + 12.3 MP IMX477 microscope camera in a portable 3D-printed form factor.</li>
-      <li><strong>Segmentation Pipeline:</strong> Compressed U-Net inference on 256 x 256 tiles with per-pixel fat-vacuole masking.</li>
-      <li><strong>Quantification Logic:</strong> Automated artifact/background filtering and averaged steatosis scoring across sampled fields.</li>
-      <li><strong>Deployment Model:</strong> Offline on-device inference for low-connectivity settings, with optional cloud upload for downstream analysis.</li>
-      <li><strong>Empirical Validation:</strong> Device and cloud outputs were strongly correlated on 33 slides (r = 0.9399).</li>
-    </ul>
+  
+
     
     <div class="project-navigation mt-5">
       <a href="../index.html#research" class="btn btn-outline-primary">

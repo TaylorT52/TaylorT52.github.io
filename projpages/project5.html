@@ -66,25 +66,27 @@
       The system preprocesses radiographs, predicts likely device classes, and then performs class-conditional bounding-box inference. Separating classification from localization reduced false positives and improved reliability under varied acquisition conditions.
     </p>
     
-    <h2>Key Features</h2>
-    <ul>
-      <li><strong>Dual-Model Design:</strong> Multi-label screening stage + YOLOv5 localization stage.</li>
-      <li><strong>Detection Quality:</strong> ~97% accuracy on diverse chest x-ray validation cohorts.</li>
-      <li><strong>Structured Outputs:</strong> Per-class confidence scores and pixel-space bounding boxes.</li>
-      <li><strong>Clinical Robustness:</strong> Stable performance across different image quality and device configurations.</li>
-    </ul>
-    
-    <h2>Technical Details</h2>
+    <h2>Some details</h2>
+    <p> 
+      It was high school sophomore year summer, and like any kid, I was wondering deeply about the future applications of computer vision to radiology. Just kidding -- I think I was still playing Minecraft.
+      But, I got to be part of the first cohort of Stanford AIMI's amazing research internship, with my two favorite CS friends, Sarah and Aarav.  
+    </p>
     <p>
+      As a team, we were given CheXpert, Stanford Medicine's dataset of x-rays containing medical devices inside them. Our objective was to figure out whether there were devices in the x-rays,
+      and if so, which devices they were. 
+    </p>
+    <p> 
+      Our first objective was to develop a simple classifier that would allow us to determine *whether* there were devices in the x-rays. After getting through the weeds, for the first time, 
+      of dealing with massive amounts of data and strange image formats, we got started on finetuning ResNet50, and adding on a classification head.
+    </p>
+    <p> 
+      Next, we wanted to know which devices were present. We finetuned YOLOv5, obtaining 97% accuracy for bounding boxes on a diverse set of chest x-ray validation cohorts.
       Training and evaluation were implemented in Python with dataset augmentation and threshold tuning to balance precision/recall. At inference time, the classifier gates candidate classes and the detector returns localized boxes, enabling downstream QA and faster radiology review workflows.
     </p>
-    
-    <h2>Internship Insights: Radiology and ResNets</h2>
+
+    <h2>But...</h2>
     <p>
-      During my Stanford AIMI internship, I also fine-tuned ResNet baselines for chest x-ray tasks to benchmark calibration and failure modes. Those experiments informed preprocessing and error-analysis choices for this localization pipeline.
-    </p>
-    <p>
-      You can read more about these insights on 
+      Hey, we wrote a cool article here! 
       <a href="https://medium.com/@stanfordaimi/radiology-and-resnets-our-summer-internship-experience-with-aimi-abda196494d7" target="_blank" rel="noopener noreferrer">this Medium article</a>.
     </p>
     

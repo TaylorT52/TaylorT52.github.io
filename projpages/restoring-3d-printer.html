@@ -31,7 +31,7 @@
     referrerpolicy="no-referrer"
   />
   <link rel="stylesheet" href="../style.css?v=20261109b" />
-  <link rel="stylesheet" href="../printer-explorer.css" />
+  <link rel="stylesheet" href="../printer-explorer.css?v=20261117c" />
 </head>
 <body class="minimal-project summer-page printer-page">
   <section class="hero project-hero">
@@ -54,19 +54,30 @@
       <p class="project-kicker">Explore</p>
       <h2>My Ender3</h2>
       <div class="printer-explorer">
+        <div class="printer-visual">
+          <div id="printer-3d" hidden></div>
+          <p id="printer-3d-status" role="status">The interactive 3D model is loading. You can explore the photo below.</p>
+          <div class="printer-view-controls" aria-label="3D view controls">
+            <button data-view="left" disabled aria-label="Rotate left">↶</button>
+            <button data-view="right" disabled aria-label="Rotate right">↷</button>
+            <button data-view="in" disabled aria-label="Zoom in">+</button>
+            <button data-view="out" disabled aria-label="Zoom out">−</button>
+            <button data-view="reset" disabled>Reset view</button>
+          </div>
         <div class="printer-map">
           <img src="../imgs/ender3.jpeg" alt="My Ender 3, with numbered points on the extruder, drive motor, print bed, and hotend" />
           <button style="left:29%;top:39%" data-part="0" aria-label="1: Extruder repair" aria-pressed="true">1</button>
           <button style="left:29%;top:44%" data-part="1" aria-label="2: Stepper motor and gear" aria-pressed="false">2</button>
           <button style="left:48%;top:63%" data-part="2" aria-label="3: Calibration and first prints" aria-pressed="false">3</button>
-          <button style="left:69%;top:56%" data-part="3" aria-label="4: Planned hotend and leveling upgrades" aria-pressed="false">4</button>
+          <button style="left:69%;top:56%" data-part="3" aria-label="4: Hotend repair" aria-pressed="false">4</button>
+        </div>
         </div>
         <div class="printer-inspector">
           <nav class="printer-part-list" aria-label="Printer parts">
             <button data-part="0" aria-pressed="true">01 Extruder</button>
             <button data-part="1" aria-pressed="false">02 Motor &amp; gear</button>
             <button data-part="2" aria-pressed="false">03 Benchy!</button>
-            <button data-part="3" aria-pressed="false">04 Next upgrades</button>
+            <button data-part="3" aria-pressed="false">04 Hotend</button>
           </nav>
           <div aria-live="polite" aria-atomic="true" id="printer-detail"></div>
           <noscript><p>Read the full repair log below for all part details and photos.</p></noscript>
@@ -232,6 +243,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../summer-updates.js?v=20260725b" defer></script>
-  <script src="../printer-explorer.js" defer></script>
+  <script src="../printer-explorer.js?v=20261117c" defer></script>
+  <script type="importmap">{"imports":{"three":"../vendor/three/three.module.js","three/addons/":"../vendor/three/"}}</script>
+  <script type="module" src="../printer-3d.js?v=20261117c"></script>
 </body>
 </html>

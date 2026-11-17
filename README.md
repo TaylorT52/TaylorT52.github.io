@@ -22,3 +22,10 @@ It also requires a random per-computer token stored in
 `.summer-portal-token`, which is excluded from Git. Publishing uses this
 computer's existing Git credentials. Press Control-C in the terminal to stop
 the portal.
+
+## Rust project page
+
+Edit `projpages/rust-deep-learning.html` to write the Rust project story. The
+`Project notes` section has a marked paragraph to replace; add ordinary HTML
+paragraphs and sections as needed. The homepage card opens this page, and its
+**Read the paper** button links to `papers/cs231n-rust-apple-silicon.pdf`.

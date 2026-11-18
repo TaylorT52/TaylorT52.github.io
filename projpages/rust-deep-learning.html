@@ -535,6 +535,26 @@
       requires registers, threadgroup memory, and scheduling resources. If a threadgroup consumes too many resources, it can reduce the number that other threadgroups
       can simultaneously reside on the GPU.
     </p>
+    <figure class="my-4">
+      <a href="../imgs/rust_metal_improvements.png" target="_blank" rel="noopener noreferrer" aria-label="View Naive CPU vs. improved Metal chart at full size">
+        <img src="../imgs/rust_metal_improvements.png" alt="Comparison of naive CPU, unoptimized Metal, and optimized Metal for matrix multiplication, row sums, and a dense layer." width="2400" height="1520" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;" />
+      </a>
+      <figcaption>Comparison of naive CPU, unoptimized Metal, and optimized Metal for matrix multiplication, row sums, and a dense layer</figcaption>
+    </figure>
+
+    <h3>
+      [10] My first model with the library! 
+    </h3>
+    <p>
+      I went for a classic - MNIST - trained with my library! 
+    </p>
+    <figure class="my-4">
+      <a href="../imgs/mnist_training.png" target="_blank" rel="noopener noreferrer" aria-label="View Training on MNIST chart at full size">
+        <img src="../imgs/mnist_training.png" alt="MNIST training from scratch in Rust: loss and accuracy over five epochs, with final test accuracy of 95.97 percent." width="2400" height="1300" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;" />
+      </a>
+      <figcaption>MNIST training from scratch in Rust: loss and accuracy over five epochs, with final test accuracy of 95.97 percent</figcaption>
+    </figure>
+
     <div class="project-navigation mt-5">
       <a href="../index.html#all-projects" class="btn btn-outline-primary">
         <i class="fas fa-arrow-left me-2"></i>Back to Projects

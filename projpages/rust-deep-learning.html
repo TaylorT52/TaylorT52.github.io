@@ -326,6 +326,78 @@
         </table>
       </div>
     </section>
+    <h3>
+      [06] Writing the Metal Backend
+    </h3>
+    <p>
+      I've also been really interested in on-device inference and models. We all know Sam Altman's comment on "local ram sitting idle in our computers is a waste..."
+      (I particularly like <a href="https://x.com/FrancoisChauba1/status/2116006293219794981" target="_blank" rel="noopener noreferrer">this response</a>), but I do really believe in the ability of on-device models
+      to disrupt token-based cloud providers. Our computers already have capable hardware, and many everyday requests don’t need a massive cloud-hosted model!
+       Token costs add up, and I think local models could offer a compelling alternative for many tasks. Running inference on-device can also keep data local 
+       and avoid network latency, while still delivering useful results on limited hardware. So, as a fun exercise, I wanted to explore what it would take to optimize this library for Apple Silicon.
+    </p>
+      <ol>
+        <li class="mb-2"><code>Tensor2::&lt;Metal, Shape2&lt;2, 3&gt;&gt;::new(values)</code> still validates the input length.
+          The type-level shape rules in <code>ops.rs</code> are shared by both backends.</li>
+        <li class="mb-2"><code>Metal::from_vec</code> allocates an <code>MTLBuffer</code> in shared storage and copies the
+          vector's values into it. Shared means both CPU and GPU can access the buffer;
+          it does <strong>not</strong> mean converting the original Vec is zero-copy.</li>
+        <li class="mb-2"><code>MetalStorage</code> owns the buffer, logical element count, and a reference to the
+          context. The buffer is private so callers cannot mutate it while a GPU reads it.</li>
+        <li class="mb-2">A typed operation calls the corresponding <code>Backend</code> method, which validates
+          buffer lengths and forwards to <code>Metal::run</code>.</li>
+        <li class="mb-2"><code>run</code> allocates a fresh output, binds input/output buffers and a small <code>Params</code>
+          structure, and submits a compute command. One cached pipeline handles all
+          operations using an operation selector uniform across the dispatch.</li>
+        <li class="mb-2">It waits for completion and checks command status before returning. Consequently,
+          <code>to_vec</code> can safely copy the completed output into a Rust Vec.</li>
+      </ol>
+      <p>
+        The context contains the device, command queue, and compiled pipeline. It is
+        initialized once per calling thread. <code>Rc</code> deliberately makes storage thread-local
+        (not Send/Sync); multi-thread sharing is future work. Shader source is compiled at
+        first use, rather than during Cargo's build. Fast math is disabled.
+      </p>
+
+      <h3>What each GPU thread does</h3>
+      <div class="rust-operations-wrap" role="region" aria-label="Metal GPU thread operations" tabindex="0">
+        <table class="rust-operations">
+          <thead>
+            <tr><th scope="col">Operation</th><th scope="col">Thread work</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">addition / subtraction / elemwisemul</th><td>Read the two elements at index <code>i</code> and write their sum, difference, or product</td></tr>
+            <tr><th scope="row">broadcast</th><td>Add <code>bias[i % N]</code> to <code>input[i]</code></td></tr>
+            <tr><th scope="row">relu</th><td>Replace a negative <code>input[i]</code> with zero; preserve other values</td></tr>
+            <tr><th scope="row">scalarmult</th><td>Multiply <code>input[i]</code> by the scalar</td></tr>
+            <tr><th scope="row">transpose</th><td>Move <code>input[i]</code> to <code>output[(i % N) * M + i / N]</code></td></tr>
+            <tr><th scope="row">matmul</th><td>Compute one output element by looping over <code>K</code> products</td></tr>
+            <tr><th scope="row">rowsum</th><td>Compute one output column by looping over <code>M</code> rows</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Threads are dispatched in groups of up to 256 (limited by the device pipeline).
+        The last group may have excess threads: the shader checks <code>i &gt;= count</code> before
+        accessing memory. Empty outputs skip dispatch; empty sums still produce zeros.
+      </p>
+
+    <figure class="my-4">
+      <a href="../imgs/metal_vs_cpu_naive.png" target="_blank" rel="noopener noreferrer"
+        aria-label="View the Metal versus CPU benchmark chart at full size">
+        <img src="../imgs/metal_vs_cpu_naive.png"
+          alt="CPU versus Metal benchmarks on an Apple M2 Pro: matrix multiplication latency and throughput, tensor operation latency, and dense-layer forward-pass latency. Metal improves larger matrix multiplication and dense-layer performance, while the naive CPU backend is faster for many elementwise operations."
+          width="960" height="642" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;" />
+      </a>
+    </figure>
+
+    <p>
+      So, on a pretty basic metal implementation versus a naive CPU, there are several outcomes here. First off, on matmul, 
+      CPU only wins up to 16x16, whereas metal wins from 64x64 onwards. At 512x512, the naive CPU takes around 456ms whereas metal
+      takes 2.67ms (x171 speedup). In terms of throughput, metal is at 101GFLOP/s, and naive CPU remains at 1GFLOP/s. However, for 
+      more simple operations like 1024x1024 addition, reLU, multiplication, and rowsums, the CPU wins. The only exceptionto this is transpose. 
+      On something more common, like a dense layer combining matmul, bias, and reLU, the naive CPU takes 42.8ms whereas metal is 1.22ms (x35 speedup).
+    </p>
 
     <div class="project-navigation mt-5">
       <a href="../index.html#all-projects" class="btn btn-outline-primary">

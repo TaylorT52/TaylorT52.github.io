@@ -23,6 +23,35 @@
   <!-- External CSS -->
   <link rel="stylesheet" href="../style.css?v=20260317" />
   <style>
+    .rust-operations-wrap {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+
+    .rust-operations {
+      width: 100%;
+      min-width: 580px;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .rust-operations th,
+    .rust-operations td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--line, #dadada);
+      vertical-align: top;
+    }
+
+    .rust-operations th {
+      font-weight: 600;
+    }
+
+    .rust-operations code {
+      color: inherit;
+      white-space: normal;
+    }
+
     .rust-image-sequence {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -276,10 +305,26 @@
     }
 }</code></pre>
       <p>
-        Ovbiously this is a straightforward, single-threaded CPU implementation.
+        Obviously this is a straightforward, single-threaded CPU implementation.
         It gives a nice working reference for checking a future Metal backend’s results;
-        it isn’t yet an optimized matrix multiplication library.
+        it isn’t yet an optimized matrix multiplication library. I implemented the backend for similar operations:
       </p>
+      <div class="rust-operations-wrap" role="region" aria-label="CPU backend operations" tabindex="0">
+        <table class="rust-operations">
+          <thead>
+            <tr><th scope="col">Operation</th><th scope="col">Shape rule</th><th scope="col">Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Row-broadcast addition</th><td><code>[B, N] + [1, N] → [B, N]</code></td><td>Add layer biases</td></tr>
+            <tr><th scope="row">ReLU</th><td><code>[M, N] → [M, N]</code></td><td>Activation between layers</td></tr>
+            <tr><th scope="row">Transpose</th><td><code>[M, N] → [N, M]</code></td><td>Compute weight and input gradients</td></tr>
+            <tr><th scope="row">Elementwise subtraction</th><td><code>[M, N] − [M, N] → [M, N]</code></td><td>Prediction errors and parameter updates</td></tr>
+            <tr><th scope="row">Scalar multiplication</th><td><code>[M, N] × f32 → [M, N]</code></td><td>Scale gradients by learning rate</td></tr>
+            <tr><th scope="row">Elementwise multiplication</th><td><code>[M, N] ⊙ [M, N] → [M, N]</code></td><td>Apply activation gradients</td></tr>
+            <tr><th scope="row">Sum over rows</th><td><code>[M, N] → [1, N]</code></td><td>Accumulate bias gradients</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <div class="project-navigation mt-5">

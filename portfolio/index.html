@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Selected Work — Taylor Tam</title>
+  <meta name="description" content="Selected engineering projects by Taylor Tam: shape-safe machine learning, compilers, clinical computer vision, and hardware." />
+  <link rel="canonical" href="https://me.taylortam.com/portfolio/" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="stylesheet" href="../style.css?v=20261109c" />
+  <link rel="stylesheet" href="portfolio.css" />
+</head>
+<body class="portfolio-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="portfolio-header">
+    <div class="portfolio-shell portfolio-nav">
+      <a class="portfolio-name" href="../">Taylor Tam<span> / selected work</span></a>
+      <nav aria-label="Portfolio navigation">
+        <a href="#selected">Projects</a>
+        <a href="../other-assets/Taylor%20Tam%20-%20Resume,%20AI.pdf" target="_blank" rel="noopener noreferrer">Resume ↗</a>
+        <a href="mailto:taylor52@stanford.edu">Email ↗</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="portfolio-shell">
+    <section class="portfolio-intro" aria-labelledby="intro-title">
+      <p class="portfolio-eyebrow">Stanford EE + CS · Previously at Apple</p>
+      <h1 id="intro-title">From types to tensors.<br />From code to hardware.</h1>
+      <div class="portfolio-intro-bottom">
+        <p>I’m Taylor. I build across systems, machine learning, and hardware. Here are three projects to start a conversation about how I think, build, and debug.</p>
+        <a class="portfolio-start" href="#selected">Explore selected work <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+    <section id="selected" aria-labelledby="selected-title">
+      <div class="portfolio-section-head"><h2 id="selected-title">Three projects, in depth</h2><span>01 — 03</span></div>
+      <article class="portfolio-feature">
+        <div class="portfolio-project-copy">
+          <p class="portfolio-eyebrow">01 / ML systems · Stanford CS231n</p>
+          <h3>Fail Fast,<br />Run Faster.</h3>
+          <p class="portfolio-subtitle">Shape-safe deep learning in Rust on Apple Silicon.</p>
+          <dl>
+            <dt>The problem</dt><dd>Tensor shape errors can interrupt model development and training.</dd>
+            <dt>The approach</dt><dd>Encode dimensions in Rust’s types and separate shape checking from backend execution.</dd>
+            <dt>The walkthrough</dt><dd>Library architecture, a compiler-rejected shape mismatch, and the path from a simple matmul to acceleration.</dd>
+          </dl>
+          <div class="portfolio-actions"><a class="portfolio-primary" href="../projpages/rust-deep-learning.html">Explore the project <span aria-hidden="true">↗</span></a><a href="../papers/cs231n-rust-apple-silicon.pdf" target="_blank" rel="noopener noreferrer">Read the paper ↗</a></div>
+          <p class="portfolio-stack">Rust / const generics / Metal</p>
+        </div>
+        <a class="portfolio-visual portfolio-visual-rust" href="../projpages/rust-deep-learning.html" aria-label="Explore the Rust library architecture">
+          <span class="portfolio-visual-label">01 / Architecture</span>
+          <img src="../imgs/Library%20Structure_%20Tensor%20API%20and%20Backend.png" alt="Tensor API validates shapes before passing operations to the compute backend." width="1774" height="887" />
+          <span class="portfolio-visual-footer">Catch the mismatch before the computation. <span aria-hidden="true">↗</span></span>
+        </a>
+      </article>
+      <article class="portfolio-feature">
+        <div class="portfolio-project-copy">
+          <p class="portfolio-eyebrow">02 / Compilers · Stanford CS143</p>
+          <h3>A COOL compiler.</h3>
+          <p class="portfolio-subtitle">From source text to executable MIPS.</p>
+          <dl>
+            <dt>The problem</dt><dd>Translate an object-oriented language while preserving its types and runtime behavior.</dd>
+            <dt>The approach</dt><dd>Build lexical analysis, parsing, semantic analysis, code generation, and optimization passes.</dd>
+            <dt>The walkthrough</dt><dd>Step through interactive compiler demos to see how each stage transforms the program.</dd>
+          </dl>
+          <div class="portfolio-actions"><a class="portfolio-primary" href="../projpages/project11.html">Explore the project <span aria-hidden="true">↗</span></a><a href="../projpages/project11.html#code-generation">Jump to the demo ↗</a></div>
+          <p class="portfolio-stack">C++ / MIPS / type systems</p>
+        </div>
+        <a class="portfolio-visual portfolio-visual-compiler" href="../projpages/project11.html#code-generation" aria-label="Open the interactive COOL compiler demo">
+          <span class="portfolio-visual-label">02 / Compilation pipeline</span>
+          <ol class="portfolio-pipeline">
+            <li><span>01</span> Source → tokens</li>
+            <li><span>02</span> Tokens → syntax tree</li>
+            <li><span>03</span> Types &amp; semantics</li>
+            <li><span>04</span> MIPS code generation</li>
+            <li><span>05</span> Optimization passes</li>
+          </ol>
+          <span class="portfolio-visual-footer">Follow a program through the compiler. <span aria-hidden="true">↗</span></span>
+        </a>
+      </article>
+      <article class="portfolio-feature">
+        <div class="portfolio-project-copy">
+          <p class="portfolio-eyebrow">03 / Clinical computer vision</p>
+          <h3>ML beyond<br />the notebook.</h3>
+          <p class="portfolio-subtitle">An automated liver tissue analysis pipeline.</p>
+          <dl>
+            <dt>The problem</dt><dd>Turn liver biopsy imagery into quantitative tissue analysis.</dd>
+            <dt>The approach</dt><dd>Combine tiled U-Net segmentation with on-device steatosis scoring on a Jetson Nano.</dd>
+            <dt>The walkthrough</dt><dd>Image processing, model deployment, and the practical constraints of an edge device.</dd>
+          </dl>
+          <div class="portfolio-actions"><a class="portfolio-primary" href="../projpages/project1.html">Explore the project <span aria-hidden="true">↗</span></a></div>
+          <p class="portfolio-stack">Python / TensorFlow / OpenCV / Jetson Nano</p>
+        </div>
+        <a class="portfolio-visual portfolio-visual-clinical" href="../projpages/project1.html" aria-label="Explore the liver tissue analysis pipeline">
+          <span class="portfolio-visual-label">03 / Tissue analysis</span>
+          <img src="../imgs/livers.png" alt="Liver tissue analysis project imagery." loading="lazy" />
+          <span class="portfolio-visual-footer">From biopsy images to on-device analysis. <span aria-hidden="true">↗</span></span>
+        </a>
+      </article>
+    </section>
+    <section class="portfolio-more" aria-labelledby="more-title">
+      <div class="portfolio-section-head"><h2 id="more-title">More to explore</h2><a href="../index.html#all-projects">All work ↗</a></div>
+      <div class="portfolio-more-grid">
+        <a href="../projpages/restoring-3d-printer.html"><span class="portfolio-eyebrow">Hardware / Interactive 3D</span><h3>Restoring an Ender 3 <span aria-hidden="true">↗</span></h3><p>Explore the printer and the repair stories behind its first successful prints.</p></a>
+        <a href="../projpages/project10.html"><span class="portfolio-eyebrow">Digital design / Audio</span><h3>FPGA music synthesizer <span aria-hidden="true">↗</span></h3><p>Polyphony, envelopes, echo, stereo panning, and a VGA note display.</p></a>
+        <a href="../projpages/project3.html"><span class="portfolio-eyebrow">iOS / 3D reconstruction</span><h3>Custom-fit insoles <span aria-hidden="true">↗</span></h3><p>Turning iPhone LiDAR scans into custom-fit insole geometry.</p></a>
+        <a href="../projpages/project5.html"><span class="portfolio-eyebrow">Medical AI / Vision</span><h3>Devices in chest X-rays <span aria-hidden="true">↗</span></h3><p>Detection and localization models for radiology workflows.</p></a>
+      </div>
+    </section>
+    <section class="portfolio-contact" aria-labelledby="contact-title">
+      <div><p class="portfolio-eyebrow">Let’s talk about the details.</p><h2 id="contact-title">What would you like to explore?</h2></div>
+      <div class="portfolio-actions"><a href="mailto:taylor52@stanford.edu">Email ↗</a><a href="https://github.com/TaylorT52" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="../other-assets/Taylor%20Tam%20-%20Resume,%20AI.pdf" target="_blank" rel="noopener noreferrer">Resume ↗</a></div>
+    </section>
+  </main>
+  <footer class="portfolio-footer portfolio-shell"><span>© 2026 Taylor Tam</span><a href="../">Back to personal site ↗</a></footer>
+</body>
+</html>

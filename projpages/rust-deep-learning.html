@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,37 +11,61 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=20260917c" />
   <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260917c" />
   <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-    crossorigin="anonymous"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
   <!-- Google Font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-    crossorigin="anonymous"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"
+    crossorigin="anonymous" />
   <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- External CSS -->
   <link rel="stylesheet" href="../style.css?v=20260317" />
   <style>
-    .rust-image-sequence { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: center; margin: 1.5rem 0 2rem; }
-    .rust-image-sequence img, .rust-meme img { display: block; width: 100%; height: auto; border-radius: 8px; }
-    .rust-meme-row { display: flex; align-items: center; gap: 1rem; margin: 2rem 0; }
-    .rust-meme { flex: 1.8; min-width: 0; margin: 0; }
-    .rust-meme--fc { flex: 1; }
-    @media (max-width: 640px) { .rust-image-sequence { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; } }
+    .rust-image-sequence {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      align-items: center;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .rust-image-sequence img,
+    .rust-meme img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .rust-meme-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .rust-meme {
+      flex: 1.8;
+      min-width: 0;
+      margin: 0;
+    }
+
+    .rust-meme--fc {
+      flex: 1;
+    }
+
+    @media (max-width: 640px) {
+      .rust-image-sequence {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin-inline: auto;
+      }
+    }
   </style>
 </head>
+
 <body class="minimal-project">
   <!-- Hero Section -->
   <section class="hero project-hero">
@@ -52,11 +77,12 @@
       </div>
       <h1>Fail Fast, Run Faster</h1>
       <div class="project-tags">
-        <span class="badge bg-primary">Stanford CS231n</span> <span class="badge bg-primary">Rust</span> <span class="badge bg-primary">Apple Silicon</span> <span class="badge bg-primary">Metal</span> 
+        <span class="badge bg-primary">Stanford CS231n</span> <span class="badge bg-primary">Rust</span> <span
+          class="badge bg-primary">Apple Silicon</span> <span class="badge bg-primary">Metal</span>
       </div>
     </div>
   </section>
-  
+
   <!-- Main Project Content -->
   <main class="container project-content">
     <div class="project-overview">
@@ -65,41 +91,64 @@
         Shape-safe deep learning in Rust on Apple Silicon.
       </p>
     </div>
-    
-    <p><a href="../papers/cs231n-rust-apple-silicon.pdf" class="btn btn-outline-primary" target="_blank" rel="noopener noreferrer">Read the paper (PDF) ↗</a></p>
+
+    <p><a href="../papers/cs231n-rust-apple-silicon.pdf" class="btn btn-outline-primary" target="_blank"
+        rel="noopener noreferrer">Read the paper (PDF) ↗</a></p>
     <!-- Write your project story here. Replace the paragraphs below and add sections as needed. -->
 
     <section class="summer-project-section">
       <h2>Project notes</h2>
       <!-- Add your write-up here using <p> paragraphs. -->
-      <p>If you've ever tried to train an ML model, you've CERTAINLY run into many, many tensor mismatches. If you haven't, you're probably the next Einstein, or honestly, better (so kudos!).
+      <p>If you've ever tried to train an ML model, you've CERTAINLY run into many, many tensor mismatches. If you
+        haven't, you're probably the next Einstein, or honestly, better (so kudos!).
         But nonetheless, this is a really. Annoying. Issue. Especially if you run into it deep into training.
       </p>
       <div class="rust-image-sequence" role="group" aria-label="The stages of waiting for model training">
-        <img src="../imgs/1.png" alt="Messages about leaving a model training overnight and finally finishing at 4:50 AM." loading="lazy" width="582" height="422" />
+        <img src="../imgs/1.png"
+          alt="Messages about leaving a model training overnight and finally finishing at 4:50 AM." loading="lazy"
+          width="582" height="422" />
         <img src="../imgs/2.png" alt="One week later…" loading="lazy" width="1070" height="738" />
-        <img src="../imgs/3.jpeg" alt="A crying reaction to the frustrations of model training." loading="lazy" width="556" height="500" />
+        <img src="../imgs/3.jpeg" alt="A crying reaction to the frustrations of model training." loading="lazy"
+          width="556" height="500" />
       </div>
-        <h3>From the ancient archives (a.k.a, StackOverflow)</h3>
-        <ul>
-          <li class="mb-2"><a href="https://discuss.pytorch.org/t/lstm-runtime-shape-error-in-evaluation-training-is-fine/118351" target="_blank" rel="noopener noreferrer">PyTorch Forums: LSTM shape error during evaluation, while training works</a></li>
-          <li class="mb-2"><a href="https://www.reddit.com/r/learnmachinelearning/comments/1gv0san/is_it_normal_to_struggle_with_tensor_shapes_when/" target="_blank" rel="noopener noreferrer">Reddit: Is it normal to struggle with tensor shapes?</a></li>
-          <li class="mb-2"><a href="https://discuss.pytorch.org/t/very-weird-error-of-shape-mismatch-between-same-exact-tensors/58128" target="_blank" rel="noopener noreferrer">PyTorch Forums: Shape mismatch between seemingly identical tensors</a></li>
-          <li class="mb-2"><a href="https://medium.com/data-science/machine-learning-the-great-stagnation-3a0f044e17e0" target="_blank" rel="noopener noreferrer">Medium: Machine Learning — The Great Stagnation</a></li>
-          <li class="mb-2"><a href="https://stackoverflow.com/questions/75966822/pytorch-mat1-and-mat2-shapes-cannot-be-multiplied-3328x13-and-9216x4096" target="_blank" rel="noopener noreferrer">Stack Overflow: PyTorch matrix shapes cannot be multiplied</a></li>
-        </ul>
+      <h3>From the ancient archives (a.k.a, StackOverflow)</h3>
+      <ul>
+        <li class="mb-2"><a
+            href="https://discuss.pytorch.org/t/lstm-runtime-shape-error-in-evaluation-training-is-fine/118351"
+            target="_blank" rel="noopener noreferrer">PyTorch Forums: LSTM shape error during evaluation, while training
+            works</a></li>
+        <li class="mb-2"><a
+            href="https://www.reddit.com/r/learnmachinelearning/comments/1gv0san/is_it_normal_to_struggle_with_tensor_shapes_when/"
+            target="_blank" rel="noopener noreferrer">Reddit: Is it normal to struggle with tensor shapes?</a></li>
+        <li class="mb-2"><a
+            href="https://discuss.pytorch.org/t/very-weird-error-of-shape-mismatch-between-same-exact-tensors/58128"
+            target="_blank" rel="noopener noreferrer">PyTorch Forums: Shape mismatch between seemingly identical
+            tensors</a></li>
+        <li class="mb-2"><a href="https://medium.com/data-science/machine-learning-the-great-stagnation-3a0f044e17e0"
+            target="_blank" rel="noopener noreferrer">Medium: Machine Learning — The Great Stagnation</a></li>
+        <li class="mb-2"><a
+            href="https://stackoverflow.com/questions/75966822/pytorch-mat1-and-mat2-shapes-cannot-be-multiplied-3328x13-and-9216x4096"
+            target="_blank" rel="noopener noreferrer">Stack Overflow: PyTorch matrix shapes cannot be multiplied</a>
+        </li>
+      </ul>
 
       <div class="rust-meme-row">
-      <figure class="rust-meme">
-        <img src="../imgs/matmul.png" alt="Astronaut meme: Wait, so you're telling me it's all matrix multiplications? Always has been." loading="lazy" width="1748" height="968" />
-      </figure>
-      <figure class="rust-meme rust-meme--fc">
-        <img src="../imgs/fclayer.png" alt="Flex Tape meme: using an FC layer to patch a tensor size mismatch error." loading="lazy" width="1090" height="1088" />
-      </figure>
+        <figure class="rust-meme">
+          <img src="../imgs/matmul.png"
+            alt="Astronaut meme: Wait, so you're telling me it's all matrix multiplications? Always has been."
+            loading="lazy" width="1748" height="968" />
+        </figure>
+        <figure class="rust-meme rust-meme--fc">
+          <img src="../imgs/fclayer.png" alt="Flex Tape meme: using an FC layer to patch a tensor size mismatch error."
+            loading="lazy" width="1090" height="1088" />
+        </figure>
       </div>
-      <p>In all seriousness, some of these errors don't emerge until the final FC layer in some crazy, deep neural network. 
-        While that's a waste of compute, energy, and money, it's worst of all a waste of time! My friend and I were following Rust's development, 
-        and we noticed a cool feature -- const-generics. Back in freshman spring, these were a nightly feature of rust (so, a bit iffy, but cool), and 
+      <p>In all seriousness, some of these errors don't emerge until the final FC layer in some crazy, deep neural
+        network.
+        While that's a waste of compute, energy, and money, it's worst of all a waste of time! My friend and I were
+        following Rust's development,
+        and we noticed a cool feature -- const-generics. Back in freshman spring, these were a nightly feature of rust
+        (so, a bit iffy, but cool), and
         we figure that this could be a cool and interesting proof-of-concept for shape-safe deep learning.
       </p>
       <div class="rust-related-reading mt-4">
@@ -109,45 +158,64 @@
     <section class="summer-project-section">
       <h2>Project Log</h2>
       <h3>[01] Getting started with Rust</h3>
-      <p>Oh, Rust. This was not easy to learn before LLMs were "good." A couple challenges here: first off, LLMs (Spring, 2025) were not that great at understanding new languages. 
-        Secondly, as a nightly feature, const-generics were not yet 'trained on.' So this required some good ol-fashioned learning.
-        But, the reason that this is specifically possible with Rust is because it's a compiled language! Meaning, we have an initial pass 
-        ensuring correctness, resolving dependencies, and then actually generating machine code. This lets us express rules for 
+      <p>Oh, Rust. This was not easy to learn before LLMs were "good." A couple challenges here: first off, LLMs
+        (Spring, 2025) were not that great at understanding new languages.
+        Secondly, as a nightly feature, const-generics were not yet 'trained on.' So this required some good
+        ol-fashioned learning.
+        But, the reason that this is specifically possible with Rust is because it's a compiled language! Meaning, we
+        have an initial pass
+        ensuring correctness, resolving dependencies, and then actually generating machine code. This lets us express
+        rules for
         compatible shapes and reject operations that 'break' rules before spending hours training a model.
       </p>
       <p>
-        I wanna also add an additional note, re: languages. There is ovbiously a reason Python is the primary ML language--tooling (CUDA, etc.) was built out extremely
-        early for it, it's easy to write, and, socially weird if you're not writing ML code in Python. But I'm anticipating a sort of shift here. At some point, 
-        and ovbiously further ahead, does it matter if a language is easy to write with LLMs? If we're able to build out tooling early, even for languages
-        that are 'harder' to write, can we reap more benefits of those languages without worrying about usability? Just a thought. This was pre the 'post-language-barrier' anyways,
+        I wanna also add an additional note, re: languages. There is ovbiously a reason Python is the primary ML
+        language--tooling (CUDA, etc.) was built out extremely
+        early for it, it's easy to write, and, socially weird if you're not writing ML code in Python. But I'm
+        anticipating a sort of shift here. At some point,
+        and ovbiously further ahead, does it matter if a language is easy to write with LLMs? If we're able to build out
+        tooling early, even for languages
+        that are 'harder' to write, can we reap more benefits of those languages without worrying about usability? Just
+        a thought. This was pre the 'post-language-barrier' anyways,
         so I did experience some form of unique torture writing a CNN in Rust, so don't call me unempathetic.
       </p>
       <h3>[02] Designing the Library</h3>
       <p>
-        First was designing the structure of the library. We figured that the best design would be to 
-        build out a high-level tensor API that was called for shape-checking, then a separate backend call that actually executes.
+        First was designing the structure of the library. We figured that the best design would be to
+        build out a high-level tensor API that was called for shape-checking, then a separate backend call that actually
+        executes.
       </p>
       <figure class="my-4">
-        <a href="../imgs/Library%20Structure_%20Tensor%20API%20and%20Backend.png" target="_blank" rel="noopener noreferrer" aria-label="View the library structure diagram at full size">
-          <img src="../imgs/Library%20Structure_%20Tensor%20API%20and%20Backend.png" alt="Library structure: user code calls the Tensor API to check tensor shapes, then the backend executes the operation and returns a tensor result." width="1774" height="887" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;" />
+        <a href="../imgs/Library%20Structure_%20Tensor%20API%20and%20Backend.png" target="_blank"
+          rel="noopener noreferrer" aria-label="View the library structure diagram at full size">
+          <img src="../imgs/Library%20Structure_%20Tensor%20API%20and%20Backend.png"
+            alt="Library structure: user code calls the Tensor API to check tensor shapes, then the backend executes the operation and returns a tensor result."
+            width="1774" height="887" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;" />
         </a>
       </figure>
-        <p> 
-        Based on that design, we'd want to design some tensor system allowing a call like <code>Tensor2&lt;B, Shape2&lt;M, N&gt;&gt;</code>, where B would
-        allow for backend selection, and M, N would behave as matrix dimensions. The reason we'd have something like 'Type2,' is 
-        because it was definitely easier to start with something more easily-defined and shape-check-able, like a 2d tensor, versus higher-level dimensions (to start).
-        </p>
-        <p>
-          So, this involves defining a couple things in <code>src/</code> <code>Shape2</code> and <code>Tensor2</code>. This will be separately defined
-          from <code>backend/</code>, <code>nn/</code>, <code>ops/</code>.
-        </p>
+      <p>
+        Based on that design, we'd want to design some tensor system allowing a call like
+        <code>Tensor2&lt;B, Shape2&lt;M, N&gt;&gt;</code>, where B would
+        allow for backend selection, and M, N would behave as matrix dimensions. The reason we'd have something like
+        'Type2,' is
+        because it was definitely easier to start with something more easily-defined and shape-check-able, like a 2d
+        tensor, versus higher-level dimensions (to start).
+      </p>
+      <p>
+        So, this involves defining a couple things in <code>src/</code> <code>Shape2</code> and <code>Tensor2</code>.
+        This will be separately defined
+        from <code>backend/</code>, <code>nn/</code>, <code>ops/</code>.
+      </p>
       <figure class="my-4">
-        <a href="../imgs/Lavender%20Module%20Dependency%20Graph.png" target="_blank" rel="noopener noreferrer" aria-label="View the module dependency graph at full size">
-          <img src="../imgs/Lavender%20Module%20Dependency%20Graph.png" alt="Module dependency graph: lib.rs exposes the tensor, shape, ops, nn, and backend modules, with shared error types in error.rs." width="1672" height="941" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;" />
+        <a href="../imgs/Lavender%20Module%20Dependency%20Graph.png" target="_blank" rel="noopener noreferrer"
+          aria-label="View the module dependency graph at full size">
+          <img src="../imgs/Lavender%20Module%20Dependency%20Graph.png"
+            alt="Module dependency graph: lib.rs exposes the tensor, shape, ops, nn, and backend modules, with shared error types in error.rs."
+            width="1672" height="941" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;" />
         </a>
       </figure>
       <h3>[03] Writing <code>Shape2</code>, <code>Tensor2</code></h3>
-      <p> 
+      <p>
         This was my first great experiment writing in Rust! I started with <code>Shape2</code>, a tiny struct
         that carries two dimensions as const-generics. This doesn't store any tensor data--the dimensions are part
         of the type itself, so <code>Shape2&lt;2,3&gt;</code> and <code>Shape2&lt;3,2&gt;</code> are different types.
@@ -157,39 +225,47 @@
         By doing this, we're able to ensure that the constructor checks the vector lengths match for multiplication.
       </p>
       <p>
-        With that foundation, I could express shape rules directly in function signatures. So, when defining an operation, 
-        we could say that multiplication accepts <code>Tensor2&lt;M, K&gt;</code> and <code>Tensor2&lt;K, N&gt;</code> and outputs <code>Tensor2&lt;M,N&gt;</code>. 
+        With that foundation, I could express shape rules directly in function signatures. So, when defining an
+        operation,
+        we could say that multiplication accepts <code>Tensor2&lt;M, K&gt;</code> and <code>Tensor2&lt;K, N&gt;</code>
+        and outputs <code>Tensor2&lt;M,N&gt;</code>.
         This is baked into the <i>function defintion</i>, so the inner dimensions have to agree for the code to compile.
       </p>
       <h3>[04] Writing Operations</h3>
       <p>
-        With <code>Shape2</code> and <code>Tensor2</code> in place, the next natural thing was to write multiplications like matmul. 
-        Matmul is natural because it's easy to check whether it's legal to multiply--the inner dimensions simply have to match. So, as stated
+        With <code>Shape2</code> and <code>Tensor2</code> in place, the next natural thing was to write multiplications
+        like matmul.
+        Matmul is natural because it's easy to check whether it's legal to multiply--the inner dimensions simply have to
+        match. So, as stated
         above, it's possible to bake this check into the defintion as follows:
-         </p>
-        <pre><code>pub fn matmul&lt;const M: usize, const K: usize, const N: usize&gt;(
+      </p>
+      <pre><code>pub fn matmul&lt;const M: usize, const K: usize, const N: usize&gt;(
     left: &amp;Tensor2&lt;M, K&gt;,
     right: &amp;Tensor2&lt;K, N&gt;,
 ) -&gt; Result&lt;Tensor2&lt;M, N&gt;, &amp;'static str&gt;</code></pre>
-  <p>      
-  If two tensors share that inner K value, then they fit this signature. But if they don't, then
-          Rust simply can't satisfy the signature. This turns matmul into a rule that Rust can enforce. 
-          For the actual computation, I started with three nested loops over the rows, columns, and shared dimension, 
-          storing the result in a flat vector. This gave us a straightforward implementation to check our results 
-          against before tackling backend acceleration.
-     </p>
+      <p>
+        If two tensors share that inner K value, then they fit this signature. But if they don't, then
+        Rust simply can't satisfy the signature. This turns matmul into a rule that Rust can enforce.
+        For the actual computation, I started with three nested loops over the rows, columns, and shared dimension,
+        storing the result in a flat vector. This gave us a straightforward implementation to check our results
+        against before tackling backend acceleration.
+      </p>
       <figure class="my-4">
-        <a href="../imgs/Screenshot%202026-11-17%20at%203.34.45%E2%80%AFPM.png" target="_blank" rel="noopener noreferrer" aria-label="View the Rust shape mismatch compiler error at full size">
-          <img src="../imgs/Screenshot%202026-11-17%20at%203.34.45%E2%80%AFPM.png" alt="Rust cargo check rejects a matmul call with error E0308: mismatched types, expected an inner dimension of 3 but found 5." width="1718" height="616" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;" />
+        <a href="../imgs/Screenshot%202026-11-17%20at%203.34.45%E2%80%AFPM.png" target="_blank"
+          rel="noopener noreferrer" aria-label="View the Rust shape mismatch compiler error at full size">
+          <img src="../imgs/Screenshot%202026-11-17%20at%203.34.45%E2%80%AFPM.png"
+            alt="Rust cargo check rejects a matmul call with error E0308: mismatched types, expected an inner dimension of 3 but found 5."
+            width="1718" height="616" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;" />
         </a>
-      </figure> 
+      </figure>
       <h3>
         [05] Separating shape checks from execution
       </h3>
       <p>
         By the way this structured, we have to write a CPU execution backend. So, a naive CPU backend would
-        store the tensor values in ordinary memory and multiply them using Rust loops. The CPU backend first checks storage lengths
-         and allocates that result, filled with zeros. Then it computes each output element:
+        store the tensor values in ordinary memory and multiply them using Rust loops. The CPU backend first checks
+        storage lengths
+        and allocates that result, filled with zeros. Then it computes each output element:
       </p>
       <pre><code>for i in 0..m {
     for j in 0..n {
@@ -199,38 +275,42 @@
         }
     }
 }</code></pre>
-  <p>
-    Ovbiously this is a straightforward, single-threaded CPU implementation.
-     It gives a nice working reference for checking a future Metal backend’s results; 
-     it isn’t yet an optimized matrix multiplication library.
-  </p>
+      <p>
+        Ovbiously this is a straightforward, single-threaded CPU implementation.
+        It gives a nice working reference for checking a future Metal backend’s results;
+        it isn’t yet an optimized matrix multiplication library.
+      </p>
     </section>
-    
+
     <div class="project-navigation mt-5">
       <a href="../index.html#all-projects" class="btn btn-outline-primary">
         <i class="fas fa-arrow-left me-2"></i>Back to Projects
       </a>
     </div>
   </main>
-  
+
   <!-- Footer -->
   <footer>
     <div class="container">
       <div class="footer-content">
         <div class="footer-buttons mb-4">
-          <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/TaylorT52" class="btn btn-outline-light me-3" target="_blank"
+            rel="noopener noreferrer">
             <i class="fab fa-github me-2"></i>GitHub
           </a>
-          <a href="https://www.linkedin.com/in/taylortam52/" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/taylortam52/" class="btn btn-outline-light" target="_blank"
+            rel="noopener noreferrer">
             <i class="fab fa-linkedin me-2"></i>LinkedIn
           </a>
         </div>
-        <p class="copyright mb-0">&copy; 2026 Taylor Tam <span class="bullet">•</span> Built with <i class="fas fa-heart text-danger mx-1"></i></p>
+        <p class="copyright mb-0">&copy; 2026 Taylor Tam <span class="bullet">•</span> Built with <i
+            class="fas fa-heart text-danger mx-1"></i></p>
       </div>
     </div>
   </footer>
-  
+
   <!-- Bootstrap JS Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

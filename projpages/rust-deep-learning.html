@@ -92,6 +92,23 @@
         margin-inline: auto;
       }
     }
+
+    .metal-aid { margin: 1.5rem 0 2rem; padding: 20px; border: 1px solid var(--line, #dadada); border-radius: 8px; background: #f3f4f2; color: #26332d; }
+    .metal-aid figcaption { margin-bottom: 16px; font-weight: 600; font-size: .85rem; }
+    .metal-flow { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; font-size: .8rem; }
+    .metal-box,.metal-flow>code { padding: 10px 12px; border: 1px solid #c4cec5; background: #fff; border-radius: 4px; text-align: center; }
+    .metal-aid code { color: #3c5f7f; }
+    .metal-bindings { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 16px; font-size: .75rem; }
+    .metal-bindings>span { border-top: 2px solid #3c5f7f; padding: 8px; }
+    .metal-group { border: 1px dashed #829583; padding: 14px; font-size: .8rem; }
+    .metal-threads { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)) 2fr; gap: 5px; margin: 12px 0; }
+    .metal-threads>span { background: #e0e3de; padding: 8px 2px; text-align: center; }
+    .metal-threads .useful-thread { background: #3c5f7f; color: white; }
+    .metal-group p,.metal-aid-note { margin: 10px 0 0; font-size: .75rem; }
+    .metal-additions { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 8px; }
+    .metal-additions>div { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 10px 3px; background: white; border: 1px solid #c4cec5; font-size: .75rem; }
+    .metal-wait { margin-top: 18px; }
+    @media(max-width:600px) { .metal-additions { grid-template-columns: repeat(3,minmax(0,1fr)); } .metal-aid { padding: 12px; } }
   </style>
 </head>
 
@@ -327,15 +344,90 @@
       </div>
     </section>
     <h3>
-      [06] Writing the Metal Backend
+      [06] Metal & Unified Memory Architectures (Why They're Exciting!)
     </h3>
     <p>
       I've also been really interested in on-device inference and models. We all know Sam Altman's comment on "local ram sitting idle in our computers is a waste..."
       (I particularly like <a href="https://x.com/FrancoisChauba1/status/2116006293219794981" target="_blank" rel="noopener noreferrer">this response</a>), but I do really believe in the ability of on-device models
       to disrupt token-based cloud providers. Our computers already have capable hardware, and many everyday requests don’t need a massive cloud-hosted model!
-       Token costs add up, and I think local models could offer a compelling alternative for many tasks. Running inference on-device can also keep data local 
+       Token costs add up, and I think local models could offer a compelling alternative for many tasks. Running inference on-device can also keep data local
        and avoid network latency, while still delivering useful results on limited hardware. So, as a fun exercise, I wanted to explore what it would take to optimize this library for Apple Silicon.
     </p>
+    <p>
+      I find Apple Silicon really exciting because of its unified memory architecture. The concept here is that, normally,
+      you have a CPU, GPU, RAM, and VRAM. This means that when you're performing operations, you need to copy data over from
+      CPU memory <i>to</i> GPU memory. Ovbiously, this takes time. But, Apple Silicon has a unified memory architecture,
+      meaning that CPU and GPU have a shared underlying memory. The CPU and GPU can work on the same buffers without
+      requiring transfers between separate memory pools. For LLM inference, this is really exciting! Model weights, ovbiously,
+      occupy lots of memory; generating tokens means repeatedly accessing those weights (memory bandwith is frequently a bottleneck)
+      and a unified memory structure can accomodate models that wouldn't usually fit into discrete GPU VRAM.
+    </p>
+    <h3>
+      [07] A Simple Metal Example
+    </h3>
+    <p>
+      Ok, so let's say that we have two 2x3 tensors, A and B, and we're trying to add them together.
+      On the naive CPU, we write this as a loop.
+      <pre><code class="language-rust">
+        for i in 0..a.len() {
+          output[i] = a[i] + b[i];
+        }
+    </code></pre>
+    </p>
+    <p>
+      On a GPU, we want to assign each addition to a different GPU thread. So we need to make the data accessible
+      to the GPU, tell the GPU what to execute, tell the GPU how many threads to launch, and then wait for the result.
+    </p>
+    <p>
+      We have the <code>from_vec</code> function. This first retrieves the GPU context (containing what we need to 'communicate' with
+      the GPU: device - which device am I using?, queue - where do I submit my work?, pipeline - which program does the GPU execute?).
+      Secondly we allocate memory, which creates a metal buffer that the CPU and GPU can both access. This is essentially a low-level memory
+      copy from a plain Rust vector to an MTLBuffer.
+    </p>
+    <p>
+      For, say, the addition function, I'm calling something like
+      <pre><code class="language-rust">
+        fn addition(
+            a: &MetalStorage,
+            b: &MetalStorage,
+            m: usize,
+            n: usize,
+        ) -> Result<MetalStorage, &'static str> {
+            Self::run(0, a, Some(b), m, 0, n, 0.0)
+        }
+    </code></pre>
+    </p>
+    <p>
+      Notice here, we're not describing actual addition. Instead, we've basically created a small set of
+      operation codes telling the GPU kernel which operations to perform.
+    </p>
+    <figure class="metal-aid"><div class="metal-flow"><code>add(a, b)</code><span aria-hidden="true">→</span><code>Params { op: ADD }</code><span aria-hidden="true">→</span><span class="metal-box">GPU kernel selects addition</span></div></figure>
+    <p>
+      <code>run</code> is where all the magic happens. Here, we're confirming tensor size, making sure both buffers
+      belong to the same context, and then constructing a params structure which tells the GPU how to interpret the buffer.
+      Then, we create a series of 'instructions' for the GPU to execute. The command queue recieves the work to be executed;
+      the buffer contains a collection of commands; the GPU encoder provides an interface for executing those commands; and the pipeline
+      eventually will contain the compiled GPU code to execute. So we tell the GPU where our data is through 'buffer binding,' so
+      it knows where to read inputs, write outputs, and what parameters to use.
+    </p>
+    <figure class="metal-aid"><div class="metal-flow"><span class="metal-box">Validate shapes<br />and context</span><span aria-hidden="true">→</span><span class="metal-box">Command buffer<br /><small>Encoder records work</small></span><span aria-hidden="true">→</span><span class="metal-box">Queue submits<br />GPU runs pipeline</span></div><div class="metal-bindings"><span>Bind inputs <code>A</code> + <code>B</code></span><span>Bind output <code>C</code></span><span>Bind <code>Params</code></span></div></figure>
+    <p>
+      Then we've gotta launch the GPU threads! (#exciting!) First, we've gotta understand threadgroups: these are organized
+      hierarchically in a grid, which contains many threadgroups, each of which contains many threads.
+      We can have a max of 256 threads per threadgroup (or fewer, if the hardware limit is lower). So let's say for six-element
+      matrix addition, we might launch 256 threads but only 6 have useful work! This is why CPUs are actually faster for some smaller work.
+    </p>
+    <figure class="metal-aid"><figcaption>A grid contains threadgroups; each group contains threads</figcaption><div class="metal-group"><span>Example threadgroup · 256 threads dispatched</span><div class="metal-threads"><span class="useful-thread">0</span><span class="useful-thread">1</span><span class="useful-thread">2</span><span class="useful-thread">3</span><span class="useful-thread">4</span><span class="useful-thread">5</span><span>6…255</span></div><p>6 threads compute · 250 return at <code>i &gt;= count</code></p></div><p class="metal-aid-note">Illustrative full-size group: actual dispatch size depends on how the backend schedules work. Other threadgroups cover larger outputs.</p></figure>
+    <p>
+      When we dispatch our kernel, each GPU kernel recieves a unique index. And in our example addition case,
+      each thread will perform one addition. The GPU executes these in parallel, while the CPU is blocked and waiting
+      for the result. Our trade-off here is that correctness and memory management are much easier, but there <i>is</i> synchronization
+      overhead to these operations.
+    </p>
+    <figure class="metal-aid"><figcaption>Each GPU thread handles one element</figcaption><div class="metal-additions"><div><small>Thread 0</small><code>1 + 10</code><span>↓</span><code>C[0] = 11</code></div><div><small>Thread 1</small><code>2 + 20</code><span>↓</span><code>C[1] = 22</code></div><div><small>Thread 2</small><code>3 + 30</code><span>↓</span><code>C[2] = 33</code></div><div><small>Thread 3</small><code>4 + 40</code><span>↓</span><code>C[3] = 44</code></div><div><small>Thread 4</small><code>5 + 50</code><span>↓</span><code>C[4] = 55</code></div><div><small>Thread 5</small><code>6 + 60</code><span>↓</span><code>C[5] = 66</code></div></div><div class="metal-flow metal-wait"><span class="metal-box">CPU submits</span><span>→ waits for GPU completion →</span><span class="metal-box">Result ready</span></div></figure>
+    <h3>
+      [08] The Whole Metal Backend
+    </h3>
       <ol>
         <li class="mb-2"><code>Tensor2::&lt;Metal, Shape2&lt;2, 3&gt;&gt;::new(values)</code> still validates the input length.
           The type-level shape rules in <code>ops.rs</code> are shared by both backends.</li>
@@ -392,10 +484,10 @@
     </figure>
 
     <p>
-      So, on a pretty basic metal implementation versus a naive CPU, there are several outcomes here. First off, on matmul, 
+      So, on a pretty basic metal implementation versus a naive CPU, there are several outcomes here. First off, on matmul,
       CPU only wins up to 16x16, whereas metal wins from 64x64 onwards. At 512x512, the naive CPU takes around 456ms whereas metal
-      takes 2.67ms (x171 speedup). In terms of throughput, metal is at 101GFLOP/s, and naive CPU remains at 1GFLOP/s. However, for 
-      more simple operations like 1024x1024 addition, reLU, multiplication, and rowsums, the CPU wins. The only exceptionto this is transpose. 
+      takes 2.67ms (x171 speedup). In terms of throughput, metal is at 101GFLOP/s, and naive CPU remains at 1GFLOP/s. However, for
+      more simple operations like 1024x1024 addition, reLU, multiplication, and rowsums, the CPU wins. The only exceptionto this is transpose.
       On something more common, like a dense layer combining matmul, bias, and reLU, the naive CPU takes 42.8ms whereas metal is 1.22ms (x35 speedup).
     </p>
 

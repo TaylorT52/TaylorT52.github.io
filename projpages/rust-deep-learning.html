@@ -426,7 +426,7 @@
     </p>
     <figure class="metal-aid"><figcaption>Each GPU thread handles one element</figcaption><div class="metal-additions"><div><small>Thread 0</small><code>1 + 10</code><span>↓</span><code>C[0] = 11</code></div><div><small>Thread 1</small><code>2 + 20</code><span>↓</span><code>C[1] = 22</code></div><div><small>Thread 2</small><code>3 + 30</code><span>↓</span><code>C[2] = 33</code></div><div><small>Thread 3</small><code>4 + 40</code><span>↓</span><code>C[3] = 44</code></div><div><small>Thread 4</small><code>5 + 50</code><span>↓</span><code>C[4] = 55</code></div><div><small>Thread 5</small><code>6 + 60</code><span>↓</span><code>C[5] = 66</code></div></div><div class="metal-flow metal-wait"><span class="metal-box">CPU submits</span><span>→ waits for GPU completion →</span><span class="metal-box">Result ready</span></div></figure>
     <h3>
-      [08] The Whole Metal Backend
+      [08] The Whole (Stupid) Metal Backend
     </h3>
       <ol>
         <li class="mb-2"><code>Tensor2::&lt;Metal, Shape2&lt;2, 3&gt;&gt;::new(values)</code> still validates the input length.
@@ -490,7 +490,51 @@
       more simple operations like 1024x1024 addition, reLU, multiplication, and rowsums, the CPU wins. The only exceptionto this is transpose.
       On something more common, like a dense layer combining matmul, bias, and reLU, the naive CPU takes 42.8ms whereas metal is 1.22ms (x35 speedup).
     </p>
-
+    <h3>
+      [09] Let's Optimize!
+    </h3>
+    <p>
+      Ok, so above we're basically using the GPU as a glorified calculator (no one tell Jensen!) But, we can achieve significant speedups
+      by managing how we schedule computation, memory access, and how threads cooperate. There are a couple major operations here: command-batching, 
+      kernel fusion, tiled GEMM, parallel row sums, and threadgroup tuning. Let's go through it! 
+    </p>
+    <p>
+      Batching. Initially, we had the CPU waiting (blocked) while waiting for GPU results. So imagine you're computing a dense NN layer, <code>Y = RELU(Xw+b)</code>. 
+      This would require three operations, three buffers, and three wait times! ick! With batching, we can execute all of these in the same command buffer. To be clear, 
+      these aren't all parallelized! Outputs still have chained dependencies on another; we're eliminating unnecessary synchronization, communication, and therefore, 
+      overhead between the CPU and GPU. 
+    </p>
+    <p>
+      Kernel fusion. Batching helps scheduling overhead, but kernel fusion improves how the GPU actually <i>does math</i>. Let's consider two operations:
+      <pre><code class="language-rust">
+        let y = broadcast(&input, &bias)?;
+        let y = relu(&y)?;
+    </code></pre>
+    </p>
+    <p>
+      So the first kernel (unoptimized) performs <code>output[i] = input[i] + bias[i % n];</code>, and the second performs <code>output[i] = max(0.0f, input[i]);</code>.
+      The principle here is simple - why not just combine them? <code>output[i] = max(0.0f, input[i] + bias[i % n]);</code> is the same! This matters because
+      <i>memory access is expensive</i>. Reading and writing millions of floating point values is stupid when you can keep temp values in a GPU register.
+    </p>
+    <p>
+      My peresonal fav: Tiled GEMM!!!! In a naive GPU implementation, each GPU thread computes one exact output element. This is paralleized, but each thread
+      is repeatedly requesting the same values from memory. If they could share the data (let's say, they both want data from row A of the matrix), then it'd be much faster.
+      Just like CPUs have registers, caches, and RAM, GPUs have a memory hierarchy. Simplified, and from fastest to slowest, these are 
+      registers (private per-thread), threadgroup memory (shared by cooperating threads), hardware caches (auto-managed), and device memory (unified RAM on Silicon).
+      Here, we want to use threadgroup memory because we can control what a group of GPU threads shares. Instead of treating a matmul like one huge problem, 
+      we chunk it into 16x16 tiles. Each threadgroup contains 256 threads and computes one 16x16 tile of the output matrix. Ultimately this increases
+      <b>arithmetic intensity</b> (the amount of computation performed compared to data transferred from device memory).
+    </p>
+    <p>
+      Parallel row sums. Sometimes an individual GPU thread is doing too much work. Let's say you have a matrix with 10,000 rows and 32 columns. 
+      In a naive approach, we'd launch 32 threads performing 10,000 operations, which is a huge waste of GPU parallelism. Instead we can assign multiple
+      threads to a column where each thread sums a subset of the rows - this is called a tree
+    </p>
+    <p>
+      Threadgroup size tuning. GPU hardware executes in smaller groups called SIMD groups -- larger groups aren't necessarily faster, also. Each threadgroup
+      requires registers, threadgroup memory, and scheduling resources. If a threadgroup consumes too many resources, it can reduce the number that other threadgroups
+      can simultaneously reside on the GPU.
+    </p>
     <div class="project-navigation mt-5">
       <a href="../index.html#all-projects" class="btn btn-outline-primary">
         <i class="fas fa-arrow-left me-2"></i>Back to Projects

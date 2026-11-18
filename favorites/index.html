@@ -11,15 +11,15 @@
   <link rel="stylesheet" href="favorites.css" />
 </head>
 <body class="minimal-home favorites-page">
-  <a class="back-link" href="../">← Back</a>
+  <a class="back-link" href="../index.html">← Back</a>
   <main class="mac-stage" aria-label="Favorite projects">
     <div class="macintosh">
       <div class="screen-bezel">
         <div class="mac-screen">
-          <div class="menu-bar"><span class="menu-mark" aria-hidden="true">π</span><h1>My favorites</h1><span class="menu-right" aria-hidden="true">File &nbsp; View</span></div>
+          <div class="menu-bar"><span class="menu-mark" aria-hidden="true">π</span><h1>made by taylor</h1><span class="menu-right" aria-hidden="true">File &nbsp; View</span></div>
           <section class="finder-window" aria-labelledby="window-title">
             <div class="window-titlebar"><span class="window-square" aria-hidden="true"></span><h2 id="window-title">Selected projects</h2></div>
-            <div class="window-info"><span>3 items</span><span>Made by Taylor</span></div>
+            <div class="window-info"><span>4 items</span><span>Made by Taylor</span></div>
             <nav class="project-files" aria-label="Open a project">
               <a class="project-file" href="../projpages/rust-deep-learning.html">
                 <svg class="file-icon" viewBox="0 0 56 64" aria-hidden="true"><path d="M8 2h27l13 13v47H8z"/><path d="M35 2v14h13"/><path d="m22 28-7 7 7 7m12-14 7 7-7 7m-4-18-5 24"/></svg>
@@ -33,6 +33,13 @@
                 <svg class="file-icon" viewBox="0 0 56 64" aria-hidden="true"><path d="M8 2h27l13 13v47H8z"/><path d="M35 2v14h13"/><path d="M16 53V25h24v28M13 53h30M16 31h24M28 31v7m-3 0h6l-3 4zM21 49v-5h14v5z"/></svg>
                 <span>3D printer<br />restoration</span>
               </a>
+              <div class="apple-character">
+              <button class="project-file apple-project" type="button" aria-expanded="false" aria-controls="apple-bubble">
+                <svg class="file-icon happy-mac" viewBox="0 0 56 64" aria-hidden="true"><path d="M8 2h40v54H8z"/><path d="M14 8h28v30H14zM18 46h6m8 0h10M12 56v6h32v-6M21 17v5m14-5v5M22 28v3h12v-3"/></svg>
+                <span>Apple</span>
+              </button>
+              <p id="apple-bubble" class="speech-bubble" hidden>Let’s talk about it!</p>
+              </div>
             </nav>
             <div class="window-bottom" aria-hidden="true"><span></span><i></i></div>
           </section>
@@ -43,5 +50,20 @@
       <div class="case-foot" aria-hidden="true"><span class="power-light"></span><span class="vents"></span></div>
     </div>
   </main>
+  <script>
+    const appleButton = document.querySelector('.apple-project');
+    const appleBubble = document.getElementById('apple-bubble');
+    const setBubble = (open) => {
+      appleBubble.hidden = !open;
+      appleButton.setAttribute('aria-expanded', String(open));
+    };
+    appleButton.addEventListener('click', () => setBubble(appleBubble.hidden));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setBubble(false);
+    });
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.apple-character')) setBubble(false);
+    });
+  </script>
 </body>
 </html>

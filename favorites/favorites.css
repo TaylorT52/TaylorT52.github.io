@@ -50,3 +50,57 @@ button.project-file{appearance:none;border:0;background:none;color:inherit;font-
 .speech-bubble::after{content:"";position:absolute;right:32px;bottom:-6px;width:10px;height:8px;background:#f1f3e9;clip-path:polygon(0 0,100% 0,0 100%)}
 .speech-bubble[hidden]{display:none}
 @media(max-width:520px){.project-files{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 6px}.speech-bubble{max-width:150px}.speech-bubble::before{right:40%}.speech-bubble::after{right:calc(40% + 2px)}}
+
+/* A little balloon drifting over the desktop; opens the high-altitude balloon project. */
+.mac-screen{position:relative}
+.desktop-balloon{position:absolute;right:22px;bottom:14px;width:36px;z-index:3;animation:balloon-float 4.5s ease-in-out infinite}
+.desktop-balloon svg{display:block;width:100%;height:auto;fill:#f1f3e9;stroke:#343c31;stroke-width:2;stroke-linejoin:miter;stroke-linecap:square;overflow:visible}
+.desktop-balloon .balloon-shine,.desktop-balloon .balloon-string{fill:none}
+.desktop-balloon:hover svg path:first-child,.desktop-balloon:focus-visible svg path:first-child{fill:#d0d9c4}
+@keyframes balloon-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media(prefers-reduced-motion:reduce){.desktop-balloon{animation:none}}
+@media(max-width:520px){.desktop-balloon{right:12px;width:30px}}
+
+/* Easter egg: type "launch" or press the power light. */
+button.power-light{appearance:none;border:0;padding:0;cursor:url("cursor-hand.svg") 10 2,pointer}
+button.power-light:hover,button.power-light:focus-visible{background:#a8c58c;box-shadow:0 0 6px #a8c58c}
+button.power-light:focus-visible{outline:2px solid #343c31;outline-offset:3px}
+.desktop-balloon.launching{animation:balloon-launch 4.2s ease-in forwards;pointer-events:none}
+@keyframes balloon-launch{0%{transform:translateY(0);opacity:1}85%{opacity:1}100%{transform:translateY(-420px) scale(.6);opacity:0}}
+.telemetry{position:absolute;left:14px;bottom:14px;z-index:4;width:200px;background:#e6eadc;border:2px solid #343c31;box-shadow:3px 3px 0 #343c31;font-size:10px}
+.telemetry[hidden]{display:none}
+.telemetry .window-titlebar{height:22px;padding:3px}
+.telemetry .window-titlebar h2{font-size:10px;line-height:16px}
+.telemetry .window-square{width:9px;height:9px;left:7px}
+.telemetry dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0;padding:8px 10px}
+.telemetry dt{font-weight:600}
+.telemetry dd{margin:0}
+@media(prefers-reduced-motion:reduce){.desktop-balloon.launching{animation:none;opacity:0}}
+@media(max-width:520px){.telemetry{left:8px;bottom:8px;width:170px}}
+
+/* The payload drops on a parachute after the burst and hides an egg. */
+.payload{position:absolute;right:96px;bottom:12px;z-index:3;width:40px;padding:0;border:0;background:none;appearance:none;cursor:url("cursor-hand.svg") 10 2,pointer;animation:payload-drop 3.8s cubic-bezier(.2,.6,.4,1) both}
+.payload[hidden]{display:none}
+.payload svg{display:block;width:100%;height:auto;fill:#f1f3e9;stroke:#343c31;stroke-width:2;stroke-linejoin:miter;stroke-linecap:square;overflow:visible}
+.payload .shroud,.payload .box-line{fill:none}
+.payload .payload-box{fill:#d0d9c4}
+.payload .chute,.payload .shroud{transition:opacity .4s,transform .4s;transform-origin:20px 48px}
+.payload.landed .chute,.payload.landed .shroud{opacity:0;transform:scaleY(.3) rotate(25deg)}
+.payload.landed{animation:payload-wobble 1.6s ease-in-out infinite}
+.payload:hover .payload-box,.payload:focus-visible .payload-box{fill:#a8c58c}
+.payload:focus-visible{outline:2px solid #343c31;outline-offset:4px}
+@keyframes payload-drop{0%{transform:translate(30px,-360px) rotate(8deg)}35%{transform:translate(-14px,-230px) rotate(-6deg)}70%{transform:translate(10px,-90px) rotate(4deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes payload-wobble{0%,100%{transform:rotate(0)}10%{transform:rotate(-6deg)}20%{transform:rotate(5deg)}30%{transform:rotate(0)}}
+.egg-window{position:absolute;left:50%;top:50%;z-index:5;width:min(250px,calc(100% - 24px));transform:translate(-50%,-50%);background:#e6eadc;border:2px solid #343c31;box-shadow:3px 3px 0 #343c31;text-align:center}
+.egg-window[hidden]{display:none}
+.egg-body{padding:14px 14px 12px}
+.egg-body p{margin:8px 0 0;font-size:11px;line-height:1.5}
+.egg-body .egg-note{font-size:10px}
+.egg{width:40px;height:50px;fill:#f1f3e9;stroke:#343c31;stroke-width:2;stroke-linejoin:miter;stroke-linecap:round;animation:egg-hop 1.2s ease-in-out infinite}
+.egg .egg-zig{fill:none}
+.egg .egg-dots{fill:none;stroke-width:3}
+@keyframes egg-hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.egg-ok{margin-top:12px;padding:3px 22px;font:inherit;font-size:11px;background:#f1f3e9;color:#263024;border:2px solid #343c31;border-radius:8px;box-shadow:0 0 0 2px #e6eadc,0 0 0 4px #343c31;cursor:url("cursor-hand.svg") 10 2,pointer}
+.egg-ok:hover,.egg-ok:focus-visible{background:#343c31;color:#f1f3e9;outline:none}
+@media(prefers-reduced-motion:reduce){.payload,.payload.landed,.egg{animation:none}}
+@media(max-width:520px){.payload{right:64px;width:34px}}

@@ -43,11 +43,30 @@
             </nav>
             <div class="window-bottom" aria-hidden="true"><span></span><i></i></div>
           </section>
+          <a class="desktop-balloon" href="../projpages/project6.html" aria-label="High-altitude balloon project" title="High-altitude balloon">
+            <svg viewBox="0 0 32 56" aria-hidden="true"><path d="M16 2C8 2 3 8 3 15c0 9 8 16 11 20h4c3-4 11-11 11-20 0-7-5-13-13-13z"/><path class="balloon-shine" d="M9 10c1-2 3-3 5-4"/><path d="M14 35l-1 3h6l-1-3"/><path class="balloon-string" d="M16 38c-3 4 3 7 0 11"/><path d="M12 49h8v6h-8z"/></svg>
+          </a>
+          <div class="telemetry" role="status" aria-live="polite" hidden>
+            <div class="window-titlebar"><span class="window-square" aria-hidden="true"></span><h2>Telemetry</h2></div>
+            <dl><dt>ALT</dt><dd data-t="alt">0 m</dd><dt>TEMP</dt><dd data-t="temp">15 °C</dd><dt>STATUS</dt><dd data-t="status">Ascending</dd></dl>
+          </div>
+          <button class="payload" type="button" aria-label="Open the recovered payload" hidden>
+            <svg viewBox="0 0 40 64" aria-hidden="true"><path class="chute" d="M2 18C2 8 10 2 20 2s18 6 18 16c-3-2-6-2-9 0-3-2-6-2-9 0-3-2-6-2-9 0-3-2-6-2-9 0z"/><path class="shroud" d="M2 18l12 30M20 18v30M38 18 26 48"/><path class="payload-box" d="M11 48h18v14H11z"/><path class="box-line" d="M15 53h10"/></svg>
+          </button>
+          <section class="egg-window" role="dialog" aria-modal="false" aria-labelledby="egg-title" hidden>
+            <div class="window-titlebar"><span class="window-square" aria-hidden="true"></span><h2 id="egg-title">Payload recovered</h2></div>
+            <div class="egg-body">
+              <svg class="egg" viewBox="0 0 40 50" aria-hidden="true"><path d="M20 2C10 2 3 18 3 30c0 10 8 18 17 18s17-8 17-18C37 18 30 2 20 2z"/><path class="egg-zig" d="M5 26l5-4 5 4 5-4 5 4 5-4 5 4"/><path class="egg-dots" d="M13 36h0m7 3h0m7-3h0"/></svg>
+              <p>You found the easter egg!</p>
+              <p class="egg-note">It fell from <span data-t="burst">0 m</span> and survived. Thanks for poking around.</p>
+              <button class="egg-ok" type="button">OK</button>
+            </div>
+          </section>
           <p class="desktop-hint">Click a file to open its project.</p>
         </div>
       </div>
       <div class="mac-chin" aria-hidden="true"><span class="case-mark">π</span><span class="case-label">Taylor’s Macintosh</span><div class="disk-slot"></div></div>
-      <div class="case-foot" aria-hidden="true"><span class="power-light"></span><span class="vents"></span></div>
+      <div class="case-foot"><button class="power-light" type="button" aria-label="Launch the balloon"></button><span class="vents" aria-hidden="true"></span></div>
     </div>
   </main>
   <script>
@@ -63,6 +82,76 @@
     });
     document.addEventListener('click', (event) => {
       if (!event.target.closest('.apple-character')) setBubble(false);
+    });
+
+    // Easter egg: type "launch" or press the power light to send the balloon up.
+    const balloon = document.querySelector('.desktop-balloon');
+    const telemetry = document.querySelector('.telemetry');
+    const field = (name) => telemetry.querySelector(`[data-t="${name}"]`);
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let launching = false;
+    let typed = '';
+
+    const payload = document.querySelector('.payload');
+    const eggWindow = document.querySelector('.egg-window');
+
+    // Counts telemetry from one altitude to another, then calls done.
+    const fly = (from, to, duration, ease, done) => {
+      const start = performance.now();
+      const tick = (now) => {
+        const t = duration ? Math.min((now - start) / duration, 1) : 1;
+        const alt = Math.round(from + (to - from) * ease(t));
+        field('alt').textContent = `${alt.toLocaleString()} m`;
+        field('temp').textContent = `${Math.round(15 - Math.min(alt, 11000) * 0.0065)} °C`;
+        if (t < 1) requestAnimationFrame(tick); else done();
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const launch = () => {
+      if (launching) return;
+      launching = true;
+      const burst = 30000 + Math.floor(Math.random() * 4000);
+      telemetry.hidden = false;
+      field('status').textContent = 'Ascending';
+      balloon.classList.add('launching');
+      fly(0, burst, reduceMotion ? 0 : 4200, (t) => t * t, () => {
+        field('status').textContent = 'POP! Payload under parachute.';
+        eggWindow.querySelector('[data-t="burst"]').textContent = `${burst.toLocaleString()} m`;
+        payload.classList.remove('landed');
+        payload.hidden = false;
+        fly(burst, 0, reduceMotion ? 0 : 3800, (t) => 1 - (1 - t) * (1 - t), () => {
+          payload.classList.add('landed');
+          field('status').textContent = 'Landed. Go recover it!';
+        });
+      });
+    };
+
+    const openEgg = () => {
+      payload.hidden = true;
+      telemetry.hidden = true;
+      eggWindow.hidden = false;
+      eggWindow.querySelector('.egg-ok').focus();
+    };
+
+    const closeEgg = () => {
+      if (eggWindow.hidden) return;
+      eggWindow.hidden = true;
+      balloon.classList.remove('launching');
+      launching = false;
+    };
+
+    payload.addEventListener('click', openEgg);
+    eggWindow.querySelector('.egg-ok').addEventListener('click', closeEgg);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeEgg();
+    });
+
+    document.querySelector('.power-light').addEventListener('click', launch);
+    document.addEventListener('keydown', (event) => {
+      if (event.key.length !== 1) return;
+      typed = (typed + event.key.toLowerCase()).slice(-6);
+      if (typed === 'launch') launch();
     });
   </script>
 </body>

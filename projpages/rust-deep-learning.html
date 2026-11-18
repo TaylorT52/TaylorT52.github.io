@@ -546,13 +546,48 @@
       [10] My first model with the library! 
     </h3>
     <p>
-      I went for a classic - MNIST - trained with my library! 
+      I went for a classic - MNIST - trained with my library! To train fully on Metal, I needed three more kernels.
+    </p>
+    <p>
+      ReLU backward. ReLU's derivative is 1 where <code>z &gt; 0</code> and 0 otherwise, so the gradient passes through where the neuron was
+      active and is zeroed where it wasn't. One thread per element (6,400 threads for a 100x64 hidden layer). It's just a selection, no arithmetic,
+      so it's bit-identical to the CPU. Tests cover 0, −0, NaN, and infinity.
+      <pre><code class="language-rust">
+        case 10: out[i] = a[i] > 0.0f ? b[i] : 0.0f; break;   // a = z, b = upstream gradient
+    </code></pre>
+    </p>
+    <p>
+      SGD. <code>w_new = w − lr × grad</code>, fused into one kernel (scalarmult + subtraction would be two dispatches and an extra buffer).
+      It writes a new buffer instead of updating in place: <code>Linear::sgd</code> computes both new weights and bias, then swaps them in, so if anything
+      fails the layer is untouched. The CPU can check for NaN/inf before updating, but the GPU can't without waiting on results (defeating the point!), so on
+      Metal the training loop checks the loss after the step. A non-finite loss aborts before that epoch is checkpointed.
+      <pre><code class="language-rust">
+        case 11: out[i] = a[i] - p.scalar * b[i]; break;      // a = param, b = grad, scalar = lr
+    </code></pre>
+    </p>
+    <p>
+      Softmax cross-entropy. This one is its own kernel, <code>softmax_xent</code>, since it outputs both the per-row loss and the gradient.
+      Each thread handles one image's row of 10 logits:
+      <pre><code class="language-rust">
+        float mx = row[0];
+        for (c = 1..n) mx = max(mx, row[c]);                          // row max
+        for (c..)      sum += exp(row[c] - mx);                       // softmax denominator
+        loss[r] = (mx - row[label]) + log(sum);                       // −log(softmax[label])
+        for (c..) g[c] = (exp(row[c]-mx)/sum - (c==label)) / batch;   // gradient
+    </code></pre>
+    </p>
+    <p>
+      Subtracting the max keeps it stable (<code>exp(10000)</code> overflows, <code>exp(10000 − 10001)</code> doesn't), and a test feeds it logits around ±10,000.
+      The gradient is <code>(softmax − one_hot) / batch_size</code>: predicted probability minus the true answer, averaged over the batch. Labels are uploaded
+      as floats (exact for small integers, with a guard for class counts above 2²⁴). The loss stays on the GPU as 100 per-row values and is averaged on the CPU
+      afterwards, so the whole step runs without the CPU waiting midway. On the Rust side, <code>run_xent</code> sets up buffers, dispatches one thread per row,
+      and hooks into batching.
     </p>
     <figure class="my-4">
-      <a href="../imgs/mnist_training.png" target="_blank" rel="noopener noreferrer" aria-label="View Training on MNIST chart at full size">
-        <img src="../imgs/mnist_training.png" alt="MNIST training from scratch in Rust: loss and accuracy over five epochs, with final test accuracy of 95.97 percent." width="2400" height="1300" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;" />
+      <a href="../imgs/cpu_vs_metal_training.png" target="_blank" rel="noopener noreferrer" aria-label="View CPU vs. Metal MNIST training chart at full size">
+        <img src="../imgs/cpu_vs_metal_training.png" alt="MNIST training on CPU versus Metal over 15 epochs: Metal is 46 times faster per epoch (0.40 s versus 18.49 s) with matching validation loss and accuracy; test accuracy is 97.36 percent on CPU and 97.39 percent on Metal." width="3000" height="1200" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;" />
       </a>
-      <figcaption>MNIST training from scratch in Rust: loss and accuracy over five epochs, with final test accuracy of 95.97 percent</figcaption>
+      <figcaption>MNIST training on CPU vs. Metal: 46x faster per epoch with the same accuracy (97.36% CPU, 97.39% Metal test accuracy)</figcaption>
     </figure>
 
     <div class="project-navigation mt-5">

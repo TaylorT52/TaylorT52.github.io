@@ -69,10 +69,9 @@
     requestAnimationFrame(step);
   };
 
-  const describe = ({ activeDays, daysSince }) => {
+  const describe = ({ daysSince }) => {
     if (daysSince === null) return "no commits lately — water me";
-    const ago = daysSince === 0 ? "today" : daysSince === 1 ? "yesterday" : `${daysSince}d ago`;
-    return `last push ${ago} · ${activeDays}/${WINDOW_DAYS} days active`;
+    return "fed by git commits";
   };
 
   const health = ({ activeDays, daysSince }) => {

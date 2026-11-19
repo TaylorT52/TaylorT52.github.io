@@ -1883,6 +1883,70 @@ footer {
     border-top: 1px dotted var(--home-line);
 }
 
+/* GitHub activity flower, planted on the intro footer's dotted line */
+.minimal-home .intro-footer {
+    position: relative;
+}
+
+.minimal-home .git-flower {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.4rem;
+    margin-bottom: -1px;
+    color: var(--home-muted);
+    text-decoration: none;
+    line-height: 0;
+}
+
+.minimal-home .git-flower svg {
+    display: block;
+    overflow: visible;
+}
+
+.minimal-home .gf-caption {
+    padding-bottom: 0.35rem;
+    font-size: 0.68rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+}
+
+.minimal-home .git-flower:hover .gf-caption,
+.minimal-home .git-flower:focus-visible .gf-caption {
+    opacity: 1;
+    transform: none;
+}
+
+.minimal-home .gf-petal,
+.minimal-home .gf-fallen {
+    transition: opacity 0.6s ease;
+}
+
+.minimal-home .gf-sway {
+    transform-origin: 20px 56px;
+}
+
+.minimal-home .git-flower.is-thriving .gf-sway {
+    animation: gf-sway 4.5s ease-in-out infinite;
+}
+
+@keyframes gf-sway {
+    0%, 100% { transform: rotate(-2.5deg); }
+    50% { transform: rotate(2.5deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .minimal-home .git-flower.is-thriving .gf-sway {
+        animation: none;
+    }
+}
+
 .minimal-home .intro-email {
     color: var(--home-muted);
     font-size: 0.78rem;

@@ -1883,7 +1883,7 @@ footer {
     border-top: 1px dotted var(--home-line);
 }
 
-/* GitHub activity flower, planted on the intro footer's dotted line */
+/* GitHub activity garden, planted on the intro footer's dotted line */
 .minimal-home .intro-footer {
     position: relative;
 }
@@ -1929,10 +1929,10 @@ footer {
 }
 
 .minimal-home .gf-sway {
-    transform-origin: 20px 56px;
+    transform-box: view-box;
 }
 
-.minimal-home .git-flower.is-thriving .gf-sway {
+.minimal-home .gf-sway.is-thriving {
     animation: gf-sway 4.5s ease-in-out infinite;
 }
 
@@ -1942,7 +1942,7 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .minimal-home .git-flower.is-thriving .gf-sway {
+    .minimal-home .gf-sway.is-thriving {
         animation: none;
     }
 }
